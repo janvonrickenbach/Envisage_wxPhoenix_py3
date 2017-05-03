@@ -39,25 +39,18 @@ class ActionManagerBuilderTestCase(unittest.TestCase):
         """ action with non-existent group """
 
         action_sets = [
-            ActionSet(
-                actions = [
-                    Action(
-                        class_name = 'Exit',
-                        path       = 'MenuBar/File',
-                        group      = 'Bogus'
-                    ),
-                ]
-            ),
-
+            ActionSet(actions=[
+                Action(
+                    class_name='Exit', path='MenuBar/File', group='Bogus'),
+            ]),
         ]
 
         # Create a builder containing the action set.
         builder = DummyActionManagerBuilder(action_sets=action_sets)
 
         # Create a menu bar manager for the 'MenuBar'.
-        self.failUnlessRaises(
-            ValueError, builder.create_menu_bar_manager, 'MenuBar'
-        )
+        self.failUnlessRaises(ValueError, builder.create_menu_bar_manager,
+                              'MenuBar')
 
         return
 
@@ -65,25 +58,20 @@ class ActionManagerBuilderTestCase(unittest.TestCase):
         """ action with non-existent sibling """
 
         action_sets = [
-            ActionSet(
-                actions = [
-                    Action(
-                        class_name = 'Exit',
-                        path       = 'MenuBar/File',
-                        before     = 'NonExistentAction'
-                    ),
-                ]
-            ),
-
+            ActionSet(actions=[
+                Action(
+                    class_name='Exit',
+                    path='MenuBar/File',
+                    before='NonExistentAction'),
+            ]),
         ]
 
         # Create a builder containing the action set.
         builder = DummyActionManagerBuilder(action_sets=action_sets)
 
         # Create a menu bar manager for the 'MenuBar'.
-        self.failUnlessRaises(
-            ValueError, builder.create_menu_bar_manager, 'MenuBar'
-        )
+        self.failUnlessRaises(ValueError, builder.create_menu_bar_manager,
+                              'MenuBar')
 
         return
 
@@ -91,20 +79,18 @@ class ActionManagerBuilderTestCase(unittest.TestCase):
         """ group with non-existent sibling """
 
         action_sets = [
-            ActionSet(
-                groups = [
-                    Group(id='FileMenuGroup', path='MenuBar', before='Bogus')
-                ]
-            )
+            ActionSet(groups=[
+                Group(
+                    id='FileMenuGroup', path='MenuBar', before='Bogus')
+            ])
         ]
 
         # Create a builder containing the action set.
         builder = DummyActionManagerBuilder(action_sets=action_sets)
 
         # Create a menu bar manager for the 'MenuBar'.
-        self.failUnlessRaises(
-            ValueError, builder.create_menu_bar_manager, 'MenuBar'
-        )
+        self.failUnlessRaises(ValueError, builder.create_menu_bar_manager,
+                              'MenuBar')
 
         return
 
@@ -113,19 +99,16 @@ class ActionManagerBuilderTestCase(unittest.TestCase):
 
         action_sets = [
             ActionSet(
-                menus = [
-                    Menu(name='&File', path='MenuBar', before='Bogus')
-                ]
-            )
+                menus=[Menu(
+                    name='&File', path='MenuBar', before='Bogus')])
         ]
 
         # Create a builder containing the action set.
         builder = DummyActionManagerBuilder(action_sets=action_sets)
 
         # Create a menu bar manager for the 'MenuBar'.
-        self.failUnlessRaises(
-            ValueError, builder.create_menu_bar_manager, 'MenuBar'
-        )
+        self.failUnlessRaises(ValueError, builder.create_menu_bar_manager,
+                              'MenuBar')
 
         return
 
@@ -133,42 +116,28 @@ class ActionManagerBuilderTestCase(unittest.TestCase):
         """ action with path component that is not a menu """
 
         action_sets = [
-            ActionSet(
-                actions = [
-                    Action(
-                        class_name = 'Exit',
-                        path       = 'MenuBar/File'
-                    ),
-
-                    Action(
-                        class_name = 'Broken',
-                        path       = 'MenuBar/File/Exit',
-                    ),
-                ]
-            ),
-
+            ActionSet(actions=[
+                Action(
+                    class_name='Exit', path='MenuBar/File'),
+                Action(
+                    class_name='Broken',
+                    path='MenuBar/File/Exit', ),
+            ]),
         ]
 
         # Create a builder containing the action set.
         builder = DummyActionManagerBuilder(action_sets=action_sets)
 
         # Create a menu bar manager for the 'MenuBar'.
-        self.failUnlessRaises(
-            ValueError, builder.create_menu_bar_manager, 'MenuBar'
-        )
+        self.failUnlessRaises(ValueError, builder.create_menu_bar_manager,
+                              'MenuBar')
 
         return
 
     def test_single_top_level_menu_with_no_group(self):
         """ single top level menu with no group """
 
-        action_sets = [
-            ActionSet(
-                menus = [
-                    Menu(name='&File', path='MenuBar'),
-                ]
-            )
-        ]
+        action_sets = [ActionSet(menus=[Menu(name='&File', path='MenuBar'), ])]
 
         # Create a builder containing the action set.
         builder = DummyActionManagerBuilder(action_sets=action_sets)
@@ -190,11 +159,8 @@ class ActionManagerBuilderTestCase(unittest.TestCase):
         """ single top level group """
 
         action_sets = [
-            ActionSet(
-                groups = [
-                    Group(id='FileMenuGroup', path='MenuBar'),
-                ]
-            )
+            ActionSet(groups=[Group(
+                id='FileMenuGroup', path='MenuBar'), ])
         ]
 
         # Create a builder containing the action set.
@@ -216,13 +182,13 @@ class ActionManagerBuilderTestCase(unittest.TestCase):
 
         action_sets = [
             ActionSet(
-                menus = [
-                    Menu(name='&File', path='MenuBar'),
-                    Menu(name='&Edit', path='MenuBar'),
-                    Menu(name='&Tools', path='MenuBar'),
-                    Menu(name='&Help', path='MenuBar')
-                ],
-            )
+                menus=[
+                    Menu(
+                        name='&File', path='MenuBar'), Menu(
+                            name='&Edit', path='MenuBar'), Menu(
+                                name='&Tools', path='MenuBar'), Menu(
+                                    name='&Help', path='MenuBar')
+                ], )
         ]
 
         # Create a builder containing the action set.
@@ -246,28 +212,16 @@ class ActionManagerBuilderTestCase(unittest.TestCase):
 
         action_sets = [
             ActionSet(
-                menus = [
-                    Menu(name='&Edit', path='MenuBar', after='File'),
-                ],
-            ),
-
+                menus=[Menu(
+                    name='&Edit', path='MenuBar', after='File'), ],
+            ), ActionSet(
+                menus=[Menu(
+                    name='&File', path='MenuBar'), ], ), ActionSet(
+                        menus=[Menu(
+                            name='&Help', path='MenuBar')], ),
             ActionSet(
-                menus = [
-                    Menu(name='&File', path='MenuBar'),
-                ],
-            ),
-
-            ActionSet(
-                menus = [
-                    Menu(name='&Help', path='MenuBar')
-                ],
-            ),
-
-            ActionSet(
-                menus = [
-                    Menu(name='&Tools', path='MenuBar', before='Help'),
-                ],
-            )
+                menus=[Menu(
+                    name='&Tools', path='MenuBar', before='Help'), ], )
         ]
 
         # Create a builder containing the action set.
@@ -291,19 +245,18 @@ class ActionManagerBuilderTestCase(unittest.TestCase):
 
         action_sets = [
             ActionSet(
-                menus = [
-                    Menu(name='&File', path='MenuBar', group='FileMenuGroup'),
-                ],
-            )
+                menus=[
+                    Menu(
+                        name='&File', path='MenuBar', group='FileMenuGroup'),
+                ], )
         ]
 
         # Create a builder containing the action set.
         builder = DummyActionManagerBuilder(action_sets=action_sets)
 
         # Create a menu bar manager for the 'MenuBar'.
-        self.failUnlessRaises(
-            ValueError, builder.create_menu_bar_manager, 'MenuBar'
-        )
+        self.failUnlessRaises(ValueError, builder.create_menu_bar_manager,
+                              'MenuBar')
 
         return
 
@@ -312,14 +265,12 @@ class ActionManagerBuilderTestCase(unittest.TestCase):
 
         action_sets = [
             ActionSet(
-                groups = [
-                    Group(id='FileMenuGroup', path='MenuBar')
-                ],
-
-                menus = [
-                    Menu(name='&File', path='MenuBar', group='FileMenuGroup'),
-                ],
-            )
+                groups=[Group(
+                    id='FileMenuGroup', path='MenuBar')],
+                menus=[
+                    Menu(
+                        name='&File', path='MenuBar', group='FileMenuGroup'),
+                ], )
         ]
 
         # Create a builder containing the action set.
@@ -348,19 +299,15 @@ class ActionManagerBuilderTestCase(unittest.TestCase):
         # you *have* to split them up this way!
         action_sets = [
             ActionSet(
-                menus = [
-                    Menu(name='&File', path='MenuBar'),
-                    Menu(name='&Edit', path='MenuBar'),
-                    Menu(name='&Tools', path='MenuBar'),
-                    Menu(name='&Help', path='MenuBar')
-                ],
-            ),
-
-            ActionSet(
-                menus = [
-                    Menu(name='&New', path='MenuBar/File'),
-                ],
-            )
+                menus=[
+                    Menu(
+                        name='&File', path='MenuBar'), Menu(
+                            name='&Edit', path='MenuBar'), Menu(
+                                name='&Tools', path='MenuBar'), Menu(
+                                    name='&Help', path='MenuBar')
+                ], ), ActionSet(
+                    menus=[Menu(
+                        name='&New', path='MenuBar/File'), ], )
         ]
 
         # Create a builder containing the action set.
@@ -385,21 +332,17 @@ class ActionManagerBuilderTestCase(unittest.TestCase):
         # that is how it might end up in an actual application... not because
         # you *have* to split them up this way!
         action_sets = [
-            ActionSet(
-                menus = [
-                    Menu(name='&File', path='MenuBar'),
-                    Menu(name='&Edit', path='MenuBar'),
-                    Menu(name='&Tools', path='MenuBar'),
-                    Menu(name='&Help', path='MenuBar')
-                ]
-            ),
-
-            ActionSet(
-                actions = [
-                    Action(class_name='Exit', path='MenuBar/File'),
-                    Action(class_name='About', path='MenuBar/Help')
-                ]
-            )
+            ActionSet(menus=[
+                Menu(
+                    name='&File', path='MenuBar'), Menu(
+                        name='&Edit', path='MenuBar'), Menu(
+                            name='&Tools', path='MenuBar'), Menu(
+                                name='&Help', path='MenuBar')
+            ]), ActionSet(actions=[
+                Action(
+                    class_name='Exit', path='MenuBar/File'), Action(
+                        class_name='About', path='MenuBar/Help')
+            ])
         ]
 
         # Create a builder containing the action set.
@@ -428,12 +371,11 @@ class ActionManagerBuilderTestCase(unittest.TestCase):
         """ actions make submenus """
 
         action_sets = [
-            ActionSet(
-                actions = [
-                    Action(class_name='Folder', path='MenuBar/File/New'),
-                    Action(class_name='File', path='MenuBar/File/New')
-                ]
-            )
+            ActionSet(actions=[
+                Action(
+                    class_name='Folder', path='MenuBar/File/New'), Action(
+                        class_name='File', path='MenuBar/File/New')
+            ])
         ]
 
         # Create a builder containing the action set.
@@ -470,26 +412,18 @@ class ActionManagerBuilderTestCase(unittest.TestCase):
         """ actions make submenus before and after """
 
         action_sets = [
-            ActionSet(
-                actions = [
-                    Action(
-                        class_name = 'File',
-                        path       = 'MenuBar/File/New',
-                        after      = 'Folder'
-                    ),
-
-                    Action(
-                        class_name = 'Project',
-                        path       = 'MenuBar/File/New',
-                        before     = 'Folder'
-                    ),
-
-                    Action(
-                        class_name = 'Folder',
-                        path       = 'MenuBar/File/New',
-                    ),
-                ]
-            )
+            ActionSet(actions=[
+                Action(
+                    class_name='File', path='MenuBar/File/New',
+                    after='Folder'),
+                Action(
+                    class_name='Project',
+                    path='MenuBar/File/New',
+                    before='Folder'),
+                Action(
+                    class_name='Folder',
+                    path='MenuBar/File/New', ),
+            ])
         ]
 
         # Create a builder containing the action set.
@@ -527,52 +461,30 @@ class ActionManagerBuilderTestCase(unittest.TestCase):
 
         action_sets = [
             ActionSet(
-                menus = [
-                    Menu(name='&File', path='MenuBar'),
-                    Menu(name='&Edit', path='MenuBar'),
-                    Menu(name='&Tools', path='MenuBar'),
-                    Menu(name='&Help', path='MenuBar')
-                ],
-            ),
-
+                menus=[
+                    Menu(
+                        name='&File', path='MenuBar'), Menu(
+                            name='&Edit', path='MenuBar'), Menu(
+                                name='&Tools', path='MenuBar'), Menu(
+                                    name='&Help', path='MenuBar')
+                ], ),
             ActionSet(
-                menus = [
-                    Menu(name='&New', path='MenuBar/File', group='NewGroup'),
-                ],
-            ),
-
-            ActionSet(
-                actions = [
-                    Action(
-                        class_name = 'Exit',
-                        path       = 'MenuBar/File',
-                        group      = 'ExitGroup'
-                    ),
-                ]
-            ),
-
-            ActionSet(
-                groups = [
-                    Group(
-                        id   = 'ExitGroup',
-                        path = 'MenuBar/File'
-                    ),
-
-                    Group(
-                        id    = 'SaveGroup',
-                        path  = 'MenuBar/File',
-                        after = 'NewGroup'
-                    ),
-
-                    Group(
-                        id     = 'NewGroup',
-                        path   = 'MenuBar/File',
-                        before = 'ExitGroup'
-                    ),
-
-                ]
-            ),
-
+                menus=[
+                    Menu(
+                        name='&New', path='MenuBar/File', group='NewGroup'),
+                ], ),
+            ActionSet(actions=[
+                Action(
+                    class_name='Exit', path='MenuBar/File', group='ExitGroup'),
+            ]),
+            ActionSet(groups=[
+                Group(
+                    id='ExitGroup', path='MenuBar/File'),
+                Group(
+                    id='SaveGroup', path='MenuBar/File', after='NewGroup'),
+                Group(
+                    id='NewGroup', path='MenuBar/File', before='ExitGroup'),
+            ]),
         ]
 
         # Create a builder containing the action set.
@@ -595,9 +507,8 @@ class ActionManagerBuilderTestCase(unittest.TestCase):
         self.assertEqual(4, len(menu.groups))
 
         ids = [group.id for group in menu.groups]
-        self.assertEqual(
-            ['NewGroup', 'SaveGroup', 'ExitGroup', 'additions'], ids
-        )
+        self.assertEqual(['NewGroup', 'SaveGroup', 'ExitGroup', 'additions'],
+                         ids)
 
         # Make sure the 'New' sub-menu got added to the 'NewGroup' group
         # of the 'File' menu.
@@ -620,35 +531,24 @@ class ActionManagerBuilderTestCase(unittest.TestCase):
 
         action_sets = [
             ActionSet(
-                menus = [
+                menus=[
                     Menu(
-                        name   = '&File',
-                        path   = 'MenuBar',
-                        groups = ['NewGroup', 'ExitGroup']
-                    ),
-
-                    Menu(name='&Edit', path='MenuBar'),
-                    Menu(name='&Tools', path='MenuBar'),
-                    Menu(name='&Help', path='MenuBar')
-                ],
-            ),
-
+                        name='&File',
+                        path='MenuBar',
+                        groups=['NewGroup', 'ExitGroup']), Menu(
+                            name='&Edit', path='MenuBar'), Menu(
+                                name='&Tools', path='MenuBar'), Menu(
+                                    name='&Help', path='MenuBar')
+                ], ),
             ActionSet(
-                menus = [
-                    Menu(name='&New', path='MenuBar/File', group='NewGroup'),
-                ],
-            ),
-
-            ActionSet(
-                actions = [
-                    Action(
-                        class_name = 'Exit',
-                        path       = 'MenuBar/File',
-                        group      = 'ExitGroup'
-                    ),
-                ]
-            ),
-
+                menus=[
+                    Menu(
+                        name='&New', path='MenuBar/File', group='NewGroup'),
+                ], ),
+            ActionSet(actions=[
+                Action(
+                    class_name='Exit', path='MenuBar/File', group='ExitGroup'),
+            ]),
         ]
 
         # Create a builder containing the action set.
@@ -694,24 +594,17 @@ class ActionManagerBuilderTestCase(unittest.TestCase):
 
         action_sets = [
             ActionSet(
-                menus = [
+                menus=[
                     Menu(
-                        name   = '&File',
-                        path   = 'MenuBar',
-                        groups = ['NewGroup', 'ExitGroup']
-                    ),
-                ],
-            ),
-
+                        name='&File',
+                        path='MenuBar',
+                        groups=['NewGroup', 'ExitGroup']),
+                ], ),
             ActionSet(
-                menus = [
+                menus=[
                     Menu(
-                        name   = '&File',
-                        path   = 'MenuBar',
-                        groups = ['ExtraGroup']
-                    ),
-                ],
-            ),
+                        name='&File', path='MenuBar', groups=['ExtraGroup']),
+                ], ),
         ]
 
         # Create a builder containing the action set.
@@ -735,9 +628,8 @@ class ActionManagerBuilderTestCase(unittest.TestCase):
         self.assertEqual(4, len(menu.groups))
 
         ids = [group.id for group in menu.groups]
-        self.assertEqual(
-            ['NewGroup', 'ExitGroup', 'ExtraGroup', 'additions'], ids
-        )
+        self.assertEqual(['NewGroup', 'ExitGroup', 'ExtraGroup', 'additions'],
+                         ids)
 
         return
 
@@ -746,24 +638,17 @@ class ActionManagerBuilderTestCase(unittest.TestCase):
 
         action_sets = [
             ActionSet(
-                menus = [
+                menus=[
                     Menu(
-                        name   = '&File',
-                        path   = 'MenuBar',
-                        groups = ['NewGroup', 'ExitGroup']
-                    ),
-                ],
-            ),
-
+                        name='&File',
+                        path='MenuBar',
+                        groups=['NewGroup', 'ExitGroup']),
+                ], ),
             ActionSet(
-                menus = [
+                menus=[
                     Menu(
-                        name   = '&File',
-                        path   = 'MenuBar',
-                        groups = ['NewGroup']
-                    ),
-                ],
-            ),
+                        name='&File', path='MenuBar', groups=['NewGroup']),
+                ], ),
         ]
 
         # Create a builder containing the action set.
@@ -787,9 +672,7 @@ class ActionManagerBuilderTestCase(unittest.TestCase):
         self.assertEqual(3, len(menu.groups))
 
         ids = [group.id for group in menu.groups]
-        self.assertEqual(
-            ['NewGroup', 'ExitGroup', 'additions'], ids
-        )
+        self.assertEqual(['NewGroup', 'ExitGroup', 'additions'], ids)
 
         return
 

@@ -1,6 +1,5 @@
 """ A resource protocol for package resources. """
 
-
 # Standard library imports.
 import errno, pkg_resources
 
@@ -38,8 +37,8 @@ class PackageResourceProtocol(HasTraits):
 
         first_forward_slash = address.index('/')
 
-        package       = address[:first_forward_slash]
-        resource_name = address[first_forward_slash+1:]
+        package = address[:first_forward_slash]
+        resource_name = address[first_forward_slash + 1:]
 
         try:
             f = pkg_resources.resource_stream(package, resource_name)
@@ -55,5 +54,6 @@ class PackageResourceProtocol(HasTraits):
             raise NoSuchResourceError(address)
 
         return f
+
 
 #### EOF ######################################################################

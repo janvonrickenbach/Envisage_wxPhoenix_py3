@@ -1,6 +1,5 @@
 """ The service registry interface. """
 
-
 # Enthought library imports.
 from traits.api import Event, Interface
 
@@ -114,5 +113,6 @@ class IServiceRegistry(Interface):
         If no such service exists a 'ValueError' exception is raised.
 
         """
+
 
 #### EOF ######################################################################

@@ -36,7 +36,9 @@ class TasksPlugin(Plugin):
     #### Extension points offered by this plugin ##############################
 
     preferences_categories = ExtensionPoint(
-        List(PreferencesCategory), id=PREFERENCES_CATEGORIES, desc="""
+        List(PreferencesCategory),
+        id=PREFERENCES_CATEGORIES,
+        desc="""
 
         This extension point makes preference categories available to the
         application. Note that preference categories will be created
@@ -45,7 +47,9 @@ class TasksPlugin(Plugin):
         """)
 
     preferences_panes = ExtensionPoint(
-        List(Callable), id=PREFERENCES_PANES, desc="""
+        List(Callable),
+        id=PREFERENCES_PANES,
+        desc="""
 
         A preferences pane appears in the preferences dialog to allow the user
         manipulate certain preference values.
@@ -102,15 +106,17 @@ class TasksPlugin(Plugin):
         from .task_extension import TaskExtension
         from pyface.tasks.action.api import DockPaneToggleGroup, SchemaAddition
 
-        actions = [SchemaAddition(id='Exit',
-                                  factory=ExitAction,
-                                  path='MenuBar/File'),
-                   SchemaAddition(id='Preferences',
-                                  factory=PreferencesGroup,
-                                  path='MenuBar/Edit'),
-                   SchemaAddition(id='DockPaneToggleGroup',
-                                  factory=DockPaneToggleGroup,
-                                  path='MenuBar/View')]
+        actions = [
+            SchemaAddition(
+                id='Exit', factory=ExitAction, path='MenuBar/File'),
+            SchemaAddition(
+                id='Preferences',
+                factory=PreferencesGroup,
+                path='MenuBar/Edit'), SchemaAddition(
+                    id='DockPaneToggleGroup',
+                    factory=DockPaneToggleGroup,
+                    path='MenuBar/View')
+        ]
 
         return [TaskExtension(actions=actions)]
 
@@ -124,7 +130,9 @@ class TasksPlugin(Plugin):
         from .preferences_dialog import PreferencesDialog
 
         dialog = PreferencesDialog(application=self.application)
-        dialog.trait_set(categories=self.preferences_categories,
-                         panes=[factory(dialog=dialog)
-                                for factory in self.preferences_panes])
+        dialog.trait_set(
+            categories=self.preferences_categories,
+            panes=[
+                factory(dialog=dialog) for factory in self.preferences_panes
+            ])
         return dialog

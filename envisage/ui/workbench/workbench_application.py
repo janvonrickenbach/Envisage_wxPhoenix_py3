@@ -1,6 +1,5 @@
 """ The entry point for an Envisage Workbench application. """
 
-
 # Standard library imports.
 import logging
 
@@ -22,7 +21,6 @@ from traits.api import Callable, Instance, Str, Tuple
 
 # Local imports.
 from .workbench import Workbench
-
 
 # Logging.
 logger = logging.getLogger(__name__)
@@ -101,8 +99,7 @@ class WorkbenchApplication(Application):
         if self.start():
             # Create and open the first workbench window.
             window = self.workbench.create_window(
-                position=self.window_position, size=self.window_size
-            )
+                position=self.window_position, size=self.window_size)
             window.open()
 
             # We stop the application when the workbench has exited.
@@ -186,5 +183,6 @@ class WorkbenchApplication(Application):
         self.gui.invoke_later(self.stop)
 
         return
+
 
 #### EOF ######################################################################

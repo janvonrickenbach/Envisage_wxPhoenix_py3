@@ -1,5 +1,3 @@
-
-
 # Standard library imports.
 import logging
 
@@ -17,19 +15,18 @@ logger.setLevel(logging.DEBUG)
 
 def main():
     application = Application(
-        id='Update Checker Tester', plugins=[UpdateChecker()]
-    )
+        id='Update Checker Tester', plugins=[UpdateChecker()])
 
     application = WorkbenchApplication(
-        id='update_checker_tester', name='Update Checker',
+        id='update_checker_tester',
+        name='Update Checker',
         plugins=[
             CorePlugin(),
             WorkbenchPlugin(),
-            UpdateCheckerPlugin(
-
-                ),
+            UpdateCheckerPlugin(),
         ])
     application.run()
+
 
 if __name__ == "__main__":
     main()

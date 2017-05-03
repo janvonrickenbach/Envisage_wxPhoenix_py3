@@ -1,6 +1,5 @@
 """ The 'Message of the Day' interface. """
 
-
 # Enthought library imports.
 from traits.api import Interface
 
@@ -14,5 +13,6 @@ class IMOTD(Interface):
         Returns an object that implements the 'IMessage' interface.
 
         """
+
 
 #### EOF ######################################################################

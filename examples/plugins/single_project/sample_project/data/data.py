@@ -17,50 +17,56 @@ from numpy import arange
 
 class DataView(HasTraits):
     volume = Array
-    pressure = Property(Array, depends_on=['temperature','attraction','totVolume'])
-    attraction = Range(low=-50.0,high=50.0,value=0.0)
-    totVolume = Range(low=.01,high=100.0,value=0.01)
-    temperature = Range(low=-50.0,high=50.0,value=50.0)
-    r_constant= Float(8.314472)
+    pressure = Property(
+        Array, depends_on=['temperature', 'attraction', 'totVolume'])
+    attraction = Range(low=-50.0, high=50.0, value=0.0)
+    totVolume = Range(low=.01, high=100.0, value=0.01)
+    temperature = Range(low=-50.0, high=50.0, value=50.0)
+    r_constant = Float(8.314472)
     plot_type = Enum("line", "scatter")
 
-    data_view = View(ChacoPlotItem("volume", "pressure",
-                               type_trait="plot_type",
-                               resizable=True,
-                               x_label="Volume",
-                               y_label="Pressure",
-                               x_bounds=(-10,120),
-                               x_auto=False,
-                               y_bounds=(-2000,4000),
-                               y_auto=False,
-                               color="blue",
-                               bgcolor="white",
-                               border_visible=True,
-                               border_width=1,
-                               title='Pressure vs. Volume',
-                               padding_bg_color="lightgray"),
-                       Item(name='attraction'),
-                       Item(name='totVolume'),
-                       Item(name='temperature'),
-                       Item(name='r_constant',style='readonly'),
-                       Item(name='plot_type'),
-                       resizable = True,
-                       buttons = ["OK"],
-                       title='Van der waal Equation',
-                       width=900, height=500)
+    data_view = View(
+        ChacoPlotItem(
+            "volume",
+            "pressure",
+            type_trait="plot_type",
+            resizable=True,
+            x_label="Volume",
+            y_label="Pressure",
+            x_bounds=(-10, 120),
+            x_auto=False,
+            y_bounds=(-2000, 4000),
+            y_auto=False,
+            color="blue",
+            bgcolor="white",
+            border_visible=True,
+            border_width=1,
+            title='Pressure vs. Volume',
+            padding_bg_color="lightgray"),
+        Item(name='attraction'),
+        Item(name='totVolume'),
+        Item(name='temperature'),
+        Item(
+            name='r_constant', style='readonly'),
+        Item(name='plot_type'),
+        resizable=True,
+        buttons=["OK"],
+        title='Van der waal Equation',
+        width=900,
+        height=500)
 
     def _volume_default(self):
-      return arange(.1, 100)
+        return arange(.1, 100)
 
     # Pressure is calculated whenever one of the elements the property depends on changes.
     def _get_pressure(self):
-      return ((self.r_constant*self.temperature)/(self.volume - self.totVolume)) - (self.attraction/(self.volume*self.volume))
-
-
+        return ((self.r_constant * self.temperature) /
+                (self.volume - self.totVolume)) - (self.attraction /
+                                                   (self.volume * self.volume))
 
 
 class Data(NumericContext):
-    name = Property(depends_on = ['context_name'])
+    name = Property(depends_on=['context_name'])
     # data_parameters = Property
     data_parameters = Instance(DataView)
 
@@ -68,14 +74,14 @@ class Data(NumericContext):
     # Object Methods
     ###################################################################################
     """ Contains all of the data for a data """
+
     def __init__(self, name="Unknown", **traits):
-        super( Data, self ).__init__( **traits )
+        super(Data, self).__init__(**traits)
         self.context_name = name
         self.data_parameters = DataView()
         # self.data_parameters = DataView()
         # self['data_parameters'] = DataParameters(self)
         # TODO cgalvan: Init other data
-
 
     def __getstate__(self):
         """ Return the state of this object for pickling.
@@ -86,7 +92,7 @@ class Data(NumericContext):
         """
 
         # Obtain state from base class(es)
-        state =  super(Data, self).__getstate__()
+        state = super(Data, self).__getstate__()
 
         # Add in our current version number.  Note use a different attribute
         # name from any base or derived class so that our numbers don't
@@ -94,7 +100,6 @@ class Data(NumericContext):
         state['_data_version'] = 1
 
         return state
-
 
     def __setstate__(self, state):
         """ Restore the state of this object during unpickling.
@@ -126,20 +131,18 @@ class Data(NumericContext):
 
         return
 
-
     ############################################################################
     # Protected Methods
     ############################################################################
 
-#    def _get_data_parameters(self):
-#        return self['data_parameters']
+    #    def _get_data_parameters(self):
+    #        return self['data_parameters']
 
     def _get_data_parameters(self):
         return self.data_parameters
 
     def _get_name(self):
         return self.context_name
-
 
     def _set_name(self, new_name):
         self.context_name = new_name
@@ -179,8 +182,8 @@ class DataAdapter(ITreeNodeAdapter):
         """ Sets up or removes a listener for the label being changed on a
             specified object.
         """
-        self.adaptee.on_trait_change(listener, 'list_items',
-            remove=remove, dispatch='ui')
+        self.adaptee.on_trait_change(
+            listener, 'list_items', remove=remove, dispatch='ui')
 
     def get_tooltip(self):
         """ Gets the tooltip to display for a specified object.
@@ -207,8 +210,3 @@ class DataAdapter(ITreeNodeAdapter):
         """ Returns whether the object can be deleted.
         """
         return True
-
-
-
-
-

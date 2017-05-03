@@ -1,6 +1,5 @@
 """ The plugin manager interface. """
 
-
 # Enthought library imports.
 from traits.api import Event, Interface
 
@@ -77,5 +76,6 @@ class IPluginManager(Interface):
         is raised.
 
         """
+
 
 #### EOF ######################################################################

@@ -4,7 +4,6 @@
 #  All rights reserved.
 #
 #-----------------------------------------------------------------------------
-
 """
 An action set for contributing actions to Data.
 
@@ -12,7 +11,6 @@ An action set for contributing actions to Data.
 
 # Enthought library imports.
 from envisage.action.action_plugin_definition import ActionSet
-
 
 ##############################################################################
 # Constants
@@ -34,10 +32,7 @@ class DataActionSet(ActionSet):
     """
 
     # A mapping from human-readable root names to globally unique Ids.
-    aliases = {
-        'DataContextMenu': DATA_CONTEXT_MENU
-        }
+    aliases = {'DataContextMenu': DATA_CONTEXT_MENU}
 
 
 #### EOF #####################################################################
-

@@ -1,6 +1,5 @@
 """ A trait type used to declare and access extension points. """
 
-
 # Standard library imports.
 import inspect, weakref
 
@@ -9,7 +8,6 @@ from traits.api import List, TraitType, Undefined, provides
 
 # Local imports.
 from .i_extension_point import IExtensionPoint
-
 
 
 def contributes_to(id):
@@ -190,14 +188,14 @@ class ExtensionPoint(TraitType):
             # If an index was specified then we fire an '_items' changed event.
             if event.index is not None:
                 name = trait_name + '_items'
-                old  = Undefined
-                new  = event
+                old = Undefined
+                new = event
 
             # Otherwise, we fire a normal trait changed event.
             else:
                 name = trait_name
-                old  = event.removed
-                new  = event.added
+                old = event.removed
+                new = event.added
 
             obj.trait_property_changed(name, old, new)
 
@@ -223,9 +221,8 @@ class ExtensionPoint(TraitType):
         listener = self._obj_to_listeners_map[obj].get(trait_name)
         if listener is not None:
             # Remove the listener from the extension registry.
-            extension_registry.remove_extension_point_listener(
-                listener, self.id
-            )
+            extension_registry.remove_extension_point_listener(listener,
+                                                               self.id)
 
             # Clean up.
             del self._obj_to_listeners_map[obj][trait_name]
@@ -258,5 +255,6 @@ class ExtensionPoint(TraitType):
             )
 
         return extension_registry
+
 
 #### EOF ######################################################################

@@ -1,6 +1,5 @@
 """ Tests for plugins. """
 
-
 # Standard library imports.
 from os.path import exists, join
 
@@ -214,13 +213,13 @@ class PluginTestCase(unittest.TestCase):
 
         class PluginA(Plugin):
             id = 'A'
-            x  = ExtensionPoint(List, id='x')
+            x = ExtensionPoint(List, id='x')
 
         class PluginB(Plugin):
             id = 'B'
 
-            x  = List([1, 2, 3], contributes_to='x')
-            y  = List([4, 5, 6], contributes_to='x')
+            x = List([1, 2, 3], contributes_to='x')
+            y = List([4, 5, 6], contributes_to='x')
 
         a = PluginA()
         b = PluginB()
@@ -238,17 +237,17 @@ class PluginTestCase(unittest.TestCase):
 
         class PluginA(Plugin):
             id = 'A'
-            x  = ExtensionPoint(List, id='x')
+            x = ExtensionPoint(List, id='x')
 
         class PluginB(Plugin):
             id = 'B'
 
-            x  = List(contributes_to='x')
+            x = List(contributes_to='x')
 
             def _x_default(self):
                 """ Trait initializer. """
 
-                raise 1/0
+                raise 1 / 0
 
         a = PluginA()
         b = PluginB()
@@ -257,9 +256,8 @@ class PluginTestCase(unittest.TestCase):
 
         # We should get an when we try to get the contributions to the
         # extension point.
-        self.failUnlessRaises(
-            ZeroDivisionError, application.get_extensions, 'x'
-        )
+        self.failUnlessRaises(ZeroDivisionError, application.get_extensions,
+                              'x')
 
         return
 
@@ -268,11 +266,11 @@ class PluginTestCase(unittest.TestCase):
 
         class PluginA(Plugin):
             id = 'A'
-            x  = ExtensionPoint(List, id='x')
+            x = ExtensionPoint(List, id='x')
 
         class PluginB(Plugin):
             id = 'B'
-            x  = List([1, 2, 3], contributes_to='x')
+            x = List([1, 2, 3], contributes_to='x')
 
         a = PluginA()
         b = PluginB()
@@ -290,7 +288,7 @@ class PluginTestCase(unittest.TestCase):
 
         class PluginA(Plugin):
             id = 'A'
-            x  = ExtensionPoint(List, id='x')
+            x = ExtensionPoint(List, id='x')
 
         class PluginB(Plugin):
             id = 'B'
@@ -312,11 +310,11 @@ class PluginTestCase(unittest.TestCase):
 
         class PluginA(Plugin):
             id = 'A'
-            x  = ExtensionPoint(List, id='x')
+            x = ExtensionPoint(List, id='x')
 
         class PluginB(Plugin):
             id = 'B'
-            x  = List([1, 2, 3], contributes_to='x')
+            x = List([1, 2, 3], contributes_to='x')
 
             @contributes_to('x')
             def _x_contributions(self):
@@ -335,21 +333,21 @@ class PluginTestCase(unittest.TestCase):
 
         class PluginA(Plugin):
             id = 'A'
-            x  = ExtensionPoint(List(Int), id='x')
+            x = ExtensionPoint(List(Int), id='x')
 
             def _x_items_changed(self, event):
-                self.added   = event.added
+                self.added = event.added
                 self.removed = event.removed
 
                 return
 
         class PluginB(Plugin):
             id = 'B'
-            x  = List(Int, [1, 2, 3], contributes_to='x')
+            x = List(Int, [1, 2, 3], contributes_to='x')
 
         class PluginC(Plugin):
             id = 'C'
-            x  = List(Int, [4, 5, 6], contributes_to='x')
+            x = List(Int, [4, 5, 6], contributes_to='x')
 
         a = PluginA()
         b = PluginB()

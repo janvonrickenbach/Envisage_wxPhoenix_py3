@@ -1,6 +1,5 @@
 """ Used to track events in tests. """
 
-
 # Enthought library imports.
 from traits.api import HasTraits, List, Str, Tuple
 
@@ -46,7 +45,6 @@ class EventTracker(HasTraits):
         for subscription in new:
             self._add_subscription(subscription)
 
-
         return
 
     def _subscriptions_items_changed(self, event):
@@ -57,7 +55,6 @@ class EventTracker(HasTraits):
 
         for subscription in event.added:
             self._add_subscription(subscription)
-
 
         return
 
@@ -96,5 +93,6 @@ class EventTracker(HasTraits):
             obj.on_trait_change(self._listener, remove=True)
 
         return
+
 
 #### EOF ######################################################################

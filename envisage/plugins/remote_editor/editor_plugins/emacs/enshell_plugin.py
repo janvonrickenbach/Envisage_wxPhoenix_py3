@@ -8,9 +8,9 @@ from Pymacs import lisp
 from envisage.plugins.remote_editor.plugins.editor_plugin import \
         EditorPlugin
 
-
 client = EditorPlugin()
 client.register()
+
 
 def run_text():
     start = lisp.point()
@@ -23,6 +23,7 @@ def run_text():
     else:
         # TODO Complain in message bar
         pass
+
 
 def run_file():
     path = lisp.buffer_file_name()

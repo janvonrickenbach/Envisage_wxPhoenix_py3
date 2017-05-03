@@ -6,7 +6,6 @@
 #  Author: Dave Peterson <dpeterson@enthought.com>
 #
 #-----------------------------------------------------------------------------
-
 """ An action to close the current project.  This is only enabled when
     there is a current project.
 """
@@ -18,6 +17,7 @@ from pyface.api import ImageResource
 ##############################################################################
 # class 'CloseProjectAction'
 ##############################################################################
+
 
 class CloseProjectAction(ProjectAction):
     """ An action to close the current project.  This is only enabled when

@@ -1,6 +1,5 @@
 """ A menu builder that doesn't build real actions! """
 
-
 # Enthought library imports.
 from envisage.ui.action.api import AbstractActionManagerBuilder
 from pyface.action.api import Action, Group, MenuManager
@@ -50,5 +49,6 @@ class DummyActionManagerBuilder(AbstractActionManagerBuilder):
             menu_manager.insert(-1, Group(id=group_definition.id))
 
         return menu_manager
+
 
 #### EOF ######################################################################

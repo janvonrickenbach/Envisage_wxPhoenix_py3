@@ -1,6 +1,5 @@
 """ Base class for Egg-based test cases. """
 
-
 import pkg_resources
 from os.path import dirname, join
 
@@ -72,5 +71,6 @@ class EggBasedTestCase(unittest.TestCase):
             working_set.add(distribution)
 
         return
+
 
 #### EOF ######################################################################

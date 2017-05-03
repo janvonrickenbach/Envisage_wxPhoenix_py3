@@ -20,23 +20,21 @@ from traitsui.table_filter import MenuFilterTemplate
 from traitsui.table_filter import EvalFilterTemplate
 from traitsui.table_filter import RuleFilterTemplate
 
-
 # Table editor definition:
 filters = [EvalFilterTemplate, MenuFilterTemplate, RuleFilterTemplate]
 
 table_editor = TableEditor(
-    columns     = [
+    columns=[
         ObjectColumn(name='name'),
         ObjectColumn(name='type'),
         ObjectColumn(name='module'),
     ],
-    editable    = False,
-    deletable   = False,
-    sortable    = True,
-    sort_model  = False,
-    filters     = filters,
-    search      = RuleTableFilter(),
-)
+    editable=False,
+    deletable=False,
+    sortable=True,
+    sort_model=False,
+    filters=filters,
+    search=RuleTableFilter(), )
 
 
 def type_to_str(obj):
@@ -90,23 +88,18 @@ class NamespaceView(View):
 
     namespace = DelegatesTo('shell_view')
 
-
     # The default traits UI view.
     traits_view = TraitsView(
         VGroup(
             Item(
                 'bindings',
-                id     = 'table',
-                editor = table_editor,
-                springy = True,
-                resizable = True,
-            ),
-
-            show_border = True,
-            show_labels = False
-        ),
-        resizable = True,
-    )
+                id='table',
+                editor=table_editor,
+                springy=True,
+                resizable=True, ),
+            show_border=True,
+            show_labels=False),
+        resizable=True, )
 
     ###########################################################################
     # 'View' interface.
@@ -145,7 +138,12 @@ class NamespaceView(View):
             type = Str
             module = Str
 
-        data = [item(name=name, type=type_to_str(value), module=module_to_str(value))
-                    for name, value in self.shell_view.namespace.items()]
+        data = [
+            item(
+                name=name,
+                type=type_to_str(value),
+                module=module_to_str(value))
+            for name, value in self.shell_view.namespace.items()
+        ]
 
         return data

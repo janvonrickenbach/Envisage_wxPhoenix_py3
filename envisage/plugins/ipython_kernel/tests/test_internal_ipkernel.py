@@ -11,7 +11,6 @@ from envisage.plugins.ipython_kernel.internal_ipkernel import InternalIPKernel
 
 
 class TestInternalIPKernel(unittest.TestCase):
-
     def tearDown(self):
         IPKernelApp.clear_instance()
 

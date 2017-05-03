@@ -1,6 +1,5 @@
 """ The interface for objects using the 'ExtensionPoint' trait type. """
 
-
 # Enthought library imports.
 from traits.api import Instance, Interface
 
@@ -13,5 +12,6 @@ class IExtensionPointUser(Interface):
 
     # The extension registry that the object's extension points are stored in.
     extension_registry = Instance(IExtensionRegistry)
+
 
 #### EOF ######################################################################

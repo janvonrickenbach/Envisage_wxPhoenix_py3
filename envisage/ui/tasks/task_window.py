@@ -1,4 +1,3 @@
-
 # Enthought library imports.
 from pyface.image_resource import ImageResource
 from pyface.tasks.api import TaskWindow as PyfaceTaskWindow

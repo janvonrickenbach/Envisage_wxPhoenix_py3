@@ -1,6 +1,5 @@
 """ An action that exits the workbench. """
 
-
 # Enthought library imports.
 from pyface.api import ImageResource
 from pyface.action.api import Action
@@ -33,5 +32,6 @@ class ExitAction(Action):
         self.window.application.exit()
 
         return
+
 
 #### EOF ######################################################################

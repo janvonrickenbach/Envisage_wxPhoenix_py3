@@ -1,6 +1,5 @@
 """ Tests for the import manager. """
 
-
 # Enthought library imports.
 from envisage.api import Application, ImportManager
 from traits.testing.unittest_tools import unittest
@@ -55,8 +54,7 @@ class ImportManagerTestCase(unittest.TestCase):
         """ import dotted module """
 
         symbol = self.import_manager.import_symbol(
-            'envisage.api:ImportManager'
-        )
+            'envisage.api:ImportManager')
         self.assertEqual(symbol, ImportManager)
 
         return

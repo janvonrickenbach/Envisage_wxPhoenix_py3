@@ -1,7 +1,4 @@
-
-
 from traits.api import Callable, HasTraits, List, Str
-
 
 
 class VersionInfo(HasTraits):
@@ -43,6 +40,7 @@ class VersionInfo(HasTraits):
             other_ver = other.version
         return self_ver < other_ver
 
+
 class UpdateInfo(HasTraits):
     """ Encapsulates the information about the available update or
     updates.  An update can consist of multiple versions, with each
@@ -52,7 +50,3 @@ class UpdateInfo(HasTraits):
     updates = List(VersionInfo)
 
     pass
-
-
-
-

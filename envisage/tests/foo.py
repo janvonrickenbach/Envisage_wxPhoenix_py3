@@ -1,6 +1,5 @@
 """ A test class used in the service registry tests! """
 
-
 # Enthought library imports.
 from traits.api import HasTraits, provides
 

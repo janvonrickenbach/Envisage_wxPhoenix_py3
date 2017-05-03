@@ -1,6 +1,5 @@
 """ A Python namespace. """
 
-
 # Standard library imports.
 import os, sys
 
@@ -151,5 +150,6 @@ class Namespace(HasTraits):
             module = None
 
         return module
+
 
 #### EOF ######################################################################

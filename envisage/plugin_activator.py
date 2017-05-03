@@ -1,6 +1,5 @@
 """ The default plugin activator. """
 
-
 # Enthought library imports.
 from traits.api import HasTraits, provides
 
@@ -44,5 +43,6 @@ class PluginActivator(HasTraits):
         plugin.disconnect_extension_point_traits()
 
         return
+
 
 #### EOF ######################################################################

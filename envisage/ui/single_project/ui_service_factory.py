@@ -4,12 +4,10 @@
 #  All rights reserved.
 #
 #-----------------------------------------------------------------------------
-
 """
 The default UI service factory.
 
 """
-
 
 # Enthought library imports.
 from traits.api import HasTraits, Int, Str

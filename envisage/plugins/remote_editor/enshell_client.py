@@ -11,6 +11,5 @@ class EnshellClient(Client):
         for this application.
     """
 
-    server_prefs = (os.path.join(remote_editor.__path__[0],
-                    "preferences.ini"),
+    server_prefs = (os.path.join(remote_editor.__path__[0], "preferences.ini"),
                     "enthought.remote_editor")

@@ -1,6 +1,5 @@
 """ Tests for safe weakrefs. """
 
-
 # Standard library imports.
 import weakref
 

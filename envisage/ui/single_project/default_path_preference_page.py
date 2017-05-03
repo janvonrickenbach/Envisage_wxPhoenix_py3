@@ -4,7 +4,6 @@
 #  All rights reserved.
 #
 #-----------------------------------------------------------------------------
-
 """ Preference page for default path for a project
 """
 
@@ -19,6 +18,7 @@ ID = 'envisage.ui.single_project'
 #-------------------------------------------------------------------------------
 #   DefaultPathPreferencePage Class
 #-------------------------------------------------------------------------------
+
 
 class DefaultPathPreferencePage(PreferencesPage):
     """ Preference page for default path for a plugin.
@@ -36,7 +36,11 @@ class DefaultPathPreferencePage(PreferencesPage):
     preferred_path = Directory('')
 
     # Set the traits view
-    traits_view = View(Item('preferred_path', style='custom',
-        tooltip='Path that will be used for storing projects'))
+    traits_view = View(
+        Item(
+            'preferred_path',
+            style='custom',
+            tooltip='Path that will be used for storing projects'))
+
 
 ### EOF ------------------------------------------------------------------------

@@ -1,9 +1,7 @@
 """ Text Editor plugin definition. """
 
-
 # Plugin extension-point imports.
 from envisage import PluginDefinition, get_using_workbench
-
 
 # Are we using the old UI plugin, or the shiny new Workbench plugin?
 USING_WORKBENCH = get_using_workbench()
@@ -17,11 +15,9 @@ else:
     from envisage.ui.ui_plugin_definition import \
          Action, Group, Menu, UIActions
 
-
 # The plugin's globally unique identifier (also used as the prefix for all
 # identifiers defined in this module).
 ID = "envisage.plugins.refresh_code"
-
 
 ###############################################################################
 # Extensions.
@@ -29,19 +25,15 @@ ID = "envisage.plugins.refresh_code"
 
 if USING_WORKBENCH:
     refresh_code = Action(
-        name          = "Refresh Code",
-        description   = "Refresh application to reflect python code changes",
-        accelerator   = "Ctrl+Shift+R",
-        function_name = "traits.util.refresh.refresh",
-
-        locations     = [
-            Location(path="MenuBar/FileMenu/ExitGroup")
-        ]
-    )
+        name="Refresh Code",
+        description="Refresh application to reflect python code changes",
+        accelerator="Ctrl+Shift+R",
+        function_name="traits.util.refresh.refresh",
+        locations=[Location(path="MenuBar/FileMenu/ExitGroup")])
 
     actions = WorkbenchActionSet(
-        id   = ID + ".refresh_code_action_set",
-        name = "Refresh Code",
+        id=ID + ".refresh_code_action_set",
+        name="Refresh Code",
 
         # fixme: This menus stuff should go away once we get ticket:312
         # resolved.
@@ -64,39 +56,32 @@ if USING_WORKBENCH:
         #        groups = []
         #    ),
         #],
-
-        actions = [refresh_code]
-    )
+        actions=[refresh_code])
 
     requires = "envisage.workbench.action"
 
 else:
     refresh_code = Action(
-        name          = "Refresh Code", # fixme: this should change
-        description   = "Refresh application to reflect python code changes",
-        menu_bar_path = "ToolsMenu/additions", # fixme: this should change
-        accelerator   = "Ctrl+Shift+R",
-        function_name = "traits.util.refresh.refresh"
-    )
+        name="Refresh Code",  # fixme: this should change
+        description="Refresh application to reflect python code changes",
+        menu_bar_path="ToolsMenu/additions",  # fixme: this should change
+        accelerator="Ctrl+Shift+R",
+        function_name="traits.util.refresh.refresh")
 
-    actions =  UIActions(
+    actions = UIActions(
         # fixme: This menus stuff should go away once we get ticket:312
         # resolved.
-        menus = [
+        menus=[
             Menu(
-                id     = "ToolsMenu",
-                name   = "&Tools",
-                path   = "ToolsGroup",
-
-                groups = [
-                    Group(id = "Start"),
-                    Group(id = "End"),
-                ]
-            ),
+                id="ToolsMenu",
+                name="&Tools",
+                path="ToolsGroup",
+                groups=[
+                    Group(id="Start"),
+                    Group(id="End"),
+                ]),
         ],
-
-        actions = [refresh_code]
-    )
+        actions=[refresh_code])
 
     requires = "envisage.ui"
 
@@ -104,16 +89,17 @@ else:
 # The plugin definition!
 ###############################################################################
 
+
 class RefreshCodePluginDefinition(PluginDefinition):
     # The plugin's globally unique identifier.
     id = ID
 
     # General information about the plugin.
-    name          = "Refresh Code Plugin"
-    version       = "1.0.0"
+    name = "Refresh Code Plugin"
+    version = "1.0.0"
     provider_name = "Enthought Inc"
-    provider_url  = "www.enthought.com"
-    enabled       = True
+    provider_url = "www.enthought.com"
+    enabled = True
 
     # The Id's of the plugins that this plugin requires.
     requires = [requires]
@@ -124,5 +110,6 @@ class RefreshCodePluginDefinition(PluginDefinition):
     # The contributions that this plugin makes to extension points offered by
     # either itself or other plugins.
     extensions = [actions]
+
 
 #### EOF ######################################################################

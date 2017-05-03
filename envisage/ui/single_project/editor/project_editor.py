@@ -4,7 +4,6 @@
 #  All rights reserved.
 #
 #-----------------------------------------------------------------------------
-
 """
 A base class for editors that can be tracked by single project plugin projects.
 
@@ -20,9 +19,8 @@ from traits.api import Instance
 # Application specific imports.
 from envisage.single_project.services import IPROJECT_MODEL
 
-
 # Setup a logger for this module.
-logger=logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 
 class ProjectEditor(DecoratedEditor):
@@ -40,7 +38,6 @@ class ProjectEditor(DecoratedEditor):
 
     # The project containing the resource we're editing
     project = Instance('envisage.single_project.project.Project')
-
 
     #########################################################################
     # `object` interface
@@ -65,7 +62,6 @@ class ProjectEditor(DecoratedEditor):
         self.project.register_editor(self.resource, self)
 
         return
-
 
     #########################################################################
     # 'Editor' interface.

@@ -1,6 +1,5 @@
 """ Tests for the 'Service' trait type. """
 
-
 # Enthought library imports.
 from envisage.api import Application, Plugin, Service
 from traits.api import HasTraits, Instance

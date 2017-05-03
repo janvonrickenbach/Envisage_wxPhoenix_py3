@@ -1,6 +1,5 @@
 """ A simple plugin manager implementation. """
 
-
 from fnmatch import fnmatch
 import logging
 
@@ -10,8 +9,6 @@ from .i_application import IApplication
 from .i_plugin import IPlugin
 from .i_plugin_manager import IPluginManager
 from .plugin_event import PluginEvent
-
-
 
 logger = logging.getLogger(__name__)
 
@@ -47,6 +44,7 @@ class PluginManager(HasTraits):
 
     # The application that the plugin manager is part of.
     application = Instance(IApplication)
+
     def _application_changed(self, trait_name, old, new):
         """ Static trait change handler. """
 
@@ -92,7 +90,6 @@ class PluginManager(HasTraits):
 
         plugins = [
             plugin for plugin in self._plugins
-
             if self._include_plugin(plugin.id)
         ]
 
@@ -183,6 +180,7 @@ class PluginManager(HasTraits):
 
     # The plugins that the manager manages!
     _plugins = List(IPlugin)
+
     def __plugins_changed(self, trait_name, old, new):
         """ Static trait change handler. """
 
@@ -207,7 +205,8 @@ class PluginManager(HasTraits):
 
         """
 
-        return self._is_included(plugin_id) and not self._is_excluded(plugin_id)
+        return self._is_included(plugin_id) and not self._is_excluded(
+            plugin_id)
 
     #### Private protocol ######################################################
 
@@ -255,5 +254,6 @@ class PluginManager(HasTraits):
             plugin.application = self.application
 
         return
+
 
 #### EOF ######################################################################

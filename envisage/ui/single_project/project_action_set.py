@@ -6,6 +6,7 @@ from envisage.ui.workbench.api import WorkbenchActionSet
 # This module's package.
 PKG = '.'.join(__name__.split('.')[:-1])
 
+
 class ProjectActionSet(WorkbenchActionSet):
     """ Action set of a default Project. """
 
@@ -18,37 +19,25 @@ class ProjectActionSet(WorkbenchActionSet):
             id='ProjectMenu',
             name='&Project',
             path='MenuBar/File',
-            group='ProjectGroup',
-        ),
+            group='ProjectGroup', ),
     ]
 
     # List of groups we provide.
     groups = [
         Group(
-            id='OpenGroup',
-            path='MenuBar/File/ProjectMenu'
-        ),
+            id='OpenGroup', path='MenuBar/File/ProjectMenu'),
         Group(
-            id='SaveGroup',
-            path='MenuBar/File/ProjectMenu'
-        ),
+            id='SaveGroup', path='MenuBar/File/ProjectMenu'),
         Group(
-            id='CloseGroup',
-            path='MenuBar/File/ProjectMenu'
-        ),
+            id='CloseGroup', path='MenuBar/File/ProjectMenu'),
         Group(
-            id='ProjectGroup',
-            path='MenuBar/File',
-            before='ExitGroup'
-        ),
+            id='ProjectGroup', path='MenuBar/File', before='ExitGroup'),
     ]
 
     # List of toolbars we provide.
     tool_bars = [
         ToolBar(
-            name='Project',
-            groups=['PerspectiveGroup', 'ProjectGroup']
-        ),
+            name='Project', groups=['PerspectiveGroup', 'ProjectGroup']),
     ]
 
     # List of actions we provide.
@@ -57,60 +46,49 @@ class ProjectActionSet(WorkbenchActionSet):
         Action(
             class_name=PKG + '.action.api:NewProjectAction',
             group='OpenGroup',
-            path='MenuBar/File/ProjectMenu',
-        ),
+            path='MenuBar/File/ProjectMenu', ),
         Action(
             class_name=PKG + '.action.api:OpenProjectAction',
             group='OpenGroup',
-            path='MenuBar/File/ProjectMenu',
-        ),
+            path='MenuBar/File/ProjectMenu', ),
         Action(
             class_name=PKG + '.action.api:SaveProjectAction',
             group='SaveGroup',
-            path='MenuBar/File/ProjectMenu',
-        ),
+            path='MenuBar/File/ProjectMenu', ),
         Action(
             class_name=PKG + '.action.api:SaveAsProjectAction',
             group='SaveGroup',
-            path='MenuBar/File/ProjectMenu',
-        ),
+            path='MenuBar/File/ProjectMenu', ),
         Action(
             class_name=PKG + '.action.api:CloseProjectAction',
             group='CloseGroup',
-            path='MenuBar/File/ProjectMenu',
-        ),
+            path='MenuBar/File/ProjectMenu', ),
 
         # Toolbar actions.
         Action(
             class_name=PKG + '.action.api:SwitchToAction',
             group='PerspectiveGroup',
-            path='ToolBar/Project',
-        ),
+            path='ToolBar/Project', ),
         Action(
             class_name=PKG + '.action.api:NewProjectAction',
             group='ProjectGroup',
-            path='ToolBar/Project',
-        ),
+            path='ToolBar/Project', ),
         Action(
             class_name=PKG + '.action.api:OpenProjectAction',
             group='ProjectGroup',
-            path='ToolBar/Project',
-        ),
+            path='ToolBar/Project', ),
         Action(
             class_name=PKG + '.action.api:SaveProjectAction',
             group='ProjectGroup',
-            path='ToolBar/Project',
-        ),
+            path='ToolBar/Project', ),
         Action(
             class_name=PKG + '.action.api:SaveAsProjectAction',
             group='ProjectGroup',
-            path='ToolBar/Project',
-        ),
+            path='ToolBar/Project', ),
         Action(
             class_name=PKG + '.action.api:CloseProjectAction',
             group='ProjectGroup',
-            path='ToolBar/Project',
-        ),
+            path='ToolBar/Project', ),
     ]
 
     #### 'WorkbenchActionSet' interface #######################################

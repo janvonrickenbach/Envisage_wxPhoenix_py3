@@ -1,10 +1,8 @@
 """ Tests for class load hooks. """
 
-
 from envisage.api import ClassLoadHook
 from traits.api import HasTraits
 from traits.testing.unittest_tools import unittest
-
 
 # This module's package.
 PKG = 'envisage.tests'
@@ -43,9 +41,8 @@ class ClassLoadHookTestCase(unittest.TestCase):
 
         # To register with 'MetaHasTraits' we use 'module_name.class_name'.
         hook = ClassLoadHook(
-            class_name = ClassLoadHookTestCase.__module__ + '.Foo',
-            on_load    = on_class_loaded
-        )
+            class_name=ClassLoadHookTestCase.__module__ + '.Foo',
+            on_load=on_class_loaded)
         hook.connect()
 
         class Foo(HasTraits):
@@ -67,9 +64,8 @@ class ClassLoadHookTestCase(unittest.TestCase):
 
         # To register with 'MetaHasTraits' we use 'module_name.class_name'.
         hook = ClassLoadHook(
-            class_name = self._get_full_class_name(ClassLoadHookTestCase),
-            on_load    = on_class_loaded
-        )
+            class_name=self._get_full_class_name(ClassLoadHookTestCase),
+            on_load=on_class_loaded)
         hook.connect()
 
         # Make sure the 'on_load' got called immediately because the class is
@@ -90,9 +86,8 @@ class ClassLoadHookTestCase(unittest.TestCase):
 
         # To register with 'MetaHasTraits' we use 'module_name.class_name'.
         hook = ClassLoadHook(
-            class_name = ClassLoadHookTestCase.__module__ + '.Foo',
-            on_load    = on_class_loaded
-        )
+            class_name=ClassLoadHookTestCase.__module__ + '.Foo',
+            on_load=on_class_loaded)
         hook.connect()
 
         class Foo(HasTraits):

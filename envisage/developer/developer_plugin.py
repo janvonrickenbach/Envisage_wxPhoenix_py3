@@ -1,10 +1,8 @@
 """ The developer plugin. """
 
-
 # Enthought library imports.
 from envisage.api import Plugin, ServiceOffer
 from traits.api import List
-
 
 # The package that this module is in.
 PKG = '.'.join(__name__.split('.')[:-1])
@@ -43,11 +41,11 @@ class DeveloperPlugin(Plugin):
         code_browser_class = PKG + '.code_browser.api.CodeBrowser'
 
         code_browser_service_offer = ServiceOffer(
-            protocol = code_browser_class,
-            factory  = code_browser_class,
-            scope    = 'application'
-        )
+            protocol=code_browser_class,
+            factory=code_browser_class,
+            scope='application')
 
         return [code_browser_service_offer]
+
 
 #### EOF ######################################################################

@@ -1,6 +1,5 @@
 """ The default implementation of the 'IMessage' interface. """
 
-
 # Enthought library imports.
 from traits.api import HasTraits, Str, provides
 
@@ -17,5 +16,6 @@ class Message(HasTraits):
 
     # The text of the message.
     text = Str
+
 
 #### EOF ######################################################################

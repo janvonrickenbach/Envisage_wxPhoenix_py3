@@ -1,6 +1,5 @@
 """ An extensible workbench window. """
 
-
 # Standard library imports.
 import logging
 
@@ -18,7 +17,6 @@ from traits.api import Delegate, Instance, List, Property, provides
 from .workbench_action_manager_builder import WorkbenchActionManagerBuilder
 from .workbench_editor_manager import WorkbenchEditorManager
 
-
 # Logging.
 logger = logging.getLogger(__name__)
 
@@ -28,9 +26,9 @@ class WorkbenchWindow(pyface.WorkbenchWindow):
     """ An extensible workbench window. """
 
     # Extension point Ids.
-    ACTION_SETS    = 'envisage.ui.workbench.action_sets'
-    VIEWS          = 'envisage.ui.workbench.views'
-    PERSPECTIVES   = 'envisage.ui.workbench.perspectives'
+    ACTION_SETS = 'envisage.ui.workbench.action_sets'
+    VIEWS = 'envisage.ui.workbench.views'
+    PERSPECTIVES = 'envisage.ui.workbench.perspectives'
     SERVICE_OFFERS = 'envisage.ui.workbench.service_offers'
 
     #### 'WorkbenchWindow' interface ##########################################
@@ -169,9 +167,8 @@ class WorkbenchWindow(pyface.WorkbenchWindow):
     def get_service(self, protocol, query='', minimize='', maximize=''):
         """ Return at most one service that matches the specified query. """
 
-        service = self.service_registry.get_service(
-            protocol, query, minimize, maximize
-        )
+        service = self.service_registry.get_service(protocol, query, minimize,
+                                                    maximize)
 
         return service
 
@@ -183,18 +180,16 @@ class WorkbenchWindow(pyface.WorkbenchWindow):
     def get_services(self, protocol, query='', minimize='', maximize=''):
         """ Return all services that match the specified query. """
 
-        services = self.service_registry.get_services(
-            protocol, query, minimize, maximize
-        )
+        services = self.service_registry.get_services(protocol, query,
+                                                      minimize, maximize)
 
         return services
 
     def register_service(self, protocol, obj, properties=None):
         """ Register a service. """
 
-        service_id = self.service_registry.register_service(
-            protocol, obj, properties
-        )
+        service_id = self.service_registry.register_service(protocol, obj,
+                                                            properties)
 
         return service_id
 
@@ -220,8 +215,7 @@ class WorkbenchWindow(pyface.WorkbenchWindow):
         """ Trait initializer. """
 
         action_manager_builder = WorkbenchActionManagerBuilder(
-            window=self, action_sets=self.action_sets
-        )
+            window=self, action_sets=self.action_sets)
 
         return action_manager_builder
 
@@ -239,10 +233,9 @@ class WorkbenchWindow(pyface.WorkbenchWindow):
         service_offer.properties['window'] = self
 
         service_id = self.register_service(
-            protocol   = service_offer.protocol,
-            obj        = service_offer.factory,
-            properties = service_offer.properties
-        )
+            protocol=service_offer.protocol,
+            obj=service_offer.factory,
+            properties=service_offer.properties)
 
         return service_id
 
@@ -258,5 +251,6 @@ class WorkbenchWindow(pyface.WorkbenchWindow):
             self.unregister_service(service_id)
 
         return
+
 
 #### EOF ######################################################################

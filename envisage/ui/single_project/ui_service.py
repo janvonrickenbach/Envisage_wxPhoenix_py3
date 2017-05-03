@@ -4,7 +4,6 @@
 #  All rights reserved.
 #
 #-----------------------------------------------------------------------------
-
 """
 A service to enable UI interactions with the single project plugin.
 
@@ -27,7 +26,6 @@ from traits.api import Any, Event, HasTraits, Instance, Int
 
 # Local imports.
 from .model_service import ModelService
-
 
 # Setup a logger for this module.
 logger = logging.getLogger(__name__)
@@ -81,10 +79,9 @@ class UiService(HasTraits):
         """
 
         super(UiService, self).__init__(
-            model_service = model_service,
-            default_context_menu_manager = menu_manager,
-            **traits
-            )
+            model_service=model_service,
+            default_context_menu_manager=menu_manager,
+            **traits)
         try:
             # Bind the autosave interval to the value specified in the
             # single project preferences
@@ -95,7 +92,6 @@ class UiService(HasTraits):
                              'preferences.' % self)
 
         return
-
 
     ##########################################################################
     # 'UiService' interface.
@@ -120,7 +116,6 @@ class UiService(HasTraits):
 
         return
 
-
     def create(self, event):
         """
         Create a new project.
@@ -135,7 +130,7 @@ class UiService(HasTraits):
 
                 # Allow the user to customize the new project
                 dialog = project.edit_traits(
-                    parent = event.window.control,
+                    parent=event.window.control,
                     # FIXME: Due to a bug in traits, using a wizard dialog
                     # causes all of the Instance traits on the object being
                     # edited to be replaced with new instances without any
@@ -143,8 +138,7 @@ class UiService(HasTraits):
                     # guarantee that our project's don't have Instance traits,
                     # we can't use the wizard dialog type.
                     #kind = 'wizard'
-                    kind = 'livemodal'
-                    )
+                    kind='livemodal')
 
                 # If the user closed the dialog with an ok, make it the
                 # current project.
@@ -154,7 +148,6 @@ class UiService(HasTraits):
                     self.project_created = project
 
         return
-
 
     def display_default_context_menu(self, parent, event):
         """
@@ -167,14 +160,15 @@ class UiService(HasTraits):
         # Determine the current workbench window.  This should be safe since
         # we're only building a context menu when the user clicked on a
         # control that is contained in a window.
-        workbench = self.model_service.application.get_service('envisage.ui.workbench.workbench.Workbench')
+        workbench = self.model_service.application.get_service(
+            'envisage.ui.workbench.workbench.Workbench')
         window = workbench.active_window
 
         # Build our menu
         from envisage.workbench.action.action_controller import \
             ActionController
-        menu = self.default_context_menu_manager.create_menu(parent,
-            controller = ActionController(window=window))
+        menu = self.default_context_menu_manager.create_menu(
+            parent, controller=ActionController(window=window))
 
         # Popup the menu (if an action is selected it will be performed
         # before before 'PopupMenu' returns).
@@ -182,7 +176,6 @@ class UiService(HasTraits):
             menu.show(event.x, event.y)
 
         return
-
 
     def delete_selection(self):
         """
@@ -214,14 +207,14 @@ class UiService(HasTraits):
                     deletables.append(item)
                 else:
                     logger.debug('Node type reports selection item [%s] is '
-                        'not deletable.', nt)
+                                 'not deletable.', nt)
 
             if deletables != []:
                 # Confirm the delete operation with the user
                 names = '\n\t'.join([b.name for b in deletables])
                 message = ('You are about to delete the following selected '
-                    'items:\n\t%s\n\n'
-                    'Are you sure?') % names
+                           'items:\n\t%s\n\n'
+                           'Are you sure?') % names
                 title = 'Delete Selected Items?'
                 action = confirm(None, message, title)
                 if action == YES:
@@ -231,7 +224,6 @@ class UiService(HasTraits):
                         self._unbind_nodes(context, deletables)
 
         return
-
 
     def is_current_project_saved(self, parent_window):
         """
@@ -249,7 +241,7 @@ class UiService(HasTraits):
         # If the current project is dirty, handle that now by challenging the
         # user for how they want to handle them.
         current = self.model_service.project
-        if not(self._get_project_state(current)):
+        if not (self._get_project_state(current)):
             dialog = ConfirmationDialog(
                 parent  = parent_window,
                 cancel  = True,
@@ -268,7 +260,6 @@ class UiService(HasTraits):
                 self._clean_autosave_location(current.location.strip())
         return result
 
-
     def listen_for_application_exit(self):
         """
         Ensure that we get notified of any attempts to, and thus have a chance
@@ -281,11 +272,11 @@ class UiService(HasTraits):
 
         """
 
-        workbench = self.model_service.application.get_service('envisage.ui.workbench.workbench.Workbench')
+        workbench = self.model_service.application.get_service(
+            'envisage.ui.workbench.workbench.Workbench')
         workbench.on_trait_change(self._workbench_exiting, 'exiting')
 
         return
-
 
     def open(self, event):
         """
@@ -306,10 +297,10 @@ class UiService(HasTraits):
                     self.model_service.project = project
                 else:
                     msg = 'Unable to open %s as a project.' % path
-                    error(event.window.control, msg, title='Project Open Error')
+                    error(
+                        event.window.control, msg, title='Project Open Error')
 
         return
-
 
     def save(self, event):
         """
@@ -323,7 +314,6 @@ class UiService(HasTraits):
 
         return
 
-
     def save_as(self, event):
         """
         Save the current project to a different location.
@@ -335,7 +325,6 @@ class UiService(HasTraits):
             self._save(current, event.window.control, prompt_for_location=True)
 
         return
-
 
     #### protected interface #################################################
 
@@ -350,23 +339,21 @@ class UiService(HasTraits):
         # Save the project only if it has been modified.
         if project.dirty and project.is_save_as_allowed:
             location = project.location.strip()
-            if not(location is None or len(location) < 1):
+            if not (location is None or len(location) < 1):
                 autosave_loc = self._get_autosave_location(location)
                 try:
                     # We do not want the project's location and name to be
                     # updated.
-                    project.save(autosave_loc, overwrite=True,
-                                 autosave=True)
-                    msg = '[%s] auto-saved to [%s]' % (project,
-                                                       autosave_loc)
+                    project.save(autosave_loc, overwrite=True, autosave=True)
+                    msg = '[%s] auto-saved to [%s]' % (project, autosave_loc)
                     logger.debug(msg)
                 except:
-                    logger.exception('Error auto-saving project [%s]'% project)
+                    logger.exception('Error auto-saving project [%s]' %
+                                     project)
             else:
                 logger.exception('Error auto-saving project [%s] in '
                                  'location %s' % (project, location))
         return
-
 
     def _clean_autosave_location(self, location):
         """
@@ -379,15 +366,14 @@ class UiService(HasTraits):
             self.model_service.clean_location(autosave_loc)
         return
 
-
     def _get_autosave_location(self, location):
         """
         Returns the path for auto-saving the project in location.
 
         """
-        return os.path.join(os.path.dirname(location),
-                            os.path.basename(location) + '.autosave')
-
+        return os.path.join(
+            os.path.dirname(location),
+            os.path.basename(location) + '.autosave')
 
     def _get_context_for_object(self, obj):
         """
@@ -409,7 +395,6 @@ class UiService(HasTraits):
 
         return context
 
-
     def _get_resource_type_for_object(self, obj):
         """
         Return the resource type for the specified object.
@@ -421,7 +406,6 @@ class UiService(HasTraits):
         resource_manager = self.model_service.resource_manager
         return resource_manager.get_type_of(obj)
 
-
     def _get_project_state(self, project):
         """ Returns True if the project is clean: i.e., the dirty flag is
         False and all autosaved versions have been deleted from the filesystem.
@@ -430,12 +414,11 @@ class UiService(HasTraits):
 
         result = True
         if project is not None:
-            autosave_loc = self._get_autosave_location(
-                project.location.strip())
+            autosave_loc = self._get_autosave_location(project.location.strip(
+            ))
             if project.dirty or os.path.exists(autosave_loc):
                 result = False
         return result
-
 
     def _get_user_location(self, project, parent_window):
         """
@@ -449,24 +432,24 @@ class UiService(HasTraits):
         # The dialog to use depends on whether we're prompting for a file or
         # a directory.
         if self.model_service.are_projects_files():
-            dialog = FileDialog(parent = parent_window,
-                title = 'Save Project As',
-                default_path = project.location,
-                action = 'save as',
-                )
+            dialog = FileDialog(
+                parent=parent_window,
+                title='Save Project As',
+                default_path=project.location,
+                action='save as', )
             title_type = 'File'
         else:
-            dialog = DirectoryDialog(parent = parent_window,
-                message = 'Choose a Directory for the Project',
-                default_path = project.location,
-                action = 'open'
-                )
+            dialog = DirectoryDialog(
+                parent=parent_window,
+                message='Choose a Directory for the Project',
+                default_path=project.location,
+                action='open')
             title_type = 'Directory'
 
         # Prompt the user for a new location and then validate we're not
         # overwriting something without getting confirmation from the user.
         result = ""
-        while(dialog.open() == OK):
+        while (dialog.open() == OK):
             location = dialog.path.strip()
 
             # If the chosen location doesn't exist yet, we're set.
@@ -480,7 +463,7 @@ class UiService(HasTraits):
             # back and prompt them for a new location.
             else:
                 logger.debug('Location [%s] exists.  Prompting for overwrite '
-                    'permission.', location)
+                             'permission.', location)
                 message = 'Overwrite %s?' % location
                 title = 'Project %s Exists' % title_type
                 action = confirm(parent_window, message, title)
@@ -503,7 +486,6 @@ class UiService(HasTraits):
         logger.debug('Returning user location [%s]', result)
         return result
 
-
     def _restore_from_autosave(self, project, autosave_loc):
         """ Restores the project from the version saved in autosave_loc.
 
@@ -518,8 +500,8 @@ class UiService(HasTraits):
                    'Do you want to restore the project from the '
                    'autosaved version ?' % project.name)
         title = '%s-%s' % (app_name, project.name)
-        action = confirm(window.control, message, title, cancel=True,
-                         default=YES)
+        action = confirm(
+            window.control, message, title, cancel=True, default=YES)
         if action == YES:
             try:
                 saved_project = self.model_service.factory.open(autosave_loc)
@@ -535,13 +517,11 @@ class UiService(HasTraits):
                     logger.debug('No usable project found in [%s].' %
                                  autosave_loc)
             except:
-                logger.exception(
-                    'Unable to restore project from [%s]' %
-                    autosave_loc)
+                logger.exception('Unable to restore project from [%s]' %
+                                 autosave_loc)
         self._start_timer(self.model_service.project)
 
         return
-
 
     def _save(self, project, parent_window, prompt_for_location=False):
         """
@@ -595,7 +575,6 @@ class UiService(HasTraits):
             self._clean_autosave_location(location)
         return saved
 
-
     def _show_open_dialog(self, parent):
         """
         Show the dialog to open a project.
@@ -609,14 +588,18 @@ class UiService(HasTraits):
         project_class = self.model_service.factory.PROJECT_CLASS
 
         if self.model_service.are_projects_files():
-            dialog = FileDialog(parent=parent, default_directory=default_path,
+            dialog = FileDialog(
+                parent=parent,
+                default_directory=default_path,
                 title='Open Project')
             if dialog.open() == OK:
                 path = dialog.path
             else:
                 path = None
         else:
-            dialog = DirectoryDialog(parent=parent, default_path=default_path,
+            dialog = DirectoryDialog(
+                parent=parent,
+                default_path=default_path,
                 message='Open Project')
             if dialog.open() == OK:
                 path = project_class.get_pickle_filename(dialog.path)
@@ -624,13 +607,12 @@ class UiService(HasTraits):
                     path = dialog.path
                 else:
                     error(parent, 'Directory does not contain a recognized '
-                        'project')
+                          'project')
                     path = None
             else:
                 path = None
 
         return path
-
 
     def _start_timer(self, project):
         """
@@ -641,10 +623,9 @@ class UiService(HasTraits):
         if self.timer is None:
             if self.autosave_interval > 0:
                 # Timer needs the interval in millisecs
-                self.timer = Timer(self.autosave_interval*60000,
+                self.timer = Timer(self.autosave_interval * 60000,
                                    self._auto_save, project)
         return
-
 
     def _unbind_nodes(self, context, nodes):
         """
@@ -658,7 +639,7 @@ class UiService(HasTraits):
         """
 
         logger.debug('Unbinding nodes [%s] from context [%s] within '
-            'UiService [%s]', nodes, context, self)
+                     'UiService [%s]', nodes, context, self)
 
         # Iterate through all of the selected nodes looking for ones who's
         # name is within our context.
@@ -700,7 +681,6 @@ class UiService(HasTraits):
                 if len(nodes) < 1:
                     break
 
-
     def _workbench_exiting(self, event):
         """
         Handle the workbench polling to see if it can exit and shutdown the
@@ -717,18 +697,19 @@ class UiService(HasTraits):
         # ignore the dirty state.
         current = self.model_service.project
 
-        if not(self._get_project_state(current)):
+        if not (self._get_project_state(current)):
             # Find the active workbench window to be our dialog parent and
             # the application name to use in our dialog title.
-            workbench = self.model_service.application.get_service('envisage.ui.workbench.workbench.Workbench')
+            workbench = self.model_service.application.get_service(
+                'envisage.ui.workbench.workbench.Workbench')
             window = workbench.active_window
             app_name = workbench.branding.application_name
 
             # Show a confirmation dialog to the user.
             message = 'Do you want to save changes before exiting?'
             title = '%s - %s' % (current.name, app_name)
-            action = confirm(window.control, message, title, cancel=True,
-                default=YES)
+            action = confirm(
+                window.control, message, title, cancel=True, default=YES)
             if action == YES:
                 # If the save is successful, the autosaved file is deleted.
                 if not self._save(current, window.control):
@@ -739,7 +720,6 @@ class UiService(HasTraits):
                 self._clean_autosave_location(current.location.strip())
             elif action == CANCEL:
                 event.veto = True
-
 
     #### Trait change handlers ###############################################
 
@@ -753,7 +733,6 @@ class UiService(HasTraits):
         if new > 0 and self.model_service.project is not None:
             self._start_timer(self.model_service.project)
         return
-
 
     def _project_changed_for_model_service(self, object, name, old, new):
         """
@@ -776,11 +755,10 @@ class UiService(HasTraits):
                 # Issue a do_later command here so as to allow time for the
                 # project view to be updated first to reflect the current
                 # project's state.
-                do_later(self._restore_from_autosave, new,
-                         autosave_loc)
+                do_later(self._restore_from_autosave, new, autosave_loc)
             else:
                 self._start_timer(new)
         return
 
-#### EOF #####################################################################
 
+#### EOF #####################################################################

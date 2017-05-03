@@ -1,12 +1,12 @@
 """ A UI for browsing a plugin. """
 
-
 # Enthought library imports.
 from envisage.api import ExtensionPoint, IPlugin
 from traits.api import Delegate, HasTraits, Instance, List, Property
 from traits.api import Code, Str
 from traitsui.api import Item, TableEditor, View, VGroup
-from traitsui.table_column import ObjectColumn # fixme: non-api!
+from traitsui.table_column import ObjectColumn  # fixme: non-api!
+
 
 class ExtensionPointModel(Hastraits):
     """ A model for browsing an extension point. """
@@ -18,7 +18,6 @@ class ExtensionPointModel(Hastraits):
     extension_point = Instance(IExtensionPoint)
 
     #### 'ExtensionPointModel' interface ######################################
-
 
 
 class ExtensionModel(Hastraits):
@@ -72,10 +71,7 @@ class PluginModel(HasTraits):
 
         extension_models = [
             ExtensionModel(
-                plugin             = plugin,
-                extension_point_id = extension_point.id
-            )
-
+                plugin=plugin, extension_point_id=extension_point.id)
             for extension_point in plugin.get_extension_points()
         ]
 
@@ -86,10 +82,7 @@ class PluginModel(HasTraits):
 
         extension_point_models = [
             ExtensionPointModel(
-                plugin          = plugin,
-                extension_point = extension_point
-            )
-
+                plugin=plugin, extension_point=extension_point)
             for extension_point in plugin.get_extension_points()
         ]
 
@@ -119,38 +112,29 @@ class ApplicationModel(HasTraits):
         return [PluginModel(plugin=plugin) for plugin in self.application]
 
 
-
 extension_point_table_editor = TableEditor(
-    columns = [
+    columns=[
         ObjectColumn(name='id'),
         #ObjectColumn(name='desc')
     ],
 
-#   selected = 'extension_point_selected',
-    editable  = True,
-    edit_view = View(Item(name='desc', show_label=False), style='custom')
-)
+    #   selected = 'extension_point_selected',
+    editable=True,
+    edit_view=View(
+        Item(
+            name='desc', show_label=False), style='custom'))
 
 plugin_browser_view = View(
     VGroup(
-        Item(name='id'),
-        Item(name='name'),
-        label='General'
-    ),
-
+        Item(name='id'), Item(name='name'), label='General'),
     VGroup(
         Item(
-            name       = 'extension_points',
-            editor     = extension_point_table_editor,
-            show_label = False
-        ),
-
-        label='Extension Points',
-    ),
-
-    width  = .8,
-    height = .6
-)
+            name='extension_points',
+            editor=extension_point_table_editor,
+            show_label=False),
+        label='Extension Points', ),
+    width=.8,
+    height=.6)
 
 
 class ExtensionPointBrowser(HasTraits):
@@ -171,7 +155,7 @@ class ExtensionPointBrowser(HasTraits):
     id = Str
 
     # The extension point's description.
-    desc = Code#Str
+    desc = Code  #Str
 
     ###########################################################################
     # 'ExtensionPoint' browser interface.
@@ -232,7 +216,6 @@ class PluginBrowser(HasTraits):
 
         extension_points = [
             ExtensionPointBrowser(extension_point=extension_point)
-
             for extension_point in self.plugin.extension_points
         ]
 
@@ -251,5 +234,6 @@ def browse_plugin(plugin):
     plugin_browser.configure_traits(view=plugin_browser_view)
 
     return
+
 
 #### EOF ######################################################################

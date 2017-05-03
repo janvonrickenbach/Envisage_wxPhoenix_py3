@@ -17,7 +17,6 @@ from traits.api import List
 
 
 class TestIPythonKernelPlugin(unittest.TestCase):
-
     def tearDown(self):
         IPKernelApp.clear_instance()
 

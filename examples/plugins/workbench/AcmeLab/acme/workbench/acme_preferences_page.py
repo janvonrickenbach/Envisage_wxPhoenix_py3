@@ -1,6 +1,5 @@
 """ The preferences for the Acme workbench. """
 
-
 # Enthought library imports.
 from apptools.preferences.ui.api import PreferencesPage
 from traits.api import Bool, Color, Int, Float, Font, Str
@@ -46,5 +45,6 @@ class AcmePreferencesPage(PreferencesPage):
     #### Traits UI views ######################################################
 
     trait_view = View('width', 'height', 'ratio', 'font', 'bgcolor')
+
 
 #### EOF ######################################################################

@@ -8,6 +8,7 @@ from pyface.api import ImageResource
 # class 'OpenProjectAction'
 ##############################################################################
 
+
 class OpenProjectAction(ProjectAction):
     """ An action that opens a project. """
 

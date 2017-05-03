@@ -1,6 +1,5 @@
 """ The interface for extension providers. """
 
-
 # Enthought library imports.
 from traits.api import Event, Interface
 
@@ -29,5 +28,6 @@ class IExtensionProvider(Interface):
         does not contribute any extensions to the extension point.
 
         """
+
 
 #### EOF ######################################################################

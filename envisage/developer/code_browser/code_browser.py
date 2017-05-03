@@ -1,6 +1,5 @@
 """ A simple traits-aware code browser. """
 
-
 # Standard library imports.
 import imp, logging, os, stat, warnings
 
@@ -16,12 +15,10 @@ from ..._compat import pickle
 # Logging.
 logger = logging.getLogger(__name__)
 
-
 # Filter future warnings for maxint, since it causes warnings when compiling
 # anything that has RGBA colors defined as hex values.
-warnings.filterwarnings(
-    "ignore", r'hex/oct constants > sys\.maxint .*', FutureWarning
-)
+warnings.filterwarnings("ignore", r'hex/oct constants > sys\.maxint .*',
+                        FutureWarning)
 
 
 class CodeBrowser(HasTraits):
@@ -125,10 +122,9 @@ class CodeBrowser(HasTraits):
                 if package is not None:
                     sub_package_name = '%s.%s' % (package.name, child.name)
                     sub_package = Package(
-                        filename = child.path,
-                        name     = sub_package_name,
-                        parent   = package
-                    )
+                        filename=child.path,
+                        name=sub_package_name,
+                        parent=package)
 
                 else:
                     sub_package = Package(filename=child.path, name=child.name)
@@ -158,9 +154,8 @@ class CodeBrowser(HasTraits):
                 logger.debug('parsed module %s' % filename)
 
                 # Add the parsed module to the database.
-                self._database[filename] = (
-                    module, os.stat(filename)[stat.ST_MTIME]
-                )
+                self._database[filename] = (module,
+                                            os.stat(filename)[stat.ST_MTIME])
                 self._database_changed = True
 
             except SyntaxError:
@@ -194,9 +189,8 @@ class CodeBrowser(HasTraits):
             # package hierarchy in turn.
             if len(components) > 0:
                 for component in components[1:]:
-                    f, filename, description = imp.find_module(
-                        component, [filename]
-                    )
+                    f, filename, description = imp.find_module(component,
+                                                               [filename])
 
         except ImportError:
             filename = None
@@ -223,5 +217,6 @@ class CodeBrowser(HasTraits):
         self.load()
 
         return
+
 
 #### EOF ######################################################################

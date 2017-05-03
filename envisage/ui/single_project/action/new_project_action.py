@@ -8,6 +8,7 @@ from pyface.api import ImageResource
 # class 'NewProjectAction'
 ##############################################################################
 
+
 class NewProjectAction(ProjectAction):
     """ An action that creates a new project. """
 

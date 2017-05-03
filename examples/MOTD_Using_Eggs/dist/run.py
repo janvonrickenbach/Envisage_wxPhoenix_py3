@@ -12,16 +12,13 @@ Usually, all you have to do in here is:-
 
 """
 
-
 # Standard library imports.
 import logging
-
 
 # Create a log file.
 logger = logging.getLogger()
 logger.addHandler(logging.StreamHandler(file('acme_motd.log', 'w')))
 logger.setLevel(logging.DEBUG)
-
 
 # A list of the directories that contain the application's eggs (any directory
 # not specified as an absolute path is treated as being relative to the current
@@ -41,10 +38,7 @@ def run():
     # Create a plugin manager that ignores all eggs except the ones that we
     # need for this example.
     plugin_manager = EggPluginManager(
-        include = [
-            'envisage.core', 'acme.motd', 'acme.motd.software_quotes'
-        ]
-    )
+        include=['envisage.core', 'acme.motd', 'acme.motd.software_quotes'])
 
     # Create an application that uses the egg plugin manager to find its
     # plugins.

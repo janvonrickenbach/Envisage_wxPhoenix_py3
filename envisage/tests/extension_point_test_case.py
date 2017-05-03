@@ -1,6 +1,5 @@
 """ Tests for extension points. """
 
-
 # Enthought library imports.
 from envisage.api import Application, ExtensionPoint
 from envisage.api import ExtensionRegistry
@@ -103,7 +102,7 @@ class ExtensionPointTestCase(unittest.TestCase):
 
         # Make sure that instances of the class pick up the extensions.
         self.assertEqual(3, len(f.x))
-        self.assertEqual([42, 'a string', True],  f.x)
+        self.assertEqual([42, 'a string', True], f.x)
 
         # Make sure the trait change handler was called.
         self.assert_(f.x_changed_called)
@@ -140,11 +139,11 @@ class ExtensionPointTestCase(unittest.TestCase):
         # Make sure that instances of the class pick up the extensions.
         f = Foo()
         self.assertEqual(3, len(f.x))
-        self.assertEqual([42, 'a string', True],  f.x)
+        self.assertEqual([42, 'a string', True], f.x)
 
         g = Foo()
         self.assertEqual(3, len(g.x))
-        self.assertEqual([42, 'a string', True],  g.x)
+        self.assertEqual([42, 'a string', True], g.x)
 
         return
 

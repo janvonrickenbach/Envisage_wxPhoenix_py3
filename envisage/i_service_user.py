@@ -1,6 +1,5 @@
 """ The interface for objects using the 'Service' trait type. """
 
-
 # Enthought library imports.
 from traits.api import Instance, Interface
 
@@ -13,5 +12,6 @@ class IServiceUser(Interface):
 
     # The service registry that the object's services are stored in.
     service_registry = Instance(IServiceRegistry)
+
 
 #### EOF ######################################################################

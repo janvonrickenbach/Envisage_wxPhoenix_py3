@@ -50,15 +50,13 @@ class FunctionFactory(HasTraits):
 
         # Create a new function.
         function = Function(
-            namespace = namespace,
-            lineno    = node.lineno,
-            name      = node.name,
-            doc       = ast.get_docstring(node, clean=False)
-        )
+            namespace=namespace,
+            lineno=node.lineno,
+            name=node.name,
+            doc=ast.get_docstring(
+                node, clean=False))
 
         return function
 
+
 #### EOF ######################################################################
-
-
-

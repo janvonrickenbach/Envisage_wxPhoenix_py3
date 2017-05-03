@@ -1,6 +1,5 @@
 """ Classes used to represent packages. """
 
-
 # Standard library imports.
 from os.path import join
 
@@ -65,5 +64,6 @@ class Package(Namespace):
         ##print '**** Package name changed', self.name
 
         return
+
 
 #### EOF ######################################################################

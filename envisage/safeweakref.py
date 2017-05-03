@@ -38,10 +38,9 @@ else:
                 obj = meth.__self__
                 func = meth.__func__
             except AttributeError:
-                raise TypeError(
-                    "argument should be a bound method, not {}"
-                    .format(type(meth))
-                )
+                raise TypeError("argument should be a bound method, not {}"
+                                .format(type(meth)))
+
             def _cb(arg):
                 # The self-weakref trick is needed to avoid creating a reference
                 # cycle.
@@ -50,6 +49,7 @@ else:
                     self._alive = False
                     if callback is not None:
                         callback(self)
+
             self = weakref.ref.__new__(cls, obj, _cb)
             self._func_ref = weakref.ref(func, _cb)
             self._meth_type = type(meth)
@@ -68,14 +68,16 @@ else:
             if isinstance(other, WeakMethod):
                 if not self._alive or not other._alive:
                     return self is other
-                return weakref.ref.__eq__(self, other) and self._func_ref == other._func_ref
+                return weakref.ref.__eq__(
+                    self, other) and self._func_ref == other._func_ref
             return False
 
         def __ne__(self, other):
             if isinstance(other, WeakMethod):
                 if not self._alive or not other._alive:
                     return self is not other
-                return weakref.ref.__ne__(self, other) or self._func_ref != other._func_ref
+                return weakref.ref.__ne__(
+                    self, other) or self._func_ref != other._func_ref
             return True
 
         __hash__ = weakref.ref.__hash__
@@ -97,5 +99,6 @@ class ref(object):
             return self
         else:
             return weakref.ref(obj, callback)
+
 
 #### EOF ######################################################################

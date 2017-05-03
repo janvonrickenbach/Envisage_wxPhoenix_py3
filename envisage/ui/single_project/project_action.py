@@ -6,7 +6,6 @@
 #  Author: Dave Peterson <dpeterson@enthought.com>
 #
 #-----------------------------------------------------------------------------
-
 """
 A base class for actions that determine their enabled status based on
 the state of the current project.
@@ -25,7 +24,6 @@ from traits.api import Instance, Str
 
 # Local imports.
 from envisage.ui.single_project.services import IPROJECT_MODEL
-
 
 # Setup a logger for this module.
 logger = logging.getLogger(__name__)
@@ -178,7 +176,6 @@ class ProjectAction(Action):
 
         return
 
-
     #### protected interface #################################################
 
     def _refresh_project_exists(self):
@@ -197,7 +194,6 @@ class ProjectAction(Action):
 
         return enabled
 
-
     def _update_model_service_listeners(self, remove=False):
         """
         Update our listeners on the project model service.
@@ -210,13 +206,12 @@ class ProjectAction(Action):
         logger.debug( (remove and 'Removing ' or 'Adding ') + \
             'listeners on project model service for ProjectAction [%s]', self)
 
-        self.model_service.on_trait_change(self._on_project_changed,
-            'project', remove=remove)
-        self.model_service.on_trait_change(self._on_project_selection_changed,
-            'selection', remove=remove)
+        self.model_service.on_trait_change(
+            self._on_project_changed, 'project', remove=remove)
+        self.model_service.on_trait_change(
+            self._on_project_selection_changed, 'selection', remove=remove)
 
         return
-
 
     #### trait handlers ######################################################
 
@@ -229,7 +224,6 @@ class ProjectAction(Action):
         self.refresh()
 
         return
-
 
     def _on_project_selection_changed(self, obj, trait_name, old, new):
         """

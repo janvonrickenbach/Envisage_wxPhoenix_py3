@@ -1,6 +1,5 @@
 """ An action that dynamically creates and adds a view. """
 
-
 # Enthought library imports.
 from pyface.action.api import Action
 
@@ -33,5 +32,6 @@ class NewViewAction(Action):
         self.window.add_view(view)
 
         return
+
 
 #### EOF ######################################################################

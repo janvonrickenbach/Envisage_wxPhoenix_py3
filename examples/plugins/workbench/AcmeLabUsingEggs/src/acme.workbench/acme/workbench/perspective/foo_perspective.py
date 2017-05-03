@@ -1,6 +1,5 @@
 """ An example perspective. """
 
-
 # Enthought library imports.
 from pyface.workbench.api import Perspective, PerspectiveItem
 
@@ -16,9 +15,12 @@ class FooPerspective(Perspective):
 
     # The contents of the perspective.
     contents = [
-        PerspectiveItem(id='Blue',  position='left'),
-        PerspectiveItem(id='Red',   position='with', relative_to='Blue'),
-        PerspectiveItem(id='Green', position='top')
+        PerspectiveItem(
+            id='Blue', position='left'), PerspectiveItem(
+                id='Red', position='with', relative_to='Blue'),
+        PerspectiveItem(
+            id='Green', position='top')
     ]
+
 
 #### EOF ######################################################################

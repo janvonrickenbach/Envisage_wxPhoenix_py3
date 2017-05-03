@@ -1,13 +1,11 @@
 """ A plugin manager that finds plugins in packages on the 'plugin_path'. """
 
-
 import logging, sys
 
 from apptools.io import File
 from traits.api import Directory, List, on_trait_change
 
 from .plugin_manager import PluginManager
-
 
 logger = logging.getLogger(__name__)
 
@@ -49,7 +47,6 @@ class PackagePluginManager(PluginManager):
 
         plugins = [
             plugin for plugin in self._harvest_plugins_in_packages()
-
             if self._include_plugin(plugin.id)
         ]
 
@@ -68,7 +65,8 @@ class PackagePluginManager(PluginManager):
         """
 
         try:
-            module = __import__(package_name + '.plugins', fromlist=['plugins'])
+            module = __import__(
+                package_name + '.plugins', fromlist=['plugins'])
 
         except ImportError:
             module = None
@@ -97,11 +95,11 @@ class PackagePluginManager(PluginManager):
             for child in File(package_dirname).children or []:
                 if child.ext == '.py' and child.name.endswith('_plugin'):
                     module = __import__(
-                        package_name + '.' + child.name, fromlist=[child.name]
-                    )
+                        package_name + '.' + child.name,
+                        fromlist=[child.name])
 
-                    atoms        = child.name.split('_')
-                    capitalized  = [atom.capitalize() for atom in atoms]
+                    atoms = child.name.split('_')
+                    capitalized = [atom.capitalize() for atom in atoms]
                     factory_name = ''.join(capitalized)
 
                     factory = getattr(module, factory_name, None)
@@ -118,10 +116,8 @@ class PackagePluginManager(PluginManager):
             for child in File(dirname).children or []:
                 if child.is_package:
                     plugins.extend(
-                        self._harvest_plugins_in_package(
-                            child.name, child.path
-                       )
-                    )
+                        self._harvest_plugins_in_package(child.name,
+                                                         child.path))
 
         return plugins
 
@@ -135,5 +131,6 @@ class PackagePluginManager(PluginManager):
         for dirname in added:
             if dirname not in sys.path:
                 sys.path.append(dirname)
+
 
 #### EOF ######################################################################

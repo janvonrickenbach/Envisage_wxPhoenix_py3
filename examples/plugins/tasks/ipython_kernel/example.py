@@ -6,8 +6,8 @@ from envisage.api import Plugin
 from envisage.core_plugin import CorePlugin
 from envisage.plugins.ipython_kernel.ipython_kernel_ui_plugin import (
     IPythonKernelUIPlugin)
-from envisage.plugins.ipython_kernel.api import (
-    IPythonKernelPlugin, IPYTHON_KERNEL_PROTOCOL)
+from envisage.plugins.ipython_kernel.api import (IPythonKernelPlugin,
+                                                 IPYTHON_KERNEL_PROTOCOL)
 from envisage.ui.tasks.api import TasksApplication, TaskFactory
 from envisage.ui.tasks.tasks_plugin import TasksPlugin
 from pyface.qt import QtCore
@@ -17,7 +17,6 @@ from traits.api import List
 
 # Local imports
 from example_task import ExampleTask
-
 
 logger = logging.getLogger(__name__)
 
@@ -46,10 +45,7 @@ class ExamplePlugin(Plugin):
         print 'Default tasks'
         return [
             TaskFactory(
-                id='example_task',
-                name='Example task',
-                factory=ExampleTask
-            )
+                id='example_task', name='Example task', factory=ExampleTask)
         ]
 
 
@@ -68,9 +64,7 @@ class ExampleApplication(TasksApplication):
     #### 'TasksApplication' interface #####################################
 
     # The default application-level layout for the application.
-    default_layout = [
-        TaskWindowLayout('example_task', size=(800, 600))
-    ]
+    default_layout = [TaskWindowLayout('example_task', size=(800, 600))]
 
     def run(self):
         """ Run the application.
@@ -93,8 +87,9 @@ class ExampleApplication(TasksApplication):
             kernel = self.get_service(IPYTHON_KERNEL_PROTOCOL)
             kernel.init_ipkernel('qt4')
 
-            app.connect(app, QtCore.SIGNAL("lastWindowClosed()"),
-                        app, QtCore.SLOT("quit()"))
+            app.connect(app,
+                        QtCore.SIGNAL("lastWindowClosed()"), app,
+                        QtCore.SLOT("quit()"))
             app.aboutToQuit.connect(kernel.cleanup_consoles)
 
             gui.set_trait_later(self, 'application_initialized', self)
@@ -105,14 +100,16 @@ class ExampleApplication(TasksApplication):
     def _application_initialized_fired(self):
         logger.info('APPLICATION INITIALIZED')
 
+
 if __name__ == '__main__':
     import logging
     logging.basicConfig(level=logging.DEBUG)
 
-    app = ExampleApplication(
-        plugins=[
-            CorePlugin(), ExamplePlugin(), IPythonKernelPlugin(),
-            IPythonKernelUIPlugin(), TasksPlugin(),
-        ]
-    )
+    app = ExampleApplication(plugins=[
+        CorePlugin(),
+        ExamplePlugin(),
+        IPythonKernelPlugin(),
+        IPythonKernelUIPlugin(),
+        TasksPlugin(),
+    ])
     app.run()

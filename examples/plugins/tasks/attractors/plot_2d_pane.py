@@ -28,25 +28,29 @@ class Plot2dPane(TraitsTaskPane):
     x_label = Property(Unicode, depends_on='active_model.x_label')
     y_label = Property(Unicode, depends_on='active_model.y_label')
 
-    view = View(HGroup(Label('Model: '),
-                       Item('active_model',
-                            editor = EnumEditor(name='_enum_map')),
-                       show_labels=False),
-                ChacoPlotItem('x_data', 'y_data',
-                              show_label      = False,
-                              resizable       = True,
-                              orientation     = 'h',
-                              marker          = 'pixel',
-                              marker_size     = 1,
-                              type_trait      = 'plot_type',
-                              title           = '',
-                              x_label_trait   = 'x_label',
-                              y_label_trait   = 'y_label',
-                              color           = 'blue',
-                              bgcolor         = 'white',
-                              border_visible  = False ,
-                              border_width    = 1),
-                resizable = True)
+    view = View(
+        HGroup(
+            Label('Model: '),
+            Item(
+                'active_model', editor=EnumEditor(name='_enum_map')),
+            show_labels=False),
+        ChacoPlotItem(
+            'x_data',
+            'y_data',
+            show_label=False,
+            resizable=True,
+            orientation='h',
+            marker='pixel',
+            marker_size=1,
+            type_trait='plot_type',
+            title='',
+            x_label_trait='x_label',
+            y_label_trait='y_label',
+            color='blue',
+            bgcolor='white',
+            border_visible=False,
+            border_width=1),
+        resizable=True)
 
     #### Private traits #######################################################
 

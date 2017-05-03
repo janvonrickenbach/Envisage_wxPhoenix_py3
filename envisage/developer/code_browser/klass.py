@@ -1,6 +1,5 @@
 """ Classes used to represent classes. """
 
-
 # Standard library imports.
 import ast
 
@@ -97,12 +96,12 @@ class KlassFactory(HasTraits):
 
         # Create a new class.
         klass = Klass(
-            namespace = namespace,
-            lineno    = node.lineno,
-            name      = node.name,
-            doc       = ast.get_docstring(node, clean=False),
-            bases     = [self._get_name(base) for base in node.bases]
-        )
+            namespace=namespace,
+            lineno=node.lineno,
+            name=node.name,
+            doc=ast.get_docstring(
+                node, clean=False),
+            bases=[self._get_name(base) for base in node.bases])
 
         # Walk the AST picking out the things we care about!
         KlassVisitor(klass).visit(node)
@@ -122,7 +121,10 @@ class KlassFactory(HasTraits):
         elif isinstance(node, ast.Name):
             name = node.id
         else:
-            names = [self._get_name(child) for child in ast.walk(node) if child is not node]
+            names = [
+                self._get_name(child) for child in ast.walk(node)
+                if child is not node
+            ]
             name = '.'.join(names)
 
         return name
@@ -143,7 +145,7 @@ class KlassVisitor(ast.NodeVisitor):
         # Factories used to create klasses, functions and assignments from
         # AST nodes.
         self._function_factory = FunctionFactory()
-        self._assign_factory   = AssignFactory()
+        self._assign_factory = AssignFactory()
 
         return
 
@@ -185,5 +187,6 @@ class KlassVisitor(ast.NodeVisitor):
                 self.klass.attributes[target] = assign
 
         return
+
 
 #### EOF ######################################################################

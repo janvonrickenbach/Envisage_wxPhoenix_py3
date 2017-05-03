@@ -1,6 +1,5 @@
 """ Tests for applications and plugins. """
 
-
 # Standard library imports.
 import os, shutil, unittest
 
@@ -81,33 +80,33 @@ class BadPlugin(Plugin):
     def start(self):
         """ Start the plugin. """
 
-        raise 1/0
+        raise 1 / 0
 
     def stop(self):
         """ Stop the plugin. """
 
-        raise 1/0
+        raise 1 / 0
 
 
 class PluginA(Plugin):
     """ A plugin that offers an extension point. """
 
     id = 'A'
-    x  = ExtensionPoint(List, id='a.x')
+    x = ExtensionPoint(List, id='a.x')
 
 
 class PluginB(Plugin):
     """ A plugin that contributes to an extension point. """
 
     id = 'B'
-    x  = List(Int, [1, 2, 3], contributes_to='a.x')
+    x = List(Int, [1, 2, 3], contributes_to='a.x')
 
 
 class PluginC(Plugin):
     """ Another plugin that contributes to an extension point! """
 
     id = 'C'
-    x  = List(Int, [98, 99, 100], contributes_to='a.x')
+    x = List(Int, [98, 99, 100], contributes_to='a.x')
 
 
 class ApplicationTestCase(unittest.TestCase):
@@ -165,13 +164,9 @@ class ApplicationTestCase(unittest.TestCase):
         application = TestApplication()
 
         tracker = EventTracker(
-            subscriptions = [
-                (application, 'starting'),
-                (application, 'started'),
-                (application, 'stopping'),
-                (application, 'stopped')
-            ]
-        )
+            subscriptions=[(application, 'starting'), (application, 'started'),
+                           (application, 'stopping'),
+                           (application, 'stopped')])
 
         # Start the application.
         started = application.start()
@@ -181,9 +176,8 @@ class ApplicationTestCase(unittest.TestCase):
         # Stop the application.
         stopped = application.stop()
         self.assertEqual(True, stopped)
-        self.assertEqual(
-            ['starting', 'started', 'stopping', 'stopped'], tracker.event_names
-        )
+        self.assertEqual(['starting', 'started', 'stopping', 'stopped'],
+                         tracker.event_names)
 
         return
 
@@ -196,13 +190,9 @@ class ApplicationTestCase(unittest.TestCase):
         application.on_trait_change(vetoer, 'starting')
 
         tracker = EventTracker(
-            subscriptions = [
-                (application, 'starting'),
-                (application, 'started'),
-                (application, 'stopping'),
-                (application, 'stopped')
-            ]
-        )
+            subscriptions=[(application, 'starting'), (application, 'started'),
+                           (application, 'stopping'),
+                           (application, 'stopped')])
 
         # Start the application.
         started = application.start()
@@ -220,13 +210,9 @@ class ApplicationTestCase(unittest.TestCase):
         application.on_trait_change(vetoer, 'stopping')
 
         tracker = EventTracker(
-            subscriptions = [
-                (application, 'starting'),
-                (application, 'started'),
-                (application, 'stopping'),
-                (application, 'stopped')
-            ]
-        )
+            subscriptions=[(application, 'starting'), (application, 'started'),
+                           (application, 'stopping'),
+                           (application, 'stopped')])
 
         # Start the application.
         started = application.start()
@@ -244,8 +230,8 @@ class ApplicationTestCase(unittest.TestCase):
         """ start and stop errors """
 
         simple_plugin = SimplePlugin()
-        bad_plugin    = BadPlugin()
-        application   = TestApplication(plugins=[simple_plugin, bad_plugin])
+        bad_plugin = BadPlugin()
+        application = TestApplication(plugins=[simple_plugin, bad_plugin])
 
         # Try to start the application - the bad plugin should barf.
         self.assertRaises(ZeroDivisionError, application.start)
@@ -255,13 +241,11 @@ class ApplicationTestCase(unittest.TestCase):
 
         # Try to start a non-existent plugin.
         self.assertRaises(
-            SystemError, application.start_plugin, plugin_id='bogus'
-        )
+            SystemError, application.start_plugin, plugin_id='bogus')
 
         # Try to stop a non-existent plugin.
         self.assertRaises(
-            SystemError, application.stop_plugin, plugin_id='bogus'
-        )
+            SystemError, application.stop_plugin, plugin_id='bogus')
 
         return
 
@@ -302,8 +286,8 @@ class ApplicationTestCase(unittest.TestCase):
             """ An extension point listener. """
 
             listener.extension_point_id = event.extension_point_id
-            listener.added              = event.added
-            listener.removed            = event.removed
+            listener.added = event.added
+            listener.removed = event.removed
 
             return
 
@@ -340,7 +324,7 @@ class ApplicationTestCase(unittest.TestCase):
             """ An extension point listener. """
 
             listener.extension_point_id = event.extension_point_id
-            listener.added   = event.added
+            listener.added = event.added
             listener.removed = event.removed
 
             return
@@ -473,8 +457,7 @@ class ApplicationTestCase(unittest.TestCase):
 
         # Start off with just two of the plugins.
         application = TestApplication(
-            plugin_manager=PluginManager(plugins=[a, b, c])
-        )
+            plugin_manager=PluginManager(plugins=[a, b, c]))
         application.start()
 
         # Make sure we can get the plugins.

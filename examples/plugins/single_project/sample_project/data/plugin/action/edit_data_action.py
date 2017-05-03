@@ -4,19 +4,16 @@
 #  All rights reserved.
 #
 #-----------------------------------------------------------------------------
-
 """
 An action to edit the data parameters of a Data.
 
 """
-
 
 # Standard imports.
 import logging
 
 # Local imports
 from data_plugin_action import DataPluginAction
-
 
 # Create a logger for this module.
 logger = logging.getLogger(__name__)

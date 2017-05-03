@@ -1,4 +1,3 @@
-
 from traitsui.api import View
 
 
@@ -8,4 +7,3 @@ class UpdateInfoView(View):
     the user or prompting for a download; for that, use the UpdateCheckerDialog.
     """
     pass
-

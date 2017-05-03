@@ -1,6 +1,5 @@
 """ A view showing a summary of the running application. """
 
-
 # Standard library imports.
 import inspect
 
@@ -17,29 +16,23 @@ from envisage.plugins.text_editor.editor.text_editor import TextEditor
 # Local imports.
 from .application_browser_tree import application_browser_tree_nodes
 
-
 application_browser_view = View(
     Item(
-        name       = 'application',
-        show_label = False,
-        editor     = TreeEditor(
-            nodes       = application_browser_tree_nodes,
-            editable    = False,
-            orientation = 'vertical',
-            hide_root   = True,
-            show_icons  = True,
-            selected    = 'selection',
-            on_dclick   = 'object.dclick'
-        )
-    ),
-
-    resizable = True,
-    style     = 'custom',
-    title     = 'Application',
-
-    width     = .1,
-    height    = .1
-)
+        name='application',
+        show_label=False,
+        editor=TreeEditor(
+            nodes=application_browser_tree_nodes,
+            editable=False,
+            orientation='vertical',
+            hide_root=True,
+            show_icons=True,
+            selected='selection',
+            on_dclick='object.dclick')),
+    resizable=True,
+    style='custom',
+    title='Application',
+    width=.1,
+    height=.1)
 
 
 class ApplicationBrowser(HasTraits):
@@ -106,8 +99,7 @@ class ApplicationBrowser(HasTraits):
 
             # Edit the plugin.
             editor = self.workbench.edit(
-                self._get_file_object(obj), kind=TextEditor
-            )
+                self._get_file_object(obj), kind=TextEditor)
 
             # Move to the class definition.
             editor.select_line(klass.lineno)
@@ -141,5 +133,6 @@ class ApplicationBrowser(HasTraits):
         filename = self._get_file_object(plugin).path
 
         return self.code_browser.read_file(filename)
+
 
 #### EOF ######################################################################

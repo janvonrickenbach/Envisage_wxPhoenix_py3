@@ -1,6 +1,5 @@
 """ The plugin interface. """
 
-
 # Enthought library imports.
 from traits.api import Instance, Interface, Str
 
@@ -51,5 +50,6 @@ class IPlugin(Interface):
           application.stop_plugin(plugin)
 
         """
+
 
 #### EOF ######################################################################

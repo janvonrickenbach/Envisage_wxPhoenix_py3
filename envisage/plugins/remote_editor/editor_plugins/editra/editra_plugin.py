@@ -79,7 +79,7 @@ class RemoteEditorPlugin(object):
         self.mainWindow = mainWindow = wx.GetApp().GetMainWindow()
         self.log = wx.GetApp().GetLog()
         self.log("[remote editor][info] Installing remote editor plugin")
-        menuBar= mainWindow.GetMenuBar()
+        menuBar = mainWindow.GetMenuBar()
 
         # Register the EditorPlugin with the Enthought remote_editor server
         self.client = EditraEditorPlugin(main_window=self.mainWindow)
@@ -93,47 +93,57 @@ class RemoteEditorPlugin(object):
         # Insert menu items
         toolsMenu = menuBar.GetMenuByName("tools")
 
-        mnu_run_text = wx.MenuItem(toolsMenu, ID_RUN_TEXT,
-                         _('Execute selection\tShift+Enter'),
-                         _('Execute selected text in a python shell'),
-                         wx.ITEM_NORMAL)
-        mnu_run_text.SetBitmap(wx.Bitmap(os.path.join(
-                                    os.path.dirname(__file__),
-                                    'images', 'python_runsel_16x16.png')))
+        mnu_run_text = wx.MenuItem(
+            toolsMenu, ID_RUN_TEXT,
+            _('Execute selection\tShift+Enter'),
+            _('Execute selected text in a python shell'), wx.ITEM_NORMAL)
+        mnu_run_text.SetBitmap(
+            wx.Bitmap(
+                os.path.join(
+                    os.path.dirname(__file__), 'images',
+                    'python_runsel_16x16.png')))
         toolsMenu.AppendItem(mnu_run_text, use_bmp=False)
 
         mnu_run_script = wx.MenuItem(toolsMenu, ID_RUN_SCRIPT,
-                         _('Execute script\tCtrl+Enter'),
-                         _('Execute file in a python shell'))
-        mnu_run_script.SetBitmap(wx.Bitmap(os.path.join(
-                                    os.path.dirname(__file__),
-                                    'images', 'python_run_16x16.png')))
+                                     _('Execute script\tCtrl+Enter'),
+                                     _('Execute file in a python shell'))
+        mnu_run_script.SetBitmap(
+            wx.Bitmap(
+                os.path.join(
+                    os.path.dirname(__file__), 'images',
+                    'python_run_16x16.png')))
         toolsMenu.AppendItem(mnu_run_script, use_bmp=False)
 
         # Bind the events.
         self.mainWindow._handlers['menu'].extend(
-            [(ID_RUN_SCRIPT, self.OnRunScript),
-                 (ID_RUN_TEXT, self.OnRunText) ])
+            [(ID_RUN_SCRIPT, self.OnRunScript), (ID_RUN_TEXT, self.OnRunText)])
 
         # The enable/disable callback for the toolbar button (we need to insert
         # this callback at the front of the stack).
-        self.mainWindow._handlers['ui'].insert(0,
+        self.mainWindow._handlers['ui'].insert(
+            0,
             (ID_RUN_TEXT, self.EnableSelection), )
 
         # Insert toolbar items
         toolBar = mainWindow.GetToolBar()
 
         self.run_sel_tb = toolBar.AddLabelTool(
-            ID_RUN_TEXT, 'Execute selection',
-            wx.Bitmap(os.path.join(os.path.dirname(__file__),
-                                   'images', 'python_runsel_24x24.png')),
+            ID_RUN_TEXT,
+            'Execute selection',
+            wx.Bitmap(
+                os.path.join(
+                    os.path.dirname(__file__), 'images',
+                    'python_runsel_24x24.png')),
             shortHelp='Execute selection',
             longHelp='Execute selection in shell')
 
         self.run_file_tb = toolBar.AddLabelTool(
-            ID_RUN_SCRIPT, 'Execute',
-            wx.Bitmap(os.path.join(os.path.dirname(__file__),
-                                   'images', 'python_run_24x24.png')),
+            ID_RUN_SCRIPT,
+            'Execute',
+            wx.Bitmap(
+                os.path.join(
+                    os.path.dirname(__file__), 'images',
+                    'python_run_24x24.png')),
             shortHelp='Execute script',
             longHelp='Execute whole file in shell')
 
@@ -163,7 +173,7 @@ class RemoteEditorPlugin(object):
         """ Run the selected text.
         """
         currentTab = self.mainWindow.GetNotebook().GetCurrentCtrl()
-        text = str(currentTab.GetSelectedText()) # Convert from unicode
+        text = str(currentTab.GetSelectedText())  # Convert from unicode
         if text == "":
             msg = _("Cannot execute. No text is selected.")
             self.mainWindow.PushStatusText(msg)
@@ -195,6 +205,3 @@ class RemoteEditorPlugin(object):
             evt.Enable(ctrl.GetSelectionStart() != ctrl.GetSelectionEnd())
         else:
             evt.Skip()
-
-
-

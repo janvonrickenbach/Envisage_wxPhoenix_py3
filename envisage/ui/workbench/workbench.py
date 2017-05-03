@@ -1,6 +1,5 @@
 """ The Envisage workbench. """
 
-
 # Enthought library imports.
 import pyface.workbench.api as pyface
 
@@ -48,11 +47,11 @@ class Workbench(pyface.Workbench):
 
         if self.prompt_on_exit:
             answer = self.active_window.confirm(
-                "Exit %s?" % self.active_window.title, "Confirm Exit"
-            )
+                "Exit %s?" % self.active_window.title, "Confirm Exit")
             if answer != YES:
                 event.veto = True
 
         return
+
 
 #### EOF ######################################################################

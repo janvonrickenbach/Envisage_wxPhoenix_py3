@@ -1,6 +1,5 @@
 """ Tests for the service registry. """
 
-
 # Standard library imports.
 import sys
 
@@ -8,7 +7,6 @@ import sys
 from envisage.api import Application, ServiceRegistry, NoSuchServiceError
 from traits.api import HasTraits, Int, Interface, provides
 from traits.testing.unittest_tools import unittest
-
 
 # This module's package.
 PKG = 'envisage.tests'
@@ -51,7 +49,6 @@ class ServiceRegistryTestCase(unittest.TestCase):
     ###########################################################################
 
     def test_should_get_required_service(self):
-
         class Foo(HasTraits):
             price = Int
 
@@ -66,7 +63,6 @@ class ServiceRegistryTestCase(unittest.TestCase):
         return
 
     def test_should_get_exception_if_required_service_is_missing(self):
-
         class IFoo(Interface):
             price = Int
 
@@ -83,10 +79,8 @@ class ServiceRegistryTestCase(unittest.TestCase):
 
         # Register a service factory.
         self.service_registry.register_service(
-            HasTraits,
-            PKG + '.service_registry_test_case.service_factory',
-            {'price' : 100}
-        )
+            HasTraits, PKG + '.service_registry_test_case.service_factory',
+            {'price': 100})
 
         # Create a query that matches the registered object.
         service = self.service_registry.get_service(HasTraits, 'price <= 100')
@@ -119,9 +113,8 @@ class ServiceRegistryTestCase(unittest.TestCase):
             return Foo(**properties)
 
         # Register a service factory.
-        self.service_registry.register_service(
-            IFoo, foo_factory, {'price' : 100}
-        )
+        self.service_registry.register_service(IFoo, foo_factory,
+                                               {'price': 100})
 
         # Create a query that matches the registered object.
         service = self.service_registry.get_service(IFoo, 'price <= 100')
@@ -149,7 +142,7 @@ class ServiceRegistryTestCase(unittest.TestCase):
             return foo_factory.foo
 
         i_foo = PKG + '.i_foo.IFoo'
-        foo   = PKG + '.foo'
+        foo = PKG + '.foo'
 
         self.service_registry.register_service(i_foo, foo_factory)
 
@@ -180,7 +173,7 @@ class ServiceRegistryTestCase(unittest.TestCase):
         """ lazy bound method service factory """
 
         i_foo = PKG + '.i_foo.IFoo'
-        foo   = PKG + '.foo'
+        foo = PKG + '.foo'
 
         class ServiceProvider(HasTraits):
             """ A class that provides a service.
@@ -293,7 +286,7 @@ class ServiceRegistryTestCase(unittest.TestCase):
         # This one shows how properties can be specified that *take precedence*
         # over the object's attributes when evaluating a query.
         goo = Foo(price=10)
-        self.service_registry.register_service(IFoo, goo, {'price' : 200})
+        self.service_registry.register_service(IFoo, goo, {'price': 200})
 
         # Create a query that doesn't match any registered object.
         services = self.service_registry.get_services(IFoo, 'color == "red"')
@@ -368,7 +361,7 @@ class ServiceRegistryTestCase(unittest.TestCase):
         # This one shows how properties can be specified that *take precedence*
         # over the object's attributes when evaluating a query.
         goo = Foo(price=10)
-        self.service_registry.register_service(IFoo, goo, {'price' : 200})
+        self.service_registry.register_service(IFoo, goo, {'price': 200})
 
         # Create a query that doesn't match any registered object.
         service = self.service_registry.get_service(IFoo, 'price < 100')
@@ -409,9 +402,8 @@ class ServiceRegistryTestCase(unittest.TestCase):
 
         # This one has properties.
         goo = Foo(price=10)
-        goo_id = self.service_registry.register_service(
-            IFoo, goo, {'price' : 200}
-        )
+        goo_id = self.service_registry.register_service(IFoo, goo,
+                                                        {'price': 200})
 
         # Get the properties.
         foo_properties = self.service_registry.get_service_properties(foo_id)
@@ -436,14 +428,12 @@ class ServiceRegistryTestCase(unittest.TestCase):
         self.assertEqual(500, goo_properties['price'])
 
         # Try to get the properties of a non-existent service.
-        self.failUnlessRaises(
-            ValueError, self.service_registry.get_service_properties, -1
-        )
+        self.failUnlessRaises(ValueError,
+                              self.service_registry.get_service_properties, -1)
 
         # Try to set the properties of a non-existent service.
         self.failUnlessRaises(
-            ValueError, self.service_registry.set_service_properties, -1, {}
-        )
+            ValueError, self.service_registry.set_service_properties, -1, {})
 
         return
 
@@ -467,9 +457,8 @@ class ServiceRegistryTestCase(unittest.TestCase):
         # This one shows how properties can be specified that *take precedence*
         # over the object's attributes when evaluating a query.
         goo = Foo(price=10)
-        goo_id = self.service_registry.register_service(
-            IFoo, goo, {'price' : 200}
-        )
+        goo_id = self.service_registry.register_service(IFoo, goo,
+                                                        {'price': 200})
 
         # Create a query that doesn't match any registered object.
         service = self.service_registry.get_service(IFoo, 'price < 100')
@@ -500,9 +489,8 @@ class ServiceRegistryTestCase(unittest.TestCase):
         self.assertEqual(None, service)
 
         # Try to unregister a non-existent service.
-        self.failUnlessRaises(
-            ValueError, self.service_registry.unregister_service, -1
-        )
+        self.failUnlessRaises(ValueError,
+                              self.service_registry.unregister_service, -1)
 
         return
 

@@ -3,6 +3,7 @@
 # Enthought library imports.
 from traits.api import Interface
 
+
 class IRemoteShell(Interface):
     """ Interface definition for the remote shell """
 
@@ -16,5 +17,5 @@ class IRemoteShell(Interface):
 
         """
 
-#### EOF ######################################################################
 
+#### EOF ######################################################################

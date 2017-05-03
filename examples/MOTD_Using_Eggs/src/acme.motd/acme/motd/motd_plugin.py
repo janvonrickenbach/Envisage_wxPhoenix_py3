@@ -1,6 +1,5 @@
 """ The 'Message of the Day' plugin """
 
-
 # In the interest of lazy loading you should only import from the following
 # packages at the module level of a plugin::
 #
@@ -8,7 +7,6 @@
 # - traits
 #
 # Eveything else should be imported when it is actually required.
-
 
 # Enthought library imports.
 from envisage.api import ExtensionPoint, Plugin, ServiceOffer
@@ -44,13 +42,14 @@ class MOTDPlugin(Plugin):
     # than actually importing it. This makes sure that the import only happens
     # when somebody actually gets the contributions to the extension point.
     messages = ExtensionPoint(
-        List(Instance('acme.motd.api.IMessage')), id=MESSAGES, desc="""
+        List(Instance('acme.motd.api.IMessage')),
+        id=MESSAGES,
+        desc="""
 
         This extension point allows you to contribute messages to the 'Message
         Of The Day'.
 
-        """
-    )
+        """)
 
     #### Contributions to extension points made by this plugin ################
 
@@ -65,9 +64,8 @@ class MOTDPlugin(Plugin):
         # protocol as coming from an 'api.py' file as this is not the actual
         # module name known to Python.
         motd_service_offer = ServiceOffer(
-            protocol = 'acme.motd.i_motd.IMOTD',
-            factory  = self._create_motd_service
-        )
+            protocol='acme.motd.i_motd.IMOTD',
+            factory=self._create_motd_service)
 
         return [motd_service_offer]
 
@@ -104,5 +102,6 @@ class MOTDPlugin(Plugin):
         print '\n"%s"\n\n- %s' % (message.text, message.author)
 
         return
+
 
 #### EOF ######################################################################

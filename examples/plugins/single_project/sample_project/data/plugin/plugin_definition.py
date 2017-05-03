@@ -4,7 +4,6 @@
 #  All rights reserved.
 #
 #-----------------------------------------------------------------------------
-
 """
 A Data resource type plugin.
 
@@ -25,7 +24,6 @@ from envisage.plugins.python_shell.python_shell_plugin_definition import \
 from data.plugin.services import IDATA_MODEL, IDATA_UI
 from data.plugin.data_action_set import DataActionSet
 
-
 ##############################################################################
 # Constants
 ##############################################################################
@@ -33,7 +31,6 @@ from data.plugin.data_action_set import DataActionSet
 # This plugin's globally unique identifier.  Our usage's assume this is the
 # python path to the package containing the plugin definition module.
 ID = 'data.plugin'
-
 
 ##############################################################################
 # Extensions.
@@ -46,83 +43,66 @@ class RenameDataAction(DefaultAction):
     description = 'Rename this data.'
     name = '&Rename'
 
+
 class EditDataAction(DefaultAction):
     description = 'Edit data properties.'
     name = '&Edit Data Properties'
 
 
 data_action_set = DataActionSet(
-    actions = [
-#        # Data action group
-#        DeleteDataAction(
-#            locations = [
-#                Location(
-#                    after='RenameData',
-#                    path='DataContextMenu/ActionGroup',
-#                    ),
-#                ],
-#            ),
+    actions=[
+        #        # Data action group
+        #        DeleteDataAction(
+        #            locations = [
+        #                Location(
+        #                    after='RenameData',
+        #                    path='DataContextMenu/ActionGroup',
+        #                    ),
+        #                ],
+        #            ),
         RenameDataAction(
-            locations = [
-                Location(path='DataContextMenu/ActionGroup'),
-                ],
-            ),
+            locations=[Location(path='DataContextMenu/ActionGroup'), ], ),
         EditDataAction(
-            locations = [
-                Location(path='DataContextMenu/ActionGroup'),
-                ],
-            ),
-        ],
-
-    groups = [
+            locations=[Location(path='DataContextMenu/ActionGroup'), ], ),
+    ],
+    groups=[
         # Data groups
         Group(
-            id = 'ActionGroup',
-            location = Location(
+            id='ActionGroup',
+            location=Location(
                 # after='PersistenceGroup',
-                path='DataContextMenu',
-                ),
-            ),
-        ],
-
-    id = '%s.data_action_set.Default' % ID,
-    name = 'DataPlugin',
-    )
-
+                path='DataContextMenu', ), ),
+    ],
+    id='%s.data_action_set.Default' % ID,
+    name='DataPlugin', )
 
 #### Application Objects #####################################################
 
 model_service = ApplicationObject(
-    class_name = '%s.model_service.ModelService' % ID,
-    uol = 'service://' + IDATA_MODEL,
-    )
+    class_name='%s.model_service.ModelService' % ID,
+    uol='service://' + IDATA_MODEL, )
 
 ui_service = ApplicationObject(
-    class_name = '%s.ui_service.UiService' % ID,
-    kw = {'model_service' : model_service.uol},
-    uol = 'service://' + IDATA_UI,
-    )
-
+    class_name='%s.ui_service.UiService' % ID,
+    kw={'model_service': model_service.uol},
+    uol='service://' + IDATA_UI, )
 
 #### Resource Types ##########################################################
 
 # References to other plugin's resource types
 FOLDER = 'envisage.resource.folder_resource_type.FolderResourceType'
-INSTANCE = ('envisage.resource.instance_resource_type.'
-    'InstanceResourceType')
+INSTANCE = ('envisage.resource.instance_resource_type.' 'InstanceResourceType')
 
 # References to our resource types
 DATA_TYPE = ID + '.resource_type.data_resource_type.DataResourceType'
 
 resource_types = ResourceManager(
-    resource_types = [
+    resource_types=[
         ResourceType(
-            class_name = DATA_TYPE,
+            class_name=DATA_TYPE,
             #precedes = [FOLDER, INSTANCE],
-            ),
-        ],
-    )
-
+        ),
+    ], )
 
 #### Shell Namespace #########################################################
 
@@ -133,10 +113,10 @@ resource_types = ResourceManager(
 #        ]
 #    )
 
-
 ##############################################################################
 # The plugin definition.
 ##############################################################################
+
 
 class DataPlugin(PluginDefinition):
     # The plugin's globally unique identifier.
@@ -150,13 +130,10 @@ class DataPlugin(PluginDefinition):
     autostart = True
 
     # The Id's of the plugins that this plugin requires.
-    requires = [
-        ]
+    requires = []
 
     # The extension points offered by this plugin.
-    extension_points = [
-        DataActionSet,
-        ]
+    extension_points = [DataActionSet, ]
 
     # The contributions that this plugin makes to extension points offered by
     # either itself or other plugins.
@@ -166,8 +143,7 @@ class DataPlugin(PluginDefinition):
         resource_types,
         ui_service,
         data_action_set,
-        ]
+    ]
 
 
 #### EOF #####################################################################
-

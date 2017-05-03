@@ -30,8 +30,6 @@ class EventManagerPlugin(Plugin):
         from encore.events.api import BaseEventManager, get_event_manager
 
         evt_mgr_service_offer = ServiceOffer(
-            protocol   = BaseEventManager,
-            factory    = get_event_manager,
-        )
+            protocol=BaseEventManager,
+            factory=get_event_manager, )
         return [evt_mgr_service_offer]
-

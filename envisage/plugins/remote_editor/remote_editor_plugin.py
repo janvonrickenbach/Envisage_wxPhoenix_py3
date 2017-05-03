@@ -16,9 +16,9 @@ class RemoteEditorPlugin(Plugin):
     """ A plugin for controlling a remote editor. """
 
     # Extension point Ids.
-    REMOTE_EDITOR     = ID
-    ACTION_SETS       = 'envisage.ui.workbench.action_sets'
-    PREFERENCES       = 'envisage.preferences'
+    REMOTE_EDITOR = ID
+    ACTION_SETS = 'envisage.ui.workbench.action_sets'
+    PREFERENCES = 'envisage.preferences'
     PREFERENCES_PAGES = 'envisage.ui.workbench.preferences_pages'
 
     # Our remote controller for the editor
@@ -53,17 +53,17 @@ class RemoteEditorPlugin(Plugin):
         """ Trait initializer. """
         from envisage.plugins.remote_editor.actions import \
             RemoteEditorActionSet
-        return [ RemoteEditorActionSet ]
+        return [RemoteEditorActionSet]
 
     def _preferences_default(self):
         """ Trait initializer. """
-        return [ 'pkgfile://%s/preferences.ini' % ID ]
+        return ['pkgfile://%s/preferences.ini' % ID]
 
     def _preferences_pages_default(self):
         """ Trait initializer. """
         from envisage.plugins.remote_editor.preference_pages \
             import RemoteEditorPreferencesPage
-        return [ RemoteEditorPreferencesPage ]
+        return [RemoteEditorPreferencesPage]
 
     ###########################################################################
     # Private interface.
@@ -86,12 +86,14 @@ class RemoteEditorPlugin(Plugin):
 
         self.remote_controller.register()
 
-        self.application.register_service(IRemoteEditor, self.remote_controller)
+        self.application.register_service(IRemoteEditor,
+                                          self.remote_controller)
 
     @on_trait_change('application:stopping')
     def _unregister_from_server(self):
         """ Unregister this client from the server.
         """
         self.remote_controller.unregister()
+
 
 #### EOF ######################################################################

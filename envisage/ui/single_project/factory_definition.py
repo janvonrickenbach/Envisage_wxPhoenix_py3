@@ -1,6 +1,7 @@
 #Enthought imports
 from traits.api import HasTraits, Int, Str
 
+
 class FactoryDefinition(HasTraits):
     """
     A project factory definition.

@@ -1,10 +1,8 @@
 """ A view that allows a developer to browse the service registry. """
 
-
 # Enthought library imports.
 from pyface.workbench.api import TraitsUIView
 from traits.api import Instance
-
 
 # The code browser protocol.
 CODE_BROWSER = 'envisage.developer.code_browser.api.CodeBrowser'
@@ -43,9 +41,8 @@ class ServiceRegistryBrowserView(TraitsUIView):
         from .service_registry_browser import ServiceRegistryBrowser
 
         service_registry_browser = ServiceRegistryBrowser(
-            application  = self.window.application,
-            code_browser = self.code_browser
-        )
+            application=self.window.application,
+            code_browser=self.code_browser)
 
         return service_registry_browser
 
@@ -57,5 +54,6 @@ class ServiceRegistryBrowserView(TraitsUIView):
         """ Trait initializer. """
 
         return self.window.application.get_service(CODE_BROWSER)
+
 
 #### EOF ######################################################################

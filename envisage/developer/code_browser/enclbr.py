@@ -1,6 +1,5 @@
 """ The Enthought class browser module. """
 
-
 # Standard library imports.
 import imp, logging, os, stat, warnings
 
@@ -15,13 +14,10 @@ from ..._compat import pickle
 # Logging.
 logger = logging.getLogger(__name__)
 
-
 # Filter future warnings for maxint, since it causes warnings when compiling
 # anything that has RGBA colors defined as hex values.
-warnings.filterwarnings(
-    "ignore", r'hex/oct constants > sys\.maxint .*', FutureWarning
-)
-
+warnings.filterwarnings("ignore", r'hex/oct constants > sys\.maxint .*',
+                        FutureWarning)
 
 # A cache that contains every module that has been parsed.
 MODULES = {}
@@ -102,8 +98,7 @@ def read_directory(filename, package=None):
             if package is not None:
                 sub_package_name = '%s.%s' % (package.name, child.name)
                 sub_package = Package(
-                    filename=child.path, name=sub_package_name, parent=package
-                )
+                    filename=child.path, name=sub_package_name, parent=package)
 
             else:
                 sub_package = Package(filename=child.path, name=child.name)
@@ -165,11 +160,13 @@ def find_module(module_name, path=None):
         # hierarchy in turn.
         if len(components) > 0:
             for component in components[1:]:
-                f,filename,description = imp.find_module(component, [filename])
+                f, filename, description = imp.find_module(component,
+                                                           [filename])
 
     except ImportError:
         filename = None
 
     return filename
+
 
 #### EOF ######################################################################

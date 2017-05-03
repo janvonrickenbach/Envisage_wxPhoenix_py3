@@ -1,6 +1,5 @@
 """ The developer UI plugin. """
 
-
 # Enthought library imports.
 from envisage.api import Plugin
 from traits.api import List
@@ -19,12 +18,12 @@ class DeveloperUIPlugin(Plugin):
 
     # Extension points Ids.
     PERSPECTIVES = 'envisage.ui.workbench.perspectives'
-    VIEWS        = 'envisage.ui.workbench.views'
+    VIEWS = 'envisage.ui.workbench.views'
 
     #### 'IPlugin' interface ##################################################
 
     # The plugin's unique identifier.
-    id   = ID
+    id = ID
 
     # The plugin's name (suitable for displaying to the user).
     name = 'Developer UI'
@@ -43,8 +42,7 @@ class DeveloperUIPlugin(Plugin):
         """ Trait initializer. """
 
         from envisage.developer.ui.perspective.api import (
-            DeveloperPerspective
-        )
+            DeveloperPerspective)
 
         return [DeveloperPerspective]
 
@@ -53,18 +51,16 @@ class DeveloperUIPlugin(Plugin):
     def _views_default(self):
         """ Trait initializer. """
 
-        from .view.api import (
-            ApplicationBrowserView,
-            ExtensionRegistryBrowserView,
-            ServiceRegistryBrowserView
-        )
+        from .view.api import (ApplicationBrowserView,
+                               ExtensionRegistryBrowserView,
+                               ServiceRegistryBrowserView)
 
         views = [
-            ApplicationBrowserView,
-            ExtensionRegistryBrowserView,
+            ApplicationBrowserView, ExtensionRegistryBrowserView,
             ServiceRegistryBrowserView
         ]
 
         return views
+
 
 #### EOF ######################################################################

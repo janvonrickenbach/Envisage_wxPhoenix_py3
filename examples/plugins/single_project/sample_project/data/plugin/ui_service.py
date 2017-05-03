@@ -4,7 +4,6 @@
 #  All rights reserved.
 #
 #-----------------------------------------------------------------------------
-
 """
 The UI service for the Data plugin.
 
@@ -21,7 +20,6 @@ from pyface.api import confirm, error, FileDialog, information, YES
 
 # Local imports.
 from services import IDATA_MODEL
-
 
 # Setup a logger for this module
 logger = logging.getLogger(__name__)
@@ -41,7 +39,6 @@ class UiService(ApplicationObject):
 
     # A reference to the Data plugin's model service.
     model_service = UOL
-
 
     ##########################################################################
     # 'Object' interface
@@ -65,28 +62,25 @@ class UiService(ApplicationObject):
 
         return
 
-
     ##########################################################################
     # 'UIService' interface
     ##########################################################################
 
     #### public methods ######################################################
 
-
-
     #TODO cgalvan: to be implemented
-#    def delete_data(self, context, data_name, parent_window):
-#        """
-#        Delete a Data.
-#
-#        """
-#
-#        # Open confirmation-dialog to confirm deletion
-#        message = 'Are you sure you want to delete %s?' % data_name
-#        if confirm(parent_window, message) == YES:
-#            self.model_service.delete_context_item(context, data_name)
-#
-#        return
+    #    def delete_data(self, context, data_name, parent_window):
+    #        """
+    #        Delete a Data.
+    #
+    #        """
+    #
+    #        # Open confirmation-dialog to confirm deletion
+    #        message = 'Are you sure you want to delete %s?' % data_name
+    #        if confirm(parent_window, message) == YES:
+    #            self.model_service.delete_context_item(context, data_name)
+    #
+    #        return
 
     def edit_data(self, window, data):
         """
@@ -96,10 +90,11 @@ class UiService(ApplicationObject):
 
         data_parameters = data.data_parameters
 
-        edit_ui = data_parameters.edit_traits(view='data_view',
-                                              kind = 'livemodal',
-                                              # handler=handler,
-                                              parent=window)
+        edit_ui = data_parameters.edit_traits(
+            view='data_view',
+            kind='livemodal',
+            # handler=handler,
+            parent=window)
 
         return edit_ui.result
 
@@ -116,7 +111,7 @@ class UiService(ApplicationObject):
             # Attempt to identify the current application window.
             parent_window = None
             workbench = self.application.get_service('envisage.'
-                'workbench.IWorkbench')
+                                                     'workbench.IWorkbench')
             if workbench is not None:
                 parent_window = workbench.active_window.control
 
@@ -131,5 +126,5 @@ class UiService(ApplicationObject):
 
         return
 
-#### EOF #####################################################################
 
+#### EOF #####################################################################

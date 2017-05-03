@@ -1,6 +1,5 @@
 """ Builds menus, menu bars and tool bars from action sets. """
 
-
 # Enthought library imports.
 from pyface.action.api import ActionManager, MenuManager
 from traits.api import HasTraits, Instance, List, provides
@@ -104,8 +103,8 @@ class AbstractActionManagerBuilder(HasTraits):
             from .tool_bar import ToolBar
 
             tool_bar_manager = self._create_tool_bar_manager(
-                ToolBar(name='Tool Bar', path=root, _action_set_=None)
-            )
+                ToolBar(
+                    name='Tool Bar', path=root, _action_set_=None))
 
             # Add all groups and menus.
             self._add_groups_and_menus(tool_bar_manager, groups)
@@ -424,5 +423,6 @@ class AbstractActionManagerBuilder(HasTraits):
             menu_manager = item
 
         return menu_manager
+
 
 #### EOF ######################################################################

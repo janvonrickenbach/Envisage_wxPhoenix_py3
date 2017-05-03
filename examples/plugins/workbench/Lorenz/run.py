@@ -1,6 +1,5 @@
 """ Run the Lorenz example application. """
 
-
 # Standard library imports.
 import logging
 
@@ -13,7 +12,6 @@ from acme.lorenz.lorenz_application import LorenzApplication
 from acme.lorenz.lorenz_plugin import LorenzPlugin
 from acme.lorenz.lorenz_ui_plugin import LorenzUIPlugin
 
-
 # Do whatever you want to do with log messages! Here we create a log file.
 logger = logging.getLogger()
 #logger.addHandler(logging.StreamHandler(file('lorenz.log', 'w')))
@@ -25,11 +23,9 @@ def main():
     """ Run the application. """
 
     # Create an application with the specified plugins.
-    lorenz_application = LorenzApplication(
-        plugins=[
-            CorePlugin(), WorkbenchPlugin(), LorenzPlugin(), LorenzUIPlugin()
-        ]
-    )
+    lorenz_application = LorenzApplication(plugins=[
+        CorePlugin(), WorkbenchPlugin(), LorenzPlugin(), LorenzUIPlugin()
+    ])
 
     # Run it! This starts the application, starts the GUI event loop, and when
     # that terminates, stops the application.

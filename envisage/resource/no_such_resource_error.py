@@ -11,4 +11,5 @@ class NoSuchResourceError(Exception):
 
         return
 
+
 #### EOF ######################################################################

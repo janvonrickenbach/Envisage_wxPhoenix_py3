@@ -12,9 +12,9 @@ class AttractorsPlugin(Plugin):
     """
 
     # Extension point IDs.
-    PREFERENCES       = 'envisage.preferences'
+    PREFERENCES = 'envisage.preferences'
     PREFERENCES_PANES = 'envisage.ui.tasks.preferences_panes'
-    TASKS             = 'envisage.ui.tasks.tasks'
+    TASKS = 'envisage.ui.tasks.tasks'
 
     #### 'IPlugin' interface ##################################################
 
@@ -36,20 +36,22 @@ class AttractorsPlugin(Plugin):
 
     def _preferences_default(self):
         filename = os.path.join(os.path.dirname(__file__), 'preferences.ini')
-        return [ 'file://' + filename ]
+        return ['file://' + filename]
 
     def _preferences_panes_default(self):
         from attractors_preferences import AttractorsPreferencesPane
-        return [ AttractorsPreferencesPane ]
+        return [AttractorsPreferencesPane]
 
     def _tasks_default(self):
         from visualize_2d_task import Visualize2dTask
         from visualize_3d_task import Visualize3dTask
 
-        return [ TaskFactory(id = 'example.attractors.task_2d',
-                             name = '2D Visualization',
-                             factory = Visualize2dTask),
-
-                 TaskFactory(id = 'example.attractors.task_3d',
-                             name = '3D Visualization',
-                             factory = Visualize3dTask) ]
+        return [
+            TaskFactory(
+                id='example.attractors.task_2d',
+                name='2D Visualization',
+                factory=Visualize2dTask), TaskFactory(
+                    id='example.attractors.task_3d',
+                    name='3D Visualization',
+                    factory=Visualize3dTask)
+        ]

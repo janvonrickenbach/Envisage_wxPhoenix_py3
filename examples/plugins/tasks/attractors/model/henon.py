@@ -29,11 +29,12 @@ class Henon(HasTraits):
     points = Property(Array, depends_on='a, b, initial_point, steps')
 
     # Configuration view.
-    view = View(Item('a'),
-                Item('b'),
-                Item('initial_point'),
-                Item('steps'),
-                resizable=True)
+    view = View(
+        Item('a'),
+        Item('b'),
+        Item('initial_point'),
+        Item('steps'),
+        resizable=True)
 
     #### 'IPlottable2D' interface #############################################
 
@@ -59,8 +60,8 @@ class Henon(HasTraits):
 
     @cached_property
     def _get_x_data(self):
-        return self.points[:,0]
+        return self.points[:, 0]
 
     @cached_property
     def _get_y_data(self):
-        return self.points[:,1]
+        return self.points[:, 1]

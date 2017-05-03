@@ -1,6 +1,5 @@
 """ Classes used to represent assignment statements. """
 
-
 # Standard library imports.
 import ast
 
@@ -17,9 +16,7 @@ class Assign(HasTraits):
     #### 'Assign' interface ###################################################
 
     # The namespace that the assignment statement is in.
-    namespace = Instance(
-        'envisage.developer.code_browser.namespace.Namespace'
-    )
+    namespace = Instance('envisage.developer.code_browser.namespace.Namespace')
 
     # The line number within the module at which the assignment statement
     # appears.
@@ -60,10 +57,7 @@ class AssignFactory(HasTraits):
 
         # Create a new assignment statement.
         assign = Assign(
-            namespace = namespace,
-            lineno    = node.lineno,
-            expr      = node.value
-        )
+            namespace=namespace, lineno=node.lineno, expr=node.value)
 
         # Walk the AST picking out the things we care about!
         AssignVisitor(assign).visit(node)
@@ -119,12 +113,16 @@ class AssignVisitor(ast.NodeVisitor):
                 name = node.id
 
             else:
-                names = [self._get_name(child) for child in ast.walk(node) if child is not node]
+                names = [
+                    self._get_name(child) for child in ast.walk(node)
+                    if child is not node
+                ]
                 name = '.'.join(names)
 
         else:
             name = ''
 
         return name
+
 
 #### EOF ######################################################################

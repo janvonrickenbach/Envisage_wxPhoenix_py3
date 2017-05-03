@@ -1,6 +1,5 @@
 """ The interactive Python shell plugin. """
 
-
 # Enthought library imports.
 from envisage.api import ExtensionPoint, Plugin
 from traits.api import Dict, List, Str
@@ -12,7 +11,7 @@ class PythonShellPlugin(Plugin):
     # Extension point Ids.
     BINDINGS = 'envisage.plugins.python_shell.bindings'
     COMMANDS = 'envisage.plugins.python_shell.commands'
-    VIEWS    = 'envisage.ui.workbench.views'
+    VIEWS = 'envisage.ui.workbench.views'
 
     #### 'IPlugin' interface ##################################################
 
@@ -25,7 +24,9 @@ class PythonShellPlugin(Plugin):
     #### Extension points offered by this plugin ##############################
 
     bindings = ExtensionPoint(
-        List(Dict), id=BINDINGS, desc="""
+        List(Dict),
+        id=BINDINGS,
+        desc="""
 
         This extension point allows you to contribute name/value pairs that
         will be bound when the interactive Python shell is started.
@@ -34,11 +35,12 @@ class PythonShellPlugin(Plugin):
 
         {'x' : 10, 'y' : ['a', 'b', 'c']}
 
-        """
-    )
+        """)
 
     commands = ExtensionPoint(
-        List(Str), id=COMMANDS, desc="""
+        List(Str),
+        id=COMMANDS,
+        desc="""
 
         This extension point allows you to contribute commands that are
         executed when the interactive Python shell is started.
@@ -51,8 +53,7 @@ class PythonShellPlugin(Plugin):
         Yes, I know this is insecure but it follows the usual Python rule of
         'we are all consenting adults'.
 
-        """
-    )
+        """)
 
     #### Contributions to extension points made by this plugin ################
 
@@ -62,7 +63,7 @@ class PythonShellPlugin(Plugin):
     def _contributed_bindings_default(self):
         """ Trait initializer. """
 
-        return [{'application' : self.application}]
+        return [{'application': self.application}]
 
     # Views.
     contributed_views = List(contributes_to=VIEWS)
@@ -75,5 +76,6 @@ class PythonShellPlugin(Plugin):
         from .view.namespace_view import NamespaceView
 
         return [PythonShellView, NamespaceView]
+
 
 #### EOF ######################################################################

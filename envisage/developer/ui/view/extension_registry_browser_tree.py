@@ -1,6 +1,5 @@
 """ The nodes used in the extension registry browser tree. """
 
-
 # Enthought library imports.
 from envisage.api import IExtensionPoint, IExtensionRegistry
 from traits.api import Undefined
@@ -58,7 +57,7 @@ class IExtensionPointTreeNode(TreeNode):
         """ Get the object's children. """
 
         # fixme: This could be uglier, but I can't work out how ;^)
-        index    = 0
+        index = 0
         children = []
         for extension in obj.__extension_registry__.get_extensions(obj.id):
             parent = SingleValueTreeNodeObject(value=obj, _index=index)
@@ -105,22 +104,19 @@ class IExtensionPointTreeNode(TreeNode):
 
 extension_registry_browser_tree_nodes = [
     IExtensionRegistryTreeNode(
-        auto_open = True,
-        label     = '=Extension Points',
-        rename    = False,
-        copy      = False,
-        delete    = False,
-        insert    = False,
-        menu      = None,
-    ),
-
+        auto_open=True,
+        label='=Extension Points',
+        rename=False,
+        copy=False,
+        delete=False,
+        insert=False,
+        menu=None, ),
     IExtensionPointTreeNode(
-        rename    = False,
-        copy      = False,
-        delete    = False,
-        insert    = False,
-        menu      = None,
-    ),
+        rename=False,
+        copy=False,
+        delete=False,
+        insert=False,
+        menu=None, ),
 ] + value_tree_nodes
 
 #### EOF ######################################################################

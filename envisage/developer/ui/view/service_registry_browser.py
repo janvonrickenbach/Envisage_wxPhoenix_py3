@@ -1,6 +1,5 @@
 """ A view showing a summary of the running application. """
 
-
 # Standard library imports.
 import inspect
 
@@ -19,28 +18,22 @@ from envisage.plugins.text_editor.editor.text_editor import TextEditor
 from .service_registry_browser_tree import \
      service_registry_browser_tree_nodes
 
-
 service_registry_browser_view = View(
     Item(
-        name       = 'service_registry_model',
-        show_label = False,
-        editor     = TreeEditor(
-            nodes       = service_registry_browser_tree_nodes,
-            editable    = False,
-            orientation = 'vertical',
-            hide_root   = True,
-            show_icons  = True,
-            on_dclick   = 'object.dclick'
-        )
-    ),
-
-    resizable = True,
-    style     = 'custom',
-    title     = 'Service Registry',
-
-    width     = .1,
-    height    = .1
-)
+        name='service_registry_model',
+        show_label=False,
+        editor=TreeEditor(
+            nodes=service_registry_browser_tree_nodes,
+            editable=False,
+            orientation='vertical',
+            hide_root=True,
+            show_icons=True,
+            on_dclick='object.dclick')),
+    resizable=True,
+    style='custom',
+    title='Service Registry',
+    width=.1,
+    height=.1)
 
 
 class ServiceRegistryBrowser(HasTraits):
@@ -63,7 +56,7 @@ class ServiceRegistryBrowser(HasTraits):
     service_registry = Instance(IServiceRegistry)
 
     # The extension registry that we are browsing.
-    service_registry_model = Any#Instance(IServiceRegistry)
+    service_registry_model = Any  #Instance(IServiceRegistry)
 
     # The workbench service.
     workbench = Instance('envisage.ui.workbench.api.Workbench')
@@ -93,8 +86,7 @@ class ServiceRegistryBrowser(HasTraits):
         """ Trait initializer. """
 
         workbench = self.application.get_service(
-            'envisage.ui.workbench.workbench.Workbench'
-        )
+            'envisage.ui.workbench.workbench.Workbench')
 
         return workbench
 
@@ -105,8 +97,8 @@ class ServiceRegistryBrowser(HasTraits):
 
         if hasattr(obj, '_service_id_'):
             protocol = obj._protocol_
-            id       = obj._service_id_
-            service  = obj.value
+            id = obj._service_id_
+            service = obj.value
 
             for plugin in self.application:
                 if id in plugin._service_ids:
@@ -115,8 +107,7 @@ class ServiceRegistryBrowser(HasTraits):
 
             else:
                 self.workbench.information(
-                    'Service not created by a plugin (%s)' % repr(service)
-                )
+                    'Service not created by a plugin (%s)' % repr(service))
 
         return
 
@@ -131,8 +122,7 @@ class ServiceRegistryBrowser(HasTraits):
 
         # Edit the plugin.
         editor = self.workbench.edit(
-            self._get_file_object(plugin), kind=TextEditor
-        )
+            self._get_file_object(plugin), kind=TextEditor)
 
         # Was the service offered declaratively?
         trait_name = self._get_service_trait(plugin, protocol, obj)
@@ -141,11 +131,11 @@ class ServiceRegistryBrowser(HasTraits):
             # Does the trait have a default initializer?
             initializer = klass.methods.get('_%s_default' % trait_name)
             if initializer is not None:
-                lineno    = initializer.lineno
+                lineno = initializer.lineno
 
             else:
                 attribute = klass.attributes.get(trait_name)
-                lineno    = attribute.lineno
+                lineno = attribute.lineno
 
         else:
             lineno = klass.lineno
@@ -221,5 +211,6 @@ class ServiceRegistryBrowser(HasTraits):
         filename = self._get_file_object(plugin).path
 
         return self.code_browser.read_file(filename)
+
 
 #### EOF ######################################################################

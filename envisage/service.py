@@ -1,12 +1,10 @@
 """ A trait type used to access services. """
 
-
 # Standard library imports.
 import logging
 
 # Enthought library imports.
 from traits.api import TraitType
-
 
 # Logging.
 logger = logging.getLogger(__name__)
@@ -24,9 +22,12 @@ class Service(TraitType):
     # 'object' interface.
     ###########################################################################
 
-    def __init__(
-        self, protocol=None, query='', minimize='', maximize='', **metadata
-    ):
+    def __init__(self,
+                 protocol=None,
+                 query='',
+                 minimize='',
+                 maximize='',
+                 **metadata):
         """ Constructor. """
 
         super(Service, self).__init__(**metadata)
@@ -54,10 +55,8 @@ class Service(TraitType):
 
         service_registry = self._get_service_registry(obj)
 
-
-        obj = service_registry.get_service(
-            self._protocol, self._query, self._minimize, self._maximize
-        )
+        obj = service_registry.get_service(self._protocol, self._query,
+                                           self._minimize, self._maximize)
 
         return obj
 
@@ -83,5 +82,6 @@ class Service(TraitType):
             )
 
         return service_registry
+
 
 #### EOF ######################################################################

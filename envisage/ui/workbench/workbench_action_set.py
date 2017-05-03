@@ -1,6 +1,5 @@
 """ An action set in a workbench window. """
 
-
 # Enthought library imports.
 from envisage.ui.action.api import ActionSet
 from traits.api import Instance, List, Str
@@ -178,5 +177,6 @@ class WorkbenchActionSet(ActionSet):
                 setattr(tool_bar_manager, trait_name, value)
 
         return
+
 
 #### EOF ######################################################################

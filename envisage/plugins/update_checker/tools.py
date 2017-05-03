@@ -2,6 +2,7 @@
 files.
 """
 
+
 class InfoFile:
 
     update_file = ""
@@ -27,6 +28,3 @@ def files2xml(filenames):
     loaded by the InfoFile class.
     """
     return
-
-
-

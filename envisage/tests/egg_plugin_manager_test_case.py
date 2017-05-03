@@ -1,6 +1,5 @@
 """ Tests for the Egg plugin manager. """
 
-
 # Enthought library imports.
 from envisage.api import EggPluginManager
 

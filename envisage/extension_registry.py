@@ -1,6 +1,5 @@
 """ A base class for extension registry implementation. """
 
-
 # Standard library imports.
 import logging
 
@@ -12,7 +11,6 @@ from .extension_point_changed_event import ExtensionPointChangedEvent
 from .i_extension_registry import IExtensionRegistry
 from . import safeweakref
 from .unknown_extension_point import UnknownExtensionPoint
-
 
 # Logging.
 logger = logging.getLogger(__name__)
@@ -80,7 +78,9 @@ class ExtensionRegistry(HasTraits):
 
         return list(self._extension_points.values())
 
-    def remove_extension_point_listener(self,listener,extension_point_id=None):
+    def remove_extension_point_listener(self,
+                                        listener,
+                                        extension_point_id=None):
         """ Remove a listener for extensions being added or removed. """
 
         listeners = self._listeners.setdefault(extension_point_id, [])
@@ -132,11 +132,10 @@ class ExtensionRegistry(HasTraits):
         """ Call listeners that are listening to an extension point. """
 
         event = ExtensionPointChangedEvent(
-            extension_point_id = extension_point_id,
-            added              = added,
-            removed            = removed,
-            index              = index
-        )
+            extension_point_id=extension_point_id,
+            added=added,
+            removed=removed,
+            index=index)
 
         for ref in refs:
             listener = ref()
@@ -176,5 +175,6 @@ class ExtensionRegistry(HasTraits):
         refs.extend(self._listeners.get(None, []))
 
         return refs
+
 
 #### EOF ######################################################################

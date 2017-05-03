@@ -1,6 +1,5 @@
 """ The default resource manager. """
 
-
 # Enthought library imports.
 from traits.api import Dict, HasTraits, Str, provides
 
@@ -34,9 +33,9 @@ class ResourceManager(HasTraits):
         from .package_resource_protocol import PackageResourceProtocol
 
         resource_protocols = {
-            'file'    : FileResourceProtocol(),
-            'http'    : HTTPResourceProtocol(),
-            'pkgfile' : PackageResourceProtocol()
+            'file': FileResourceProtocol(),
+            'http': HTTPResourceProtocol(),
+            'pkgfile': PackageResourceProtocol()
         }
 
         return resource_protocols
@@ -53,5 +52,6 @@ class ResourceManager(HasTraits):
             raise ValueError('unknown protocol in URL %s' % url)
 
         return protocol.file(address)
+
 
 #### EOF ######################################################################

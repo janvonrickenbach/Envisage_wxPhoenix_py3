@@ -31,4 +31,5 @@ class HTTPResourceProtocol(HasTraits):
 
         return f
 
+
 #### EOF ######################################################################

@@ -1,11 +1,9 @@
-
 # Enthought library imports
 from envisage.api import Plugin
 from traits.api import Bool, Callable, Event, Int, Instance, Str, Trait
 
 # Local, relative imports
 from .update_info import UpdateInfo
-
 
 # The globally unique ID of this plugin
 ID = "envisage.plugins.update_checker"
@@ -57,7 +55,8 @@ class UpdateCheckerPlugin(Plugin):
         """ Clean up
         """
 
-        self.application.on_trait_change("started", self._check_for_update, remove=True)
+        self.application.on_trait_change(
+            "started", self._check_for_update, remove=True)
 
     #========================================================================
     # Public methods
@@ -65,5 +64,3 @@ class UpdateCheckerPlugin(Plugin):
 
     def _check_for_update(self):
         pass
-
-

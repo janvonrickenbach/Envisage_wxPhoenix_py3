@@ -1,13 +1,11 @@
 """ The Envisage version of the old chestnut. """
 
-
 # Standard library imports.
 import logging
 
 # Enthought library imports.
 from envisage.api import Application, ExtensionPoint, Plugin
 from traits.api import List, Str
-
 
 # Create a log file.
 logger = logging.getLogger()
@@ -28,8 +26,7 @@ class HelloWorld(Plugin):
     # and that plugins that want to contribute to it must each provide a list
     # of strings (Str).
     greetings = ExtensionPoint(
-        List(Str), id='greetings', desc='Greetings for "Hello World"'
-    )
+        List(Str), id='greetings', desc='Greetings for "Hello World"')
 
     # Plugin's have two important lifecyle methods, 'start' and 'stop'. These
     # methods are called automatically by Envisage when the application is
@@ -70,7 +67,6 @@ class MoreGreetings(Plugin):
 
         extensions = [
             'The %s application says %s' % (self.application.id, greeting)
-
             for greeting in ['Bonjour', 'Hola']
         ]
 
@@ -86,8 +82,8 @@ if __name__ == '__main__':
     # specify the plugins explicitly, but the mechanism for finding plugins
     # is configurable by setting the application's 'plugin_manager' trait.
     application = Application(
-        id='hello.world', plugins=[HelloWorld(), Greetings(), MoreGreetings()]
-    )
+        id='hello.world',
+        plugins=[HelloWorld(), Greetings(), MoreGreetings()])
 
     # Run it!
     application.run()

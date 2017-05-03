@@ -1,6 +1,5 @@
 """ An offer to provide a service. """
 
-
 # Enthought library imports.
 from traits.api import Callable, Dict, Either, HasTraits, Str, Type
 
@@ -32,5 +31,6 @@ class ServiceOffer(HasTraits):
     #
     # This dictionary is passed as keyword arguments to the factory.
     properties = Dict
+
 
 #### EOF ######################################################################

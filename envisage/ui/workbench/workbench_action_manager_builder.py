@@ -1,6 +1,5 @@
 """ The action manager builder used to build the workbench menu/tool bars. """
 
-
 # Standard library imports.
 import weakref
 
@@ -34,7 +33,7 @@ class WorkbenchActionManagerBuilder(AbstractActionManagerBuilder):
     def _create_action(self, definition):
         """ Create an action implementation from an action definition. """
 
-        traits = {'window' : self.window}
+        traits = {'window': self.window}
 
         # Override any traits that can be set in the definition.
         if len(definition.name) > 0:
@@ -43,7 +42,7 @@ class WorkbenchActionManagerBuilder(AbstractActionManagerBuilder):
         if len(definition.class_name) > 0:
             action = self._actions.get(definition.class_name)
             if action is None:
-                klass  = self._import_symbol(definition.class_name)
+                klass = self._import_symbol(definition.class_name)
                 action = klass(**traits)
                 self._actions[definition.class_name] = action
 
@@ -90,7 +89,7 @@ class WorkbenchActionManagerBuilder(AbstractActionManagerBuilder):
         # it here to allow the 'View' menu to be created. However, it seems
         # that menus and actions etc should *always* have a reference to
         # the window that they are in?!?
-        traits = {'window' : self.window}
+        traits = {'window': self.window}
 
         # Override any traits that can be set in the definition.
         if len(definition.id) > 0:
@@ -127,10 +126,7 @@ class WorkbenchActionManagerBuilder(AbstractActionManagerBuilder):
     def _create_tool_bar_manager(self, definition):
         """ Create a tool bar manager implementation from a definition. """
 
-        traits = {
-            'window'          : self.window,
-            'show_tool_names' : False
-        }
+        traits = {'window': self.window, 'show_tool_names': False}
 
         # Override any traits that can be set in the definition.
         if len(definition.id) > 0:
@@ -175,5 +171,6 @@ class WorkbenchActionManagerBuilder(AbstractActionManagerBuilder):
         """ Import a symbol. """
 
         return self.window.application.import_symbol(symbol_path)
+
 
 #### EOF ######################################################################

@@ -5,11 +5,9 @@ we try to mimic trait list events when extensions are added or removed.
 
 """
 
-
 # Enthought library imports.
 from traits.api import HasTraits, List
 from traits.testing.unittest_tools import unittest
-
 
 # The starting list for all tests.
 TEST_LIST = [7, 9, 2, 3, 4, 1, 6, 5, 8, 0]
@@ -47,7 +45,7 @@ def listener(obj, trait_name, old, event):
             clone[event.index] = event.added[0]
 
         else:
-            clone[event.index : event.index + len(event.added)] = event.added
+            clone[event.index:event.index + len(event.added)] = event.added
 
     listener.clone = clone
 

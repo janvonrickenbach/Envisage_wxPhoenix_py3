@@ -15,17 +15,19 @@ from traits.etsconfig.api import ETSConfig
 # Local imports
 from envisage._compat import STRING_BASE_CLASS
 
-
 # An obscure ASCII character that we used as separators in socket streams
-MESSAGE_SEP = chr(7) # 'bell' character
+MESSAGE_SEP = chr(7)  # 'bell' character
 
 # The location of the server lock file and the communication log
 LOCK_PATH = os.path.join(ETSConfig.application_data,
                          'remote_editor_server.lock')
 LOG_PATH = os.path.join(ETSConfig.application_data, 'remote_editor_server.log')
 
+
 def encode(s):
     return s.encode('utf-8')
+
+
 def decode(s):
     return s.decode('utf-8')
 
@@ -71,6 +73,7 @@ def spawn_independent(command, shell=False):
             os.setpgrp()
             Popen(command, shell=shell)
             sys.exit(0)
+
 
 def get_server_port():
     """ Reads the server port from the lock file. If the file does not exist
@@ -162,7 +165,7 @@ def receive(sock):
                 index = chunk.find(encode(MESSAGE_SEP))
             length = int(length + chunk[:index])
 
-            msg = chunk[index+1:]
+            msg = chunk[index + 1:]
             while len(msg) < length:
                 chunk = rsock.recv(length - len(msg))
                 if not chunk:

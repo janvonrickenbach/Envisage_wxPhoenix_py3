@@ -8,6 +8,7 @@ def get_shell(window):
     """
     return window.application.get_service(IPythonShell)
 
+
 ################################################################################
 # Groups
 ################################################################################
@@ -24,10 +25,9 @@ ipython_shell_group = Group(
 class ClearScreen(PyfaceAction):
     """ An action that clears the IPython screen. """
 
-    tooltip      = "Clear the IPython screen."
+    tooltip = "Clear the IPython screen."
 
-    description  = "Clear the IPython screen."
-
+    description = "Clear the IPython screen."
 
     ###########################################################################
     # 'Action' interface.
@@ -40,12 +40,12 @@ class ClearScreen(PyfaceAction):
         if shell is not None:
             shell.control.clear_screen()
 
+
 clear_screen = Action(
-    path        = "MenuBar/Tools",
-    class_name  = __name__ + '.ClearScreen',
-    name        = "Clear IPython screen",
-    group       = "IPythonShellGroup",
-)
+    path="MenuBar/Tools",
+    class_name=__name__ + '.ClearScreen',
+    name="Clear IPython screen",
+    group="IPythonShellGroup", )
 
 
 ################################################################################

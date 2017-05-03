@@ -1,6 +1,5 @@
 """ The 'Software Quotes' plugin """
 
-
 # Enthought library imports.
 from envisage.api import Plugin
 from traits.api import List
@@ -33,5 +32,6 @@ class SoftwareQuotesPlugin(Plugin):
         from messages import messages
 
         return messages
+
 
 #### EOF ######################################################################

@@ -25,14 +25,17 @@ class Plot3dPane(TraitsTaskPane):
 
     scene = Instance(MlabSceneModel, ())
 
-    view = View(HGroup(Label('Model: '),
-                       Item('active_model',
-                            editor = EnumEditor(name='_enum_map')),
-                       show_labels=False),
-                Item('scene',
-                     editor = SceneEditor(scene_class=MayaviScene),
-                     show_label = False),
-                resizable = True)
+    view = View(
+        HGroup(
+            Label('Model: '),
+            Item(
+                'active_model', editor=EnumEditor(name='_enum_map')),
+            show_labels=False),
+        Item(
+            'scene',
+            editor=SceneEditor(scene_class=MayaviScene),
+            show_label=False),
+        resizable=True)
 
     #### Private traits #######################################################
 

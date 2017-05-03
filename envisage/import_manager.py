@@ -1,6 +1,5 @@
 """ The default import manager implementation. """
 
-
 # Enthought library imports.
 from traits.api import HasTraits, provides
 
@@ -37,9 +36,8 @@ class ImportManager(HasTraits):
             module_name = '.'.join(components[:-1])
             symbol_name = components[-1]
 
-            module = __import__(
-                module_name, globals(), locals(), [symbol_name]
-            )
+            module = __import__(module_name,
+                                globals(), locals(), [symbol_name])
 
             symbol = getattr(module, symbol_name)
 
@@ -69,5 +67,6 @@ class ImportManager(HasTraits):
             module = getattr(module, component)
 
         return module
+
 
 #### EOF ######################################################################

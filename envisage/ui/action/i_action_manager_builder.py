@@ -1,6 +1,5 @@
 """ The interface for action manager builders. """
 
-
 # Enthought library imports.
 from traits.api import Interface, List
 
@@ -24,5 +23,6 @@ class IActionManagerBuilder(Interface):
         """ Initialize an action manager from the builder's action sets.
 
         """
+
 
 #### EOF ######################################################################

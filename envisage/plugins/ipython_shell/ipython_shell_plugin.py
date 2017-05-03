@@ -1,6 +1,5 @@
 """ An IPython shell plugin. """
 
-
 # Enthought library imports.
 from envisage.api import ExtensionPoint, Plugin
 from traits.api import Dict, List, Str
@@ -10,11 +9,11 @@ class IPythonShellPlugin(Plugin):
     """ An IPython shell plugin. """
 
     # Extension point Ids.
-    BANNER          = 'envisage.plugins.ipython_shell.banner'
-    BINDINGS        = 'envisage.plugins.python_shell.bindings'
-    COMMANDS        = 'envisage.plugins.python_shell.commands'
-    VIEWS           = 'envisage.ui.workbench.views'
-    ACTION_SETS     = 'envisage.ui.workbench.action_sets'
+    BANNER = 'envisage.plugins.ipython_shell.banner'
+    BINDINGS = 'envisage.plugins.python_shell.bindings'
+    COMMANDS = 'envisage.plugins.python_shell.commands'
+    VIEWS = 'envisage.ui.workbench.views'
+    ACTION_SETS = 'envisage.ui.workbench.action_sets'
 
     #### 'IPlugin' interface ##################################################
 
@@ -27,16 +26,18 @@ class IPythonShellPlugin(Plugin):
     #### Extension points offered by this plugin ##############################
 
     banner = ExtensionPoint(
-        List(Str), id=BANNER, desc="""
+        List(Str),
+        id=BANNER,
+        desc="""
 
         This extension point allows you to contribute a string that
         is printed as a banner when the IPython shell is started.
-        """
-    )
-
+        """)
 
     bindings = ExtensionPoint(
-        List(Dict), id=BINDINGS, desc="""
+        List(Dict),
+        id=BINDINGS,
+        desc="""
 
         This extension point allows you to contribute name/value pairs that
         will be bound when the interactive Python shell is started.
@@ -45,11 +46,12 @@ class IPythonShellPlugin(Plugin):
 
         {'x' : 10, 'y' : ['a', 'b', 'c']}
 
-        """
-    )
+        """)
 
     commands = ExtensionPoint(
-        List(Str), id=COMMANDS, desc="""
+        List(Str),
+        id=COMMANDS,
+        desc="""
 
         This extension point allows you to contribute commands that are
         executed when the interactive Python shell is started.
@@ -62,8 +64,7 @@ class IPythonShellPlugin(Plugin):
         Yes, I know this is insecure but it follows the usual Python rule of
         'we are all consenting adults'.
 
-        """
-    )
+        """)
 
     #### Contributions to extension points made by this plugin ################
 
@@ -82,7 +83,7 @@ class IPythonShellPlugin(Plugin):
     def _contributed_bindings_default(self):
         """ Trait initializer. """
 
-        return [{'application' : self.application}]
+        return [{'application': self.application}]
 
     # Views.
     contributed_views = List(contributes_to=VIEWS)
@@ -96,5 +97,6 @@ class IPythonShellPlugin(Plugin):
                     import NamespaceView
 
         return [IPythonShellView, NamespaceView]
+
 
 #### EOF ######################################################################

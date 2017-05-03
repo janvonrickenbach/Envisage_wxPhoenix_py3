@@ -4,20 +4,17 @@ from pyface.action.api import Action as PyfaceAction
 from envisage.plugins.remote_editor.api import IRemoteEditor
 
 
-
 def get_server(window):
     """ Given an application window, retrieve the communication server.
     """
     return window.application.get_service(IRemoteEditor)
 
+
 ################################################################################
 # Groups
 ################################################################################
 file_group = Group(
-    id='RemoteEditorFileGroup',
-    path='MenuBar/File',
-    before='ExitGroup'
-)
+    id='RemoteEditorFileGroup', path='MenuBar/File', before='ExitGroup')
 
 
 ################################################################################
@@ -26,10 +23,9 @@ file_group = Group(
 class OpenScript(PyfaceAction):
     """ An action that opens a Python file in a remote editor. """
 
-    tooltip      = "Open a Python script in separate editor."
+    tooltip = "Open a Python script in separate editor."
 
-    description  = "Open a Python script in separate editor."
-
+    description = "Open a Python script in separate editor."
 
     ###########################################################################
     # 'Action' interface.
@@ -42,20 +38,21 @@ class OpenScript(PyfaceAction):
         wildcard = 'Python files (*.py)|*.py'
 
         parent = self.window.control
-        dialog = FileDialog(parent=parent,
-                            title='Open Python script in separate editor',
-                            action='open', wildcard=wildcard
-                            )
+        dialog = FileDialog(
+            parent=parent,
+            title='Open Python script in separate editor',
+            action='open',
+            wildcard=wildcard)
         if dialog.open() == OK:
             server.open_file(dialog.path)
 
 
 open_script = Action(
-    path        = "MenuBar/File",
-    class_name  = __name__ + '.OpenScript',
-    name        = "Open script in editor",
-    group       = "RemoteEditorFileGroup",
-)
+    path="MenuBar/File",
+    class_name=__name__ + '.OpenScript',
+    name="Open script in editor",
+    group="RemoteEditorFileGroup", )
+
 
 ################################################################################
 # `NewScript` class.
@@ -63,9 +60,9 @@ open_script = Action(
 class NewScript(PyfaceAction):
     """ An action that opens a new file in a remote editor. """
 
-    tooltip       = "Open a new file in separate editor."
+    tooltip = "Open a new file in separate editor."
 
-    description   = "Open a new file in separate editor."
+    description = "Open a new file in separate editor."
 
     ###########################################################################
     # 'Action' interface.
@@ -78,11 +75,10 @@ class NewScript(PyfaceAction):
 
 
 new_script = Action(
-    path        = "MenuBar/File",
-    class_name  = __name__ + '.NewScript',
-    name        = "New script in editor",
-    group       = "RemoteEditorFileGroup",
-)
+    path="MenuBar/File",
+    class_name=__name__ + '.NewScript',
+    name="New script in editor",
+    group="RemoteEditorFileGroup", )
 
 
 ################################################################################

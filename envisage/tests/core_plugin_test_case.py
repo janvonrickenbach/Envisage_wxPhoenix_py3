@@ -1,6 +1,5 @@
 """ Tests for the core plugin. """
 
-
 # Major package imports.
 from pkg_resources import resource_filename
 
@@ -9,7 +8,6 @@ from envisage.api import Application, Category, ClassLoadHook, Plugin
 from envisage.api import ServiceOffer
 from traits.api import HasTraits, Int, Interface, List
 from traits.testing.unittest_tools import unittest
-
 
 # This module's package.
 PKG = 'envisage.tests'
@@ -53,17 +51,14 @@ class CorePluginTestCase(unittest.TestCase):
         class PluginA(Plugin):
             id = 'A'
 
-            service_offers = List(
-                contributes_to='envisage.service_offers'
-            )
+            service_offers = List(contributes_to='envisage.service_offers')
 
             def _service_offers_default(self):
                 """ Trait initializer. """
 
                 service_offers = [
                     ServiceOffer(
-                        protocol=IMyService, factory=self._my_service_factory
-                    )
+                        protocol=IMyService, factory=self._my_service_factory)
                 ]
 
                 return service_offers
@@ -73,9 +68,8 @@ class CorePluginTestCase(unittest.TestCase):
 
                 return 42
 
-
         core = CorePlugin()
-        a    = PluginA()
+        a = PluginA()
 
         application = TestApplication(plugins=[core, a])
         application.start()
@@ -102,17 +96,14 @@ class CorePluginTestCase(unittest.TestCase):
         class PluginA(Plugin):
             id = 'A'
 
-            service_offers = List(
-                contributes_to='envisage.service_offers'
-            )
+            service_offers = List(contributes_to='envisage.service_offers')
 
             def _service_offers_default(self):
                 """ Trait initializer. """
 
                 service_offers = [
                     ServiceOffer(
-                        protocol=IMyService, factory=self._my_service_factory
-                    )
+                        protocol=IMyService, factory=self._my_service_factory)
                 ]
 
                 return service_offers
@@ -123,7 +114,7 @@ class CorePluginTestCase(unittest.TestCase):
                 return 42
 
         core = CorePlugin()
-        a    = PluginA()
+        a = PluginA()
 
         # Start off with just the core plugin.
         application = TestApplication(plugins=[core])
@@ -165,15 +156,13 @@ class CorePluginTestCase(unittest.TestCase):
                 """ Trait initializer. """
 
                 bar_category = Category(
-                    class_name = PKG + '.bar_category.BarCategory',
-                    target_class_name = CorePluginTestCase.__module__ + '.Bar'
-                )
+                    class_name=PKG + '.bar_category.BarCategory',
+                    target_class_name=CorePluginTestCase.__module__ + '.Bar')
 
                 return [bar_category]
 
-
         core = CorePlugin()
-        a    = PluginA()
+        a = PluginA()
 
         application = TestApplication(plugins=[core, a])
         application.start()
@@ -206,15 +195,13 @@ class CorePluginTestCase(unittest.TestCase):
                 """ Trait initializer. """
 
                 bar_category = Category(
-                    class_name = PKG + '.bar_category.BarCategory',
-                    target_class_name = CorePluginTestCase.__module__ + '.Bar'
-                )
+                    class_name=PKG + '.bar_category.BarCategory',
+                    target_class_name=CorePluginTestCase.__module__ + '.Bar')
 
                 return [bar_category]
 
-
         core = CorePlugin()
-        a    = PluginA()
+        a = PluginA()
 
         # Start with just the core plugin.
         application = TestApplication(plugins=[core])
@@ -250,16 +237,13 @@ class CorePluginTestCase(unittest.TestCase):
             class_load_hooks = List(
                 [
                     ClassLoadHook(
-                        class_name = CorePluginTestCase.__module__ + '.Baz',
-                        on_load    = on_class_loaded,
-                    )
+                        class_name=CorePluginTestCase.__module__ + '.Baz',
+                        on_load=on_class_loaded, )
                 ],
-
-                contributes_to='envisage.class_load_hooks'
-            )
+                contributes_to='envisage.class_load_hooks')
 
         core = CorePlugin()
-        a    = PluginA()
+        a = PluginA()
 
         application = TestApplication(plugins=[core, a])
         application.start()
@@ -303,16 +287,13 @@ class CorePluginTestCase(unittest.TestCase):
             class_load_hooks = List(
                 [
                     ClassLoadHook(
-                        class_name = CorePluginTestCase.__module__ + '.Baz',
-                        on_load    = on_class_loaded,
-                    )
+                        class_name=CorePluginTestCase.__module__ + '.Baz',
+                        on_load=on_class_loaded, )
                 ],
-
-                contributes_to='envisage.class_load_hooks'
-            )
+                contributes_to='envisage.class_load_hooks')
 
         core = CorePlugin()
-        a    = PluginA()
+        a = PluginA()
 
         # Start with just the core plugin.
         application = TestApplication(plugins=[core])
@@ -353,9 +334,8 @@ class CorePluginTestCase(unittest.TestCase):
 
                 return ['file://' + resource_filename(PKG, 'preferences.ini')]
 
-
         core = CorePlugin()
-        a    = PluginA()
+        a = PluginA()
 
         application = TestApplication(plugins=[core, a])
         application.run()
@@ -382,7 +362,7 @@ class CorePluginTestCase(unittest.TestCase):
                 return ['file://' + resource_filename(PKG, 'preferences.ini')]
 
         core = CorePlugin()
-        a    = PluginA()
+        a = PluginA()
 
         # Start with just the core plugin.
         application = TestApplication(plugins=[core])

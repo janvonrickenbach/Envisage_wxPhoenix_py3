@@ -1,6 +1,5 @@
 """ A view containing an interactive Python shell. """
 
-
 # Standard library imports.
 import logging
 import traceback
@@ -18,9 +17,9 @@ from pyface.ipython_widget import IPythonWidget
 from pyface.api import GUI
 from traits.api import Instance, Property, provides, Dict
 
-
 # Setup a logger for this module.
 logger = logging.getLogger(__name__)
+
 
 @provides(IPythonShell)
 class IPythonShellView(View):
@@ -87,9 +86,8 @@ class IPythonShellView(View):
     def create_control(self, parent):
         """ Creates the toolkit-specific control that represents the view. """
 
-        self.shell = IPythonWidget(parent,
-                                   banner='\n'.join(self._banner),
-                                   interp=self.interpreter)
+        self.shell = IPythonWidget(
+            parent, banner='\n'.join(self._banner), interp=self.interpreter)
 
         # Namespace contributions.
         for bindings in self._bindings:
@@ -101,9 +99,9 @@ class IPythonShellView(View):
                 self.execute_command(command)
             except Exception as e:
                 logger.exception(
-                        "The command '%s' supplied to the Ipython shell "
-                        "plugin has raised an exception:\n%s" %
-                        (command, traceback.format_exc()))
+                    "The command '%s' supplied to the Ipython shell "
+                    "plugin has raised an exception:\n%s" %
+                    (command, traceback.format_exc()))
 
         # Register the view as a service.
         self.window.application.register_service(IPythonShell, self)
@@ -126,7 +124,6 @@ class IPythonShellView(View):
 
         return self.shell.control
 
-
     def destroy_control(self):
         """ Destroys the toolkit-specific control that represents the view.
 
@@ -138,9 +135,7 @@ class IPythonShellView(View):
         ns_view = self.window.application.get_service(INamespaceView)
         if ns_view is not None:
             self.on_trait_change(
-                ns_view._on_names_changed, 'names', remove=True
-            )
-
+                ns_view._on_names_changed, 'names', remove=True)
 
     ###########################################################################
     # 'PythonShellView' interface.
@@ -178,5 +173,6 @@ class IPythonShellView(View):
         """ Returns the value bound to a name in the interpreter's namespace."""
 
         return self.namespace[name]
+
 
 #### EOF ######################################################################

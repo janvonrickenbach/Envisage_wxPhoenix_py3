@@ -6,7 +6,6 @@
 #  Author: Dave Peterson <dpeterson@enthought.com>
 #
 #-----------------------------------------------------------------------------
-
 """
 A runnable that restores the last opened project.
 
@@ -22,7 +21,6 @@ from pyface.api import information
 
 # Application imports
 from .services import IPROJECT_MODEL, IPROJECT_UI
-
 
 # Setup a logger for this module.
 logger = logging.getLogger(__name__)
@@ -62,7 +60,7 @@ class ProjectRunnable(Runnable):
         # Load the project we were using when we last shutdown.
         model_service = application.get_service(IPROJECT_MODEL)
         location = model_service.preferences.get('project location',
-            default=None)
+                                                 default=None)
         if location and len(location) > 0:
             logger.info("Opening last project from location [%s]", location)
 
@@ -75,18 +73,17 @@ class ProjectRunnable(Runnable):
             if project is not None:
                 model_service.project = project
             else:
-                information(self._get_parent_window(application),
+                information(
+                    self._get_parent_window(application),
                     'Unable to open last project from location:\t\n'
-                    '\t%s\n'  % (location) + '\n\n'
+                    '\t%s\n' % (location) + '\n\n'
                     'The project may no longer exist.',
-                    'Can Not Open Last Project',
-                    )
+                    'Can Not Open Last Project', )
 
         else:
             logger.info('No previous project to open')
 
         return
-
 
     #### protected interface ################################################
 
@@ -109,4 +106,3 @@ class ProjectRunnable(Runnable):
 
 
 #### EOF ######################################################################
-

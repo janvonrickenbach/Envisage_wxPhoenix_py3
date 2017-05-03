@@ -47,9 +47,7 @@ class EggBasketPluginManagerTestCase(unittest.TestCase):
 
     def test_find_plugins_in_eggs_on_the_plugin_path(self):
 
-        plugin_manager = EggBasketPluginManager(
-            plugin_path=[self.eggs_dir]
-        )
+        plugin_manager = EggBasketPluginManager(plugin_path=[self.eggs_dir])
 
         ids = [plugin.id for plugin in plugin_manager]
         self.assertEqual(len(ids), 3)
@@ -66,9 +64,7 @@ class EggBasketPluginManagerTestCase(unittest.TestCase):
         include = ['acme.foo', 'acme.bar']
 
         plugin_manager = EggBasketPluginManager(
-            plugin_path = [self.eggs_dir],
-            include     = include
-        )
+            plugin_path=[self.eggs_dir], include=include)
 
         # The Ids of the plugins that we expect the plugin manager to find.
         expected = ['acme.foo', 'acme.bar']
@@ -86,9 +82,7 @@ class EggBasketPluginManagerTestCase(unittest.TestCase):
         include = ['acme.b*']
 
         plugin_manager = EggBasketPluginManager(
-            plugin_path = [self.eggs_dir],
-            include     = include
-        )
+            plugin_path=[self.eggs_dir], include=include)
 
         # The Ids of the plugins that we expect the plugin manager to find.
         expected = ['acme.bar', 'acme.baz']
@@ -106,9 +100,7 @@ class EggBasketPluginManagerTestCase(unittest.TestCase):
         exclude = ['acme.foo', 'acme.baz']
 
         plugin_manager = EggBasketPluginManager(
-            plugin_path = [self.eggs_dir],
-            exclude     = exclude
-        )
+            plugin_path=[self.eggs_dir], exclude=exclude)
 
         # The Ids of the plugins that we expect the plugin manager to find.
         expected = ['acme.bar']
@@ -126,9 +118,7 @@ class EggBasketPluginManagerTestCase(unittest.TestCase):
         exclude = ['acme.b*']
 
         plugin_manager = EggBasketPluginManager(
-            plugin_path = [self.eggs_dir],
-            exclude     = exclude
-        )
+            plugin_path=[self.eggs_dir], exclude=exclude)
 
         # The Ids of the plugins that we expect the plugin manager to find.
         expected = ['acme.foo']
@@ -159,8 +149,7 @@ class EggBasketPluginManagerTestCase(unittest.TestCase):
 
     def test_ignore_broken_plugins_raises_exceptions_by_default(self):
         plugin_manager = EggBasketPluginManager(
-            plugin_path = [self.bad_eggs_dir, self.eggs_dir],
-        )
+            plugin_path=[self.bad_eggs_dir, self.eggs_dir], )
         self.assertRaises(ImportError, list, plugin_manager)
 
         return
@@ -174,9 +163,8 @@ class EggBasketPluginManagerTestCase(unittest.TestCase):
             data['exc'] = exc
 
         plugin_manager = EggBasketPluginManager(
-            plugin_path           = [self.bad_eggs_dir, self.eggs_dir],
-            on_broken_plugin      = on_broken_plugin,
-        )
+            plugin_path=[self.bad_eggs_dir, self.eggs_dir],
+            on_broken_plugin=on_broken_plugin, )
 
         ids = [plugin.id for plugin in plugin_manager]
         self.assertEqual(len(ids), 3)
@@ -193,25 +181,28 @@ class EggBasketPluginManagerTestCase(unittest.TestCase):
 
     def test_ignore_broken_distributions_raises_exceptions_by_default(self):
         plugin_manager = EggBasketPluginManager(
-            plugin_path = [self.bad_eggs_dir,
-                self._create_broken_distribution_eggdir('acme.foo*.egg')],
-        )
+            plugin_path=[
+                self.bad_eggs_dir,
+                self._create_broken_distribution_eggdir('acme.foo*.egg')
+            ], )
         self.assertRaises(SystemError, iter, plugin_manager)
 
         return
 
     def test_ignore_broken_distributions_loads_good_distributions(self):
-        data = {'count':0}
+        data = {'count': 0}
+
         def on_broken_distribution(dist, exc):
             data['count'] += 1
             data['distribution'] = dist
             data['exc'] = exc
 
         plugin_manager = EggBasketPluginManager(
-            plugin_path = [self.eggs_dir,
-                self._create_broken_distribution_eggdir('acme.foo*.egg')],
-            on_broken_distribution = on_broken_distribution,
-        )
+            plugin_path=[
+                self.eggs_dir,
+                self._create_broken_distribution_eggdir('acme.foo*.egg')
+            ],
+            on_broken_distribution=on_broken_distribution, )
 
         ids = [plugin.id for plugin in plugin_manager]
         self.assertEqual(len(ids), 3)

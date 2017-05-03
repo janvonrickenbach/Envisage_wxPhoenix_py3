@@ -1,6 +1,5 @@
 """ A view containing a colored panel! """
 
-
 # Enthought library imports.
 from traits.etsconfig.api import ETSConfig
 from pyface.workbench.api import View
@@ -78,5 +77,6 @@ class ColorView(View):
         widget.setAutoFillBackground(True)
 
         return widget
+
 
 #### EOF ######################################################################

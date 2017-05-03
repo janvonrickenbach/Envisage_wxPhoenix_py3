@@ -21,39 +21,47 @@ class ExampleTask(Task):
     id = 'example.example_task'
     name = 'Multi-Tab Editor'
 
-    active_editor = Property(Instance(IEditor),
-                             depends_on='editor_area.active_editor')
+    active_editor = Property(
+        Instance(IEditor), depends_on='editor_area.active_editor')
 
     editor_area = Instance(IEditorAreaPane)
 
-    menu_bar = SMenuBar(SMenu(TaskAction(name='New', method='new',
-                                         accelerator='Ctrl+N'),
-                              TaskAction(name='Open...', method='open',
-                                         accelerator='Ctrl+O'),
-                              TaskAction(name='Save', method='save',
-                                         accelerator='Ctrl+S'),
-                              id='File', name='&File'),
-                        SMenu(DockPaneToggleGroup(),
-                              id='View', name='&View'))
+    menu_bar = SMenuBar(
+        SMenu(
+            TaskAction(
+                name='New', method='new', accelerator='Ctrl+N'),
+            TaskAction(
+                name='Open...', method='open', accelerator='Ctrl+O'),
+            TaskAction(
+                name='Save', method='save', accelerator='Ctrl+S'),
+            id='File',
+            name='&File'),
+        SMenu(
+            DockPaneToggleGroup(), id='View', name='&View'))
 
-    tool_bars = [SToolBar(TaskAction(method='new',
-                                     tooltip='New file',
-                                     image=ImageResource('document_new')),
-                          TaskAction(method='open',
-                                     tooltip='Open a file',
-                                     image=ImageResource('document_open')),
-                          TaskAction(method='save',
-                                     tooltip='Save the current file',
-                                     image=ImageResource('document_save')),
-                          image_size=(32, 32))]
+    tool_bars = [
+        SToolBar(
+            TaskAction(
+                method='new',
+                tooltip='New file',
+                image=ImageResource('document_new')),
+            TaskAction(
+                method='open',
+                tooltip='Open a file',
+                image=ImageResource('document_open')),
+            TaskAction(
+                method='save',
+                tooltip='Save the current file',
+                image=ImageResource('document_save')),
+            image_size=(32, 32))
+    ]
 
     ###########################################################################
     # 'Task' interface.
     ###########################################################################
 
     def _default_layout_default(self):
-        return TaskLayout(
-            left=PaneItem('example.python_script_browser_pane'))
+        return TaskLayout(left=PaneItem('example.python_script_browser_pane'))
 
     def activated(self):
         """ Overriden to set the window's title.
@@ -105,8 +113,8 @@ class ExampleTask(Task):
         except IOError:
             # If you are trying to save to a file that doesn't exist, open up a
             # FileDialog with a 'save as' action.
-            dialog = FileDialog(parent=self.window.control,
-                                action='save as', wildcard='*.py')
+            dialog = FileDialog(
+                parent=self.window.control, action='save as', wildcard='*.py')
             if dialog.open() == OK:
                 editor.save(dialog.path)
             else:
@@ -135,9 +143,12 @@ class ExampleTask(Task):
         if not dirty_editors.keys():
             return True
         message = 'You have unsaved files. Would you like to save them?'
-        dialog = ConfirmationDialog(parent=self.window.control,
-                                    message=message, cancel=True,
-                                    default=CANCEL, title='Save Changes?')
+        dialog = ConfirmationDialog(
+            parent=self.window.control,
+            message=message,
+            cancel=True,
+            default=CANCEL,
+            title='Save Changes?')
         result = dialog.open()
         if result == CANCEL:
             return False

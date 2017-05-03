@@ -1,6 +1,5 @@
 """ The location of a group, menu, or action, within an action hierarchy. """
 
-
 # Enthought library imports.
 from traits.api import HasTraits, Str
 
@@ -41,5 +40,6 @@ class Location(HasTraits):
     # - for groups, this is the ID of another group.
     # - for menus and actions, this is the ID of another menu or action.
     before = Str
+
 
 #### EOF ######################################################################

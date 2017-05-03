@@ -4,7 +4,6 @@
 #  All rights reserved.
 #
 #-----------------------------------------------------------------------------
-
 """
 
 Test envisage project.
@@ -49,13 +48,12 @@ class EnvProject(Project, NumericContext):
     # Overridden here to a File to use the File dialog since we're saving
     # projects as files.
 
-
     # Set up the naming environment.
-#    klass_name = "apptools.naming.InitialContextFactory"
-#    environment = {Context.INITIAL_CONTEXT_FACTORY : klass_name}
-#
-#    # Create an initial context.
-#    context = InitialContext(environment)
+    #    klass_name = "apptools.naming.InitialContextFactory"
+    #    environment = {Context.INITIAL_CONTEXT_FACTORY : klass_name}
+    #
+    #    # Create an initial context.
+    #    context = InitialContext(environment)
 
     # The list of names bound in this context:
     list_names = Property(List)
@@ -66,18 +64,16 @@ class EnvProject(Project, NumericContext):
     # The UI view to use when creating a new project
     traits_view = View(
         Group('location'),
-        title = 'New Env Project',
-        id = 'plugins.single_project.env_project.EnvProject',
-        buttons = [ 'OK', 'Cancel' ],
+        title='New Env Project',
+        id='plugins.single_project.env_project.EnvProject',
+        buttons=['OK', 'Cancel'],
 
         # Ensure closing via the dialog close button is the same
         # as clicking cancel.
-        close_result = False,
+        close_result=False,
 
         # Ensure the user can resize the dialog.
-        resizable = True,
-        )
-
+        resizable=True, )
 
     ##########################################################################
     # 'object' interface
@@ -94,7 +90,7 @@ class EnvProject(Project, NumericContext):
         """
 
         # Obtain state from base class(es)
-        state =  super(EnvProject, self).__getstate__()
+        state = super(EnvProject, self).__getstate__()
 
         # Add in our current version number.  Note use a different attribute
         # name from any base or derived class so that our numbers don't
@@ -102,7 +98,6 @@ class EnvProject(Project, NumericContext):
         state['_env_project_version'] = 1
 
         return state
-
 
     def __setstate__(self, state):
         """ Restore the state of this object during unpickling.
@@ -129,12 +124,10 @@ class EnvProject(Project, NumericContext):
                 self._add_all_items_as_dynamic_bindings_to_state(state,
                                                                  items_dict)
 
-
         # Restore the base class's state.
         super(EnvProject, self).__setstate__(state)
 
         return
-
 
     ##########################################################################
     # 'EnvProject' interface
@@ -183,7 +176,7 @@ class EnvProject(Project, NumericContext):
         self.bind_dynamic(data, 'context_name')
 
         logger.debug('Added new data (%s) to EnvProject (%s) with '
-            'name (%s)', data, self, name)
+                     'name (%s)', data, self, name)
 
         return data
 
@@ -243,8 +236,8 @@ class EnvProjectAdapter(ITreeNodeAdapter):
         """ Sets up or removes a listener for children being replaced on a
             specified object.
         """
-        self.adaptee.on_trait_change(listener, 'list_items',
-                              remove=remove, dispatch='ui')
+        self.adaptee.on_trait_change(
+            listener, 'list_items', remove=remove, dispatch='ui')
 
     def get_label(self):
         """ Gets the label to display for a specified object.
@@ -254,11 +247,11 @@ class EnvProjectAdapter(ITreeNodeAdapter):
     def get_menu(self):
         """ Returns the right-click context menu for an object.
         """
-        return Menu(*[
-            Action(name='Create Data',
-                action='node.adapter.append_child',
-            )]
-        )
+        return Menu(* [
+            Action(
+                name='Create Data',
+                action='node.adapter.append_child', )
+        ])
 
     def get_tooltip(self):
         """ Gets the tooltip to display for a specified object.
@@ -297,5 +290,5 @@ class EnvProjectAdapter(ITreeNodeAdapter):
         """
         return False
 
-### EOF ######################################################################
 
+### EOF ######################################################################

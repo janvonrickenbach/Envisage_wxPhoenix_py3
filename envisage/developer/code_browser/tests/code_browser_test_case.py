@@ -9,7 +9,6 @@ logger = logging.getLogger()
 logger.addHandler(logging.StreamHandler())
 logger.setLevel(logging.DEBUG)
 
-
 # Standard library imports.
 import inspect, unittest
 
@@ -17,7 +16,6 @@ import inspect, unittest
 from traits.util.resource import get_path
 
 from envisage.developer.code_browser.api import CodeBrowser
-
 
 
 class CodeBrowserTestCase(unittest.TestCase):
@@ -77,8 +75,7 @@ class CodeBrowserTestCase(unittest.TestCase):
         """ has traits """
 
         module = self.code_browser.read_file(
-            os.path.join(get_path(CodeBrowserTestCase), 'example_1.py')
-        )
+            os.path.join(get_path(CodeBrowserTestCase), 'example_1.py'))
 
         # Check the module name and documentation.
         self.assertTrue(module.name.endswith('example_1'))

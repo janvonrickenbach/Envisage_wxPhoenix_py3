@@ -6,7 +6,6 @@
 #  All rights reserved.
 #
 #-----------------------------------------------------------------------------
-
 """
 The entry point for an Envisage application.
 
@@ -36,12 +35,13 @@ logger = logging.getLogger()
 logger.addHandler(logging.StreamHandler())
 logger.setLevel(logging.DEBUG)
 
+
 def main():
     """ Runs the application. """
 
     # Create the application.
     application = WorkbenchApplication(
-        id = 'testProject_extended',
+        id='testProject_extended',
         plugins=[
             CorePlugin(),
             WorkbenchPlugin(),
@@ -54,8 +54,7 @@ def main():
             # implementation in place that can understand domain-objects that have
             # been abstracted to an INode interface.
             #DataPlugin(),
-        ]
-    )
+        ])
 
     # Run the application.
     application.run()

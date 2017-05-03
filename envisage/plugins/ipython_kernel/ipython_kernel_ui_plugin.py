@@ -8,7 +8,6 @@ from envisage.api import Plugin
 from traits.api import List
 from pyface.tasks.action.api import SGroup, SchemaAddition
 
-
 TASK_EXTENSIONS = 'envisage.ui.tasks.task_extensions'
 
 
@@ -35,19 +34,13 @@ class IPythonKernelUIPlugin(Plugin):
 
         def menu_factory():
             kernel = self.application.get_service(IPYTHON_KERNEL_PROTOCOL)
-            return SGroup(
-                StartQtConsoleAction(kernel=kernel),
-                id='ipython'
-            )
+            return SGroup(StartQtConsoleAction(kernel=kernel), id='ipython')
 
         return [
-            TaskExtension(
-                actions=[
-                    SchemaAddition(
-                        path='MenuBar/View',
-                        factory=menu_factory,
-                        id='IPythonSchema',
-                    ),
-                ]
-            )
+            TaskExtension(actions=[
+                SchemaAddition(
+                    path='MenuBar/View',
+                    factory=menu_factory,
+                    id='IPythonSchema', ),
+            ])
         ]

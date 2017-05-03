@@ -1,6 +1,5 @@
 """ Tests for the resource manager. """
 
-
 # Standard library imports.
 import unittest
 
@@ -15,7 +14,6 @@ from envisage.resource.api import NoSuchResourceError
 from envisage._compat import HTTPError, unicode_str
 import envisage._compat
 url_library = envisage._compat
-
 
 # This module's package.
 PKG = 'envisage.resource.tests'
@@ -87,9 +85,7 @@ class ResourceManagerTestCase(unittest.TestCase):
         rm = ResourceManager()
 
         # Open a file resource.
-        self.assertRaises(
-            NoSuchResourceError, rm.file, 'file://../bogus.py'
-        )
+        self.assertRaises(NoSuchResourceError, rm.file, 'file://../bogus.py')
 
         return
 
@@ -120,18 +116,13 @@ class ResourceManagerTestCase(unittest.TestCase):
         rm = ResourceManager()
 
         # Open a package resource.
-        self.assertRaises(
-            NoSuchResourceError,
-            rm.file,
-            'pkgfile://envisage.resource/bogus.py'
-        )
+        self.assertRaises(NoSuchResourceError, rm.file,
+                          'pkgfile://envisage.resource/bogus.py')
 
-        self.assertRaises(
-            NoSuchResourceError, rm.file, 'pkgfile://completely.bogus/bogus.py'
-        )
+        self.assertRaises(NoSuchResourceError, rm.file,
+                          'pkgfile://completely.bogus/bogus.py')
 
         return
-
 
     def test_http_resource(self):
         """ http resource """
@@ -148,19 +139,16 @@ class ResourceManagerTestCase(unittest.TestCase):
 
         return
 
-
     def test_no_such_http_resource(self):
         """ no such http resource """
 
         # Open an HTTP document resource.
         rm = ResourceManager()
 
-        self.assertRaises(
-            NoSuchResourceError, rm.file, 'http://localhost:1234/bogus.dat'
-        )
+        self.assertRaises(NoSuchResourceError, rm.file,
+                          'http://localhost:1234/bogus.dat')
 
         return
-
 
     def test_unknown_protocol(self):
         """ unknown protocol """

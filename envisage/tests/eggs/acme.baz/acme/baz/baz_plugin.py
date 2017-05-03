@@ -1,6 +1,5 @@
 """ The 'Baz' plugin """
 
-
 # Enthought library imports.
 from envisage.api import Plugin
 from traits.api import Bool
@@ -38,5 +37,6 @@ class BazPlugin(Plugin):
         self.stopped = True
 
         return
+
 
 #### EOF ######################################################################

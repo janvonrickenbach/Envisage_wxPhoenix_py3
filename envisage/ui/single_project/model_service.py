@@ -4,7 +4,6 @@
 #  All rights reserved.
 #
 #-----------------------------------------------------------------------------
-
 """
 The Envisage service providing the model state for the single
 project plugin.
@@ -20,7 +19,6 @@ import shutil
 from envisage.api import IApplication
 from apptools.preferences.api import IPreferences
 from traits.api import Any, HasTraits, Instance, List
-
 
 # Setup a logger for this module.
 logger = logging.getLogger(__name__)
@@ -44,7 +42,7 @@ class ModelService(HasTraits):
 
     # The factory to use for creating new projects
     factory = Instance('envisage.ui.single_project.project_factory.'
-        'ProjectFactory')
+                       'ProjectFactory')
 
     # The preferences to be exposed through this service.
     preferences = Instance(IPreferences)
@@ -54,7 +52,6 @@ class ModelService(HasTraits):
 
     # The current selection within the current project.
     selection = List(Any)
-
 
     ##########################################################################
     # 'object' interface.
@@ -71,11 +68,10 @@ class ModelService(HasTraits):
 
         """
 
-        super(ModelService, self).__init__(application = application,
-            factory = factory, **traits)
+        super(ModelService, self).__init__(
+            application=application, factory=factory, **traits)
 
         return
-
 
     ##########################################################################
     # 'ModelService' interface.
@@ -91,7 +87,6 @@ class ModelService(HasTraits):
         """
 
         return self.factory.PROJECT_CLASS.PROJECTS_ARE_FILES
-
 
     def clean_location(self, location):
         """
@@ -110,7 +105,6 @@ class ModelService(HasTraits):
 
         return
 
-
     def get_default_path(self):
         """
         Return the default location for projects.
@@ -118,7 +112,6 @@ class ModelService(HasTraits):
         """
 
         return self.factory.PROJECT_CLASS.get_default_path(self.application)
-
 
     ### trait handlers #######################################################
 
@@ -132,7 +125,7 @@ class ModelService(HasTraits):
         """
 
         logger.debug('Detected project change from [%s] to [%s] in '
-            'ModelService [%s]', old, new, self)
+                     'ModelService [%s]', old, new, self)
 
         if old is not None:
             old.stop()
@@ -141,7 +134,6 @@ class ModelService(HasTraits):
             new.start()
 
         return
-
 
     def _selection_changed(self, old, new):
         """
@@ -152,10 +144,9 @@ class ModelService(HasTraits):
         """
 
         logger.debug('ModelService [%s] selection changed from [%s] to [%s] ',
-             self, old, new)
+                     self, old, new)
 
         return
 
 
 ### EOF ######################################################################
-

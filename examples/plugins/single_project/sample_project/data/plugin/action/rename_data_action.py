@@ -4,19 +4,16 @@
 #  All rights reserved.
 #
 #-----------------------------------------------------------------------------
-
 """
 An action to rename a data.
 
 """
-
 
 # Standard imports.
 import logging
 
 # Local imports
 from data_plugin_action import DataPluginAction
-
 
 # Create a logger for this module.
 logger = logging.getLogger(__name__)
@@ -45,5 +42,6 @@ class RenameDataAction(DataPluginAction):
         event.tree.edit_label(event.node)
 
         return
+
 
 #### EOF #####################################################################

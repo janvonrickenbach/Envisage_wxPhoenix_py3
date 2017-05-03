@@ -1,6 +1,5 @@
 """ A mutable, manually populated extension registry used for testing. """
 
-
 # Enthought library imports.
 from envisage.api import ExtensionRegistry, UnknownExtension
 
@@ -24,7 +23,7 @@ class MutableExtensionRegistry(ExtensionRegistry):
 
         self._check_extension_point(extension_point_id)
 
-        old   = self._get_extensions(extension_point_id)
+        old = self._get_extensions(extension_point_id)
         index = len(old)
         old.extend(extensions)
 
@@ -56,5 +55,6 @@ class MutableExtensionRegistry(ExtensionRegistry):
         self._call_listeners(refs, extension_point_id, [], extensions, None)
 
         return
+
 
 #### EOF ######################################################################

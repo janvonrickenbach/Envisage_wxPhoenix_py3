@@ -40,7 +40,7 @@ class ClientThread(Thread):
                 sock.bind(('localhost', 0))
                 sock.listen(1)
                 port = sock.getsockname()[1]
-                args = self.client.server_prefs + ( port, )
+                args = self.client.server_prefs + (port, )
                 code = "from envisage.plugins.remote_editor.communication." \
                     "server import main; main(r'%s', '%s', %i)" % args
                 spawn_independent([sys.executable, '-c', code])
@@ -142,8 +142,8 @@ class ClientThread(Thread):
                         else:
                             exec('from pyface.ui.%s.gui import GUI' %
                                  self.client.ui_dispatch)
-                        GUI.invoke_later(self.client.handle_command,
-                                         command, arguments)
+                        GUI.invoke_later(self.client.handle_command, command,
+                                         arguments)
         finally:
             self.client.unregister()
 
@@ -160,8 +160,7 @@ class Client(HasTraits):
     # the server.
     server_prefs = Tuple((os.path.join(remote_editor.__path__[0],
                                        "preferences.ini"),
-                          "enthought.remote_editor"),
-                         Str, Str)
+                          "enthought.remote_editor"), Str, Str)
 
     # The type of this object and the type of the desired object, respectively
     self_type = Str
@@ -222,7 +221,8 @@ class Client(HasTraits):
             of the appropriate type.
         """
         if self._communication_thread is None:
-            raise RuntimeError("Client is not registered. Cannot send command.")
+            raise RuntimeError(
+                "Client is not registered. Cannot send command.")
 
         msg = r"Client on port %i sending: %s %s"
         logger.debug(msg, self._port, command, arguments)
@@ -239,7 +239,3 @@ class Client(HasTraits):
             given was understood; otherwise, False.
         """
         raise NotImplementedError()
-
-
-
-

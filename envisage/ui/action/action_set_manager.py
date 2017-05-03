@@ -1,6 +1,5 @@
 """ Manages a collection of action sets. """
 
-
 # Enthought library imports.
 from traits.api import HasTraits, List
 
@@ -114,5 +113,6 @@ class ActionSetManager(HasTraits):
             root = components[0]
 
         return root
+
 
 #### EOF ######################################################################

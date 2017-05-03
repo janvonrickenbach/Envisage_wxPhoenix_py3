@@ -1,6 +1,5 @@
 """ The workbench preferences. """
 
-
 # Enthought library imports.
 from apptools.preferences.api import PreferencesHelper
 from traits.api import Bool
@@ -18,5 +17,6 @@ class WorkbenchPreferences(PreferencesHelper):
 
     # Should the user be prompted before exiting the workbench?
     prompt_on_exit = Bool(True)
+
 
 #### EOF ######################################################################

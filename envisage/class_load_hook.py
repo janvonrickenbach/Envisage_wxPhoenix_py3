@@ -1,6 +1,5 @@
 """ A hook to allow code be executed when a class is loaded. """
 
-
 # Standard library imports.
 import sys
 
@@ -82,7 +81,7 @@ class ClassLoadHook(HasTraits):
             components = class_path.split('.')
 
             module_name = '.'.join(components[:-1])
-            class_name  = components[-1]
+            class_name = components[-1]
 
             # The class is loaded if its module has been imported and the class
             # is defined in the module dictionary.
@@ -97,5 +96,6 @@ class ClassLoadHook(HasTraits):
             klass = None
 
         return klass
+
 
 #### EOF ######################################################################

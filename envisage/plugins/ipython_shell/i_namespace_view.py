@@ -3,6 +3,7 @@
 # Enthought library imports.
 from traits.api import Interface
 
+
 class INamespaceView(Interface):
     """ Interface definition for the Namespace view """
 
@@ -10,5 +11,6 @@ class INamespaceView(Interface):
         """ Handler to track the changes in the namespace viewed.
 
         """
+
 
 #### EOF ######################################################################

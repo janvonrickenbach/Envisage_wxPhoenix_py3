@@ -1,6 +1,5 @@
 """ The Acme Lab application. """
 
-
 # Standard library imports.
 from logging import DEBUG
 
@@ -35,9 +34,8 @@ class Acmelab(WorkbenchApplication):
         """ Trait initializer. """
 
         about_dialog = AboutDialog(
-            parent = self.workbench.active_window.control,
-            image  = ImageResource('about')
-        )
+            parent=self.workbench.active_window.control,
+            image=ImageResource('about'))
 
         return about_dialog
 
@@ -45,13 +43,11 @@ class Acmelab(WorkbenchApplication):
         """ Trait initializer. """
 
         splash_screen = SplashScreen(
-            image             = ImageResource('splash'),
-            show_log_messages = True,
-            log_level         = DEBUG
-        )
+            image=ImageResource('splash'),
+            show_log_messages=True,
+            log_level=DEBUG)
 
         return splash_screen
 
+
 #### EOF ######################################################################
-
-

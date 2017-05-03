@@ -1,6 +1,5 @@
 """ A view showing a summary of the running application. """
 
-
 # Standard library imports.
 import inspect
 
@@ -19,28 +18,22 @@ from envisage.plugins.text_editor.editor.text_editor import TextEditor
 from .extension_registry_browser_tree import \
      extension_registry_browser_tree_nodes
 
-
 extension_registry_browser_view = View(
     Item(
-        name       = 'extension_registry',
-        show_label = False,
-        editor     = TreeEditor(
-            nodes       = extension_registry_browser_tree_nodes,
-            editable    = False,
-            orientation = 'vertical',
-            hide_root   = True,
-            show_icons  = True,
-            on_dclick   = 'object.dclick'
-        )
-    ),
-
-    resizable = True,
-    style     = 'custom',
-    title     = 'Extension Registry',
-
-    width     = .1,
-    height    = .1
-)
+        name='extension_registry',
+        show_label=False,
+        editor=TreeEditor(
+            nodes=extension_registry_browser_tree_nodes,
+            editable=False,
+            orientation='vertical',
+            hide_root=True,
+            show_icons=True,
+            on_dclick='object.dclick')),
+    resizable=True,
+    style='custom',
+    title='Extension Registry',
+    width=.1,
+    height=.1)
 
 
 class ExtensionRegistryBrowser(HasTraits):
@@ -115,14 +108,13 @@ class ExtensionRegistryBrowser(HasTraits):
 
         # Edit the plugin.
         editor = self.workbench.edit(
-            self._get_file_object(plugin), kind=TextEditor
-        )
+            self._get_file_object(plugin), kind=TextEditor)
 
         # Was the extension point offered declaratively via a trait?
         trait_name = self._get_extension_point_trait(plugin, obj.id)
         if trait_name is not None:
             attribute = klass.attributes.get(trait_name)
-            lineno    = attribute.lineno
+            lineno = attribute.lineno
 
         else:
             lineno = klass.lineno
@@ -135,7 +127,7 @@ class ExtensionRegistryBrowser(HasTraits):
         """ Called when an extension is double-clicked. """
 
         extension_point = obj.parent.value
-        index           = obj.parent._index
+        index = obj.parent._index
 
         extension_registry = self.extension_registry
         extensions = extension_registry.extension_registry._extensions
@@ -148,8 +140,8 @@ class ExtensionRegistryBrowser(HasTraits):
                 break
             provider_index += 1
 
-
-        plugin = extension_registry.extension_registry._providers[provider_index]
+        plugin = extension_registry.extension_registry._providers[
+            provider_index]
 
         # Parse the plugin source code.
         module = self._parse_plugin(plugin)
@@ -159,8 +151,7 @@ class ExtensionRegistryBrowser(HasTraits):
 
         # Edit the plugin.
         editor = self.workbench.edit(
-            self._get_file_object(plugin), kind=TextEditor
-        )
+            self._get_file_object(plugin), kind=TextEditor)
 
         # Was the extension offered declaratively?
         trait_name = self._get_extension_trait(plugin, extension_point.id)
@@ -169,11 +160,11 @@ class ExtensionRegistryBrowser(HasTraits):
             # Does the trait have a default initializer?
             initializer = klass.methods.get('_%s_default' % trait_name)
             if initializer is not None:
-                lineno    = initializer.lineno
+                lineno = initializer.lineno
 
             else:
                 attribute = klass.attributes.get(trait_name)
-                lineno    = attribute.lineno
+                lineno = attribute.lineno
 
         else:
             lineno = klass.lineno
@@ -257,5 +248,6 @@ class ExtensionRegistryBrowser(HasTraits):
         filename = self._get_file_object(plugin).path
 
         return self.code_browser.read_file(filename)
+
 
 #### EOF ######################################################################

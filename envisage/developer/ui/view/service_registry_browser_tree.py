@@ -1,6 +1,5 @@
 """ The nodes used in the service registry browser tree. """
 
-
 # Enthought library imports.
 from envisage.api import IExtensionPoint, IServiceRegistry
 from traits.api import Any, Dict, HasTraits, Instance, Int, List
@@ -10,7 +9,6 @@ from traitsui.api import TreeNode
 # fixme: non-api imports.
 from traitsui.value_tree import SingleValueTreeNodeObject
 from traitsui.value_tree import value_tree_nodes
-
 
 
 class ServiceModel(HasTraits):
@@ -69,10 +67,7 @@ class ServiceRegistryModel(HasTraits):
                 protocols[protocol_name] = protocol
 
             service_model = ServiceModel(
-                id         = service_id,
-                obj        = obj,
-                properties = properties
-            )
+                id=service_id, obj=obj, properties=properties)
 
             protocol.services.append(service_model)
 
@@ -99,7 +94,7 @@ class ProtocolModelTreeNode(TreeNode):
         nodes = []
         for service in obj.services:
             node = svtno.node_for(repr(service.obj), service.obj)
-            node._protocol_   = obj.name
+            node._protocol_ = obj.name
             node._service_id_ = service.id
             nodes.append(node)
 
@@ -108,27 +103,24 @@ class ProtocolModelTreeNode(TreeNode):
 
 service_registry_browser_tree_nodes = [
     TreeNode(
-        node_for  = [ServiceRegistryModel],
-        auto_open = True,
-        label     = '=Services',
-        children  = 'protocols',
-        rename    = False,
-        copy      = False,
-        delete    = False,
-        insert    = False,
-        menu      = None,
-    ),
-
+        node_for=[ServiceRegistryModel],
+        auto_open=True,
+        label='=Services',
+        children='protocols',
+        rename=False,
+        copy=False,
+        delete=False,
+        insert=False,
+        menu=None, ),
     ProtocolModelTreeNode(
-        node_for  = [ProtocolModel],
-        auto_open = True,
-        label     = 'name',
-        rename    = False,
-        copy      = False,
-        delete    = False,
-        insert    = False,
-        menu      = None,
-    ),
+        node_for=[ProtocolModel],
+        auto_open=True,
+        label='name',
+        rename=False,
+        copy=False,
+        delete=False,
+        insert=False,
+        menu=None, ),
 ] + value_tree_nodes
 
 #### EOF ######################################################################

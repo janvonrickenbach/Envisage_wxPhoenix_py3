@@ -1,6 +1,5 @@
 """ A plugin that offers the 'refresh code' functionality. """
 
-
 # Enthought library imports.
 from envisage.api import Plugin
 from traits.api import List
@@ -24,9 +23,9 @@ class RefreshCodePlugin(Plugin):
         """ Trait initializer. """
 
         from envisage.plugins.refresh_code.refresh_code_action_set import (
-            RefreshCodeActionSet
-        )
+            RefreshCodeActionSet)
 
         return [RefreshCodeActionSet]
+
 
 #### EOF ######################################################################

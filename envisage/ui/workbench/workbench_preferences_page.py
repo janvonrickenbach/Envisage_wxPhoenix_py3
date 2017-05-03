@@ -1,6 +1,5 @@
 """ The main preferences page for the workbench. """
 
-
 # Enthought library imports.
 from apptools.preferences.ui.api import PreferencesPage
 from traits.api import Bool
@@ -34,5 +33,6 @@ class WorkbenchPreferencesPage(PreferencesPage):
     #### Traits UI views ######################################################
 
     trait_view = View('prompt_on_exit')
+
 
 #### EOF ######################################################################

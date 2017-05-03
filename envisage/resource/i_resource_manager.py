@@ -1,6 +1,5 @@
 """ The resource manager interface. """
 
-
 # Enthought library imports.
 from traits.api import Instance, Interface
 
@@ -24,5 +23,6 @@ class IResourceManager(Interface):
           manager.file('pkgfile://acme.ui.workbench/preferences.ini')
 
         """
+
 
 #### EOF ######################################################################

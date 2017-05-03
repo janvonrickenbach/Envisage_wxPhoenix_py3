@@ -315,7 +315,8 @@ class Server(HasTraits):
                 if error_msg:
                     self._send_to(port, '__error__', '1' + error_msg)
                 else:
-                    self._queue[object_info.other_type] = [(command, arguments)]
+                    self._queue[object_info.other_type] = [(command, arguments)
+                                                           ]
                     self._match(port)
 
     def _send_to(self, port, command, arguments):

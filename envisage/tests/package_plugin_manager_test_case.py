@@ -1,6 +1,5 @@
 """ Tests for the 'Package' plugin manager. """
 
-
 from os.path import dirname, join
 
 from envisage.package_plugin_manager import PackagePluginManager
@@ -30,7 +29,7 @@ class PackagePluginManagerTestCase(unittest.TestCase):
     def test_find_plugins_in_packages_on_the_plugin_path(self):
 
         plugin_manager = PackagePluginManager(plugin_path=[self.plugins_dir])
-        ids            = [plugin.id for plugin in plugin_manager]
+        ids = [plugin.id for plugin in plugin_manager]
 
         self.assertEqual(len(ids), 3)
         self.assertIn('banana', ids)
@@ -46,9 +45,7 @@ class PackagePluginManagerTestCase(unittest.TestCase):
         include = ['orange', 'pear']
 
         plugin_manager = PackagePluginManager(
-            plugin_path = [self.plugins_dir],
-            include     = include
-        )
+            plugin_path=[self.plugins_dir], include=include)
 
         # The Ids of the plugins that we expect the plugin manager to find.
         expected = ['orange', 'pear']
@@ -66,9 +63,7 @@ class PackagePluginManagerTestCase(unittest.TestCase):
         include = ['*r*']
 
         plugin_manager = PackagePluginManager(
-            plugin_path = [self.plugins_dir],
-            include     = include
-        )
+            plugin_path=[self.plugins_dir], include=include)
 
         # The Ids of the plugins that we expect the plugin manager to find.
         expected = ['orange', 'pear']
@@ -86,9 +81,7 @@ class PackagePluginManagerTestCase(unittest.TestCase):
         exclude = ['orange', 'pear']
 
         plugin_manager = PackagePluginManager(
-            plugin_path = [self.plugins_dir],
-            exclude     = exclude
-        )
+            plugin_path=[self.plugins_dir], exclude=exclude)
 
         # The Ids of the plugins that we expect the plugin manager to find.
         expected = ['banana']
@@ -106,9 +99,7 @@ class PackagePluginManagerTestCase(unittest.TestCase):
         exclude = ['*r*']
 
         plugin_manager = PackagePluginManager(
-            plugin_path = [self.plugins_dir],
-            exclude     = exclude
-        )
+            plugin_path=[self.plugins_dir], exclude=exclude)
 
         # The Ids of the plugins that we expect the plugin manager to find.
         expected = ['banana']
@@ -147,8 +138,7 @@ class PackagePluginManagerTestCase(unittest.TestCase):
         # Make sure the plugin manager found only the required plugins.
         self.assertEqual(
             list(sorted(expected)),
-            list(sorted(plugin.id for plugin in plugin_manager))
-        )
+            list(sorted(plugin.id for plugin in plugin_manager)))
 
         # Start the plugin manager. This starts all of the plugin manager's
         # plugins.

@@ -1,6 +1,5 @@
 """ A test action set. """
 
-
 # Enthought library imports.
 from envisage.ui.action.api import Action, Group, Menu, ToolBar
 from envisage.ui.workbench.api import WorkbenchActionSet
@@ -16,66 +15,47 @@ class TestActionSet(WorkbenchActionSet):
 
     menus = [
         Menu(
-            name='&Test', path='MenuBar', before='Help',
-            groups=['XGroup', 'YGroup']
-        ),
-
+            name='&Test',
+            path='MenuBar',
+            before='Help',
+            groups=['XGroup', 'YGroup']),
         Menu(
-            name='Foo', path='MenuBar/Test',
-            groups=['XGroup', 'YGroup']
-        ),
-
+            name='Foo', path='MenuBar/Test', groups=['XGroup', 'YGroup']),
         Menu(
-            name='Bar', path='MenuBar/Test',
-            groups=['XGroup', 'YGroup']
-        ),
+            name='Bar', path='MenuBar/Test', groups=['XGroup', 'YGroup']),
     ]
 
-    groups = [
-        Group(id='Fred', path='MenuBar/Test')
-    ]
+    groups = [Group(id='Fred', path='MenuBar/Test')]
 
     tool_bars = [
-        ToolBar(name='Fred', groups=['AToolBarGroup']),
-        ToolBar(name='Wilma'),
+        ToolBar(
+            name='Fred', groups=['AToolBarGroup']), ToolBar(name='Wilma'),
         ToolBar(name='Barney')
     ]
 
     actions = [
         Action(
-            path='MenuBar/Test', group='Fred',
-            class_name='envisage.ui.workbench.action.api:AboutAction'
-        ),
-
+            path='MenuBar/Test',
+            group='Fred',
+            class_name='envisage.ui.workbench.action.api:AboutAction'),
         Action(
-            path='MenuBar/Test', group='Fred',
-            class_name='acme.workbench.action.new_view_action:NewViewAction'
-        ),
-
+            path='MenuBar/Test',
+            group='Fred',
+            class_name='acme.workbench.action.new_view_action:NewViewAction'),
         Action(
             path='ToolBar',
-            class_name='envisage.ui.workbench.action.api:AboutAction'
-        ),
-
+            class_name='envisage.ui.workbench.action.api:AboutAction'), Action(
+                path='ToolBar',
+                class_name='envisage.ui.workbench.action.api:ExitAction'),
         Action(
-            path='ToolBar',
-            class_name='envisage.ui.workbench.action.api:ExitAction'
-        ),
-
-        Action(
-            path='ToolBar/Fred', group='AToolBarGroup',
-            class_name='envisage.ui.workbench.action.api:AboutAction'
-        ),
-
-        Action(
-            path='ToolBar/Wilma',
-            class_name='envisage.ui.workbench.action.api:AboutAction'
-        ),
-
+            path='ToolBar/Fred',
+            group='AToolBarGroup',
+            class_name='envisage.ui.workbench.action.api:AboutAction'), Action(
+                path='ToolBar/Wilma',
+                class_name='envisage.ui.workbench.action.api:AboutAction'),
         Action(
             path='ToolBar/Barney',
-            class_name='envisage.ui.workbench.action.api:ExitAction'
-        )
+            class_name='envisage.ui.workbench.action.api:ExitAction')
     ]
 
     #### 'WorkbenchActionSet' interface #######################################
@@ -91,5 +71,6 @@ class TestActionSet(WorkbenchActionSet):
 
     # The Ids of the views that the action set is visible for.
     #visible_for_views = ['Red']
+
 
 #### EOF ######################################################################

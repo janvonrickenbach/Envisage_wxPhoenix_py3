@@ -1,6 +1,5 @@
 """ A view containing an interactive Python shell. """
 
-
 # Standard library imports.
 import logging, sys
 
@@ -16,7 +15,7 @@ from traits.api import Any, Event, Instance, Property, DictStrAny, provides
 logger = logging.getLogger(__name__)
 
 
-class PseudoFile ( object ):
+class PseudoFile(object):
     """ Simulates a normal File object.
     """
 
@@ -102,8 +101,7 @@ class PythonShellView(View):
 
         # Write application standard out to this shell instead of to DOS window
         self.on_trait_change(
-            self._on_write_stdout, 'stdout_text', dispatch='ui'
-        )
+            self._on_write_stdout, 'stdout_text', dispatch='ui')
         self.original_stdout = sys.stdout
         sys.stdout = PseudoFile(self._write_stdout)
 
@@ -138,9 +136,7 @@ class PythonShellView(View):
         self.window.application.unregister_service(self._service_id)
 
         # Remove the sys.stdout handlers.
-        self.on_trait_change(
-            self._on_write_stdout, 'stdout_text', remove=True
-        )
+        self.on_trait_change(self._on_write_stdout, 'stdout_text', remove=True)
 
         # Restore the original stdout.
         sys.stdout = self.original_stdout
@@ -227,12 +223,12 @@ class PythonShellView(View):
         if event.alt_down and event.key_code == 317:
             zoom = self.shell.control.GetZoom()
             if zoom != 20:
-                self.shell.control.SetZoom(zoom+1)
+                self.shell.control.SetZoom(zoom + 1)
 
         elif event.alt_down and event.key_code == 319:
             zoom = self.shell.control.GetZoom()
             if zoom != -10:
-                self.shell.control.SetZoom(zoom-1)
+                self.shell.control.SetZoom(zoom - 1)
 
         return
 
@@ -242,5 +238,6 @@ class PythonShellView(View):
         self.shell.control.write(text)
 
         return
+
 
 #### EOF ######################################################################

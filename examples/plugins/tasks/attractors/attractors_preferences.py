@@ -39,15 +39,19 @@ class AttractorsPreferencesPane(PreferencesPane):
     task_map = Dict(Str, Unicode)
 
     view = View(
-        VGroup(HGroup(Item('always_use_default_layout'),
-                      Label('Always use the default active task on startup'),
-                      show_labels = False),
-               HGroup(Label('Default active task:'),
-                      Item('default_task',
-                           editor=EnumEditor(name='handler.task_map')),
-                      enabled_when = 'always_use_default_layout',
-                      show_labels = False),
-               label='Application startup'),
+        VGroup(
+            HGroup(
+                Item('always_use_default_layout'),
+                Label('Always use the default active task on startup'),
+                show_labels=False),
+            HGroup(
+                Label('Default active task:'),
+                Item(
+                    'default_task',
+                    editor=EnumEditor(name='handler.task_map')),
+                enabled_when='always_use_default_layout',
+                show_labels=False),
+            label='Application startup'),
         resizable=True)
 
     ###########################################################################

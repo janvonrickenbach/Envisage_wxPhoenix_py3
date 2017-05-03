@@ -4,7 +4,6 @@
 #  All rights reserved.
 #
 #-----------------------------------------------------------------------------
-
 """
 The env application's extension of the single project plugin.
 
@@ -24,6 +23,7 @@ PKG = '.'.join(__name__.split('.')[:-1])
 
 # Globally unique identifier.
 ID = 'plugins.single_project'
+
 
 ###############################################################################
 # `EnvProjectPlugin` class.
@@ -45,9 +45,8 @@ class EnvProjectPlugin(Plugin):
     def _factory_definitions_default(self):
         """ Trait initializer. """
         factory_definition = FactoryDefinition(
-            class_name = '%s.env_project_factory.EnvProjectFactory' % ID,
-            priority = 10,
-        )
+            class_name='%s.env_project_factory.EnvProjectFactory' % ID,
+            priority=10, )
         return [factory_definition]
 
     # TODO: Add contributions project action set.

@@ -1,6 +1,5 @@
 """ A plugin manager that finds plugins in eggs on the 'plugin_path'. """
 
-
 import logging, pkg_resources, sys
 import traceback
 
@@ -8,7 +7,6 @@ from traits.api import Callable, Directory, List, on_trait_change
 
 from .egg_utils import add_eggs_on_path, get_entry_points_in_egg_order
 from .plugin_manager import PluginManager
-
 
 logger = logging.getLogger(__name__)
 
@@ -43,6 +41,7 @@ class EggBasketPluginManager(PluginManager):
     def _on_broken_plugin_default(self):
         def handle_broken_plugin(entry_point, exc):
             raise exc
+
         return handle_broken_plugin
 
     # If a distribution cannot be loaded for any reason
@@ -74,16 +73,14 @@ class EggBasketPluginManager(PluginManager):
     def _create_plugin_from_entry_point(self, ep, application):
         """ Create a plugin from an entry point. """
 
-        klass  = ep.load()
+        klass = ep.load()
         plugin = klass(application=application)
 
         # Warn if the entry point is an old-style one where the LHS didn't have
         # to be the same as the plugin Id.
         if ep.name != plugin.id:
-            logger.warn(
-                'entry point name <%s> should be the same as the '
-                'plugin id <%s>' % (ep.name, plugin.id)
-            )
+            logger.warn('entry point name <%s> should be the same as the '
+                        'plugin id <%s>' % (ep.name, plugin.id))
 
         return plugin
 
@@ -91,8 +88,7 @@ class EggBasketPluginManager(PluginManager):
         """ Return all plugin entry points in the working set. """
 
         entry_points = get_entry_points_in_egg_order(
-            working_set, self.ENVISAGE_PLUGINS_ENTRY_POINT
-        )
+            working_set, self.ENVISAGE_PLUGINS_ENTRY_POINT)
 
         return entry_points
 
@@ -145,5 +141,6 @@ class EggBasketPluginManager(PluginManager):
         for dirname in added:
             if dirname not in sys.path:
                 sys.path.append(dirname)
+
 
 #### EOF ######################################################################

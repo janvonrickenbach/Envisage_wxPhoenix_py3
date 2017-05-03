@@ -67,8 +67,8 @@ class InternalIPKernel(HasStrictTraits):
 
     def new_qt_console(self):
         """ Start a new qtconsole connected to our kernel. """
-        console = connect_qtconsole(self.ipkernel.connection_file,
-                                    argv=['--no-confirm-exit'])
+        console = connect_qtconsole(
+            self.ipkernel.connection_file, argv=['--no-confirm-exit'])
         self.consoles.append(console)
         return console
 

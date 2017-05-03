@@ -1,6 +1,5 @@
 """ The application interface. """
 
-
 # Enthought library imports.
 from apptools.preferences.api import IPreferences
 from traits.api import Event, Instance, Str, VetoableEvent
@@ -13,9 +12,8 @@ from .i_service_registry import IServiceRegistry
 from .application_event import ApplicationEvent
 
 
-class IApplication(
-        IExtensionRegistry, IImportManager, IPluginManager, IServiceRegistry
-    ):
+class IApplication(IExtensionRegistry, IImportManager, IPluginManager,
+                   IServiceRegistry):
     """ The application interface. """
 
     # The application's globally unique identifier.
@@ -59,5 +57,6 @@ class IApplication(
               application.stop()
 
         """
+
 
 #### EOF ######################################################################

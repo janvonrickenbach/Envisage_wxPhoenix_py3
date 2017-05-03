@@ -104,7 +104,6 @@ class Plugin(ExtensionProvider):
 
         extension_points = [
             trait.trait_type
-
             for trait in self.traits(__extension_point__=True).values()
         ]
 
@@ -252,8 +251,7 @@ class Plugin(ExtensionProvider):
                 'Services should now be offered using the service '
                 'offer extension point (envisage.service_offers) '
                 'from the core plugin. '
-                'Plugin %s trait <%s>' % (self, trait_name)
-            )
+                'Plugin %s trait <%s>' % (self, trait_name))
 
             # Register a service factory for the trait.
             service_id = self._register_service_factory(trait_name, trait)
@@ -292,25 +290,24 @@ class Plugin(ExtensionProvider):
         # Ignore the '_items' part of the trait name (if it is there!), and get
         # the actual trait.
         base_trait_name = trait_name.split('_items')[0]
-        trait           = self.trait(base_trait_name)
+        trait = self.trait(base_trait_name)
 
         # If the trait is one that contributes to an extension point then fire
         # an appropriate 'extension point changed' event.
         if trait.contributes_to is not None:
             if trait_name.endswith('_items'):
-                added   = new.added
+                added = new.added
                 removed = new.removed
-                index   = new.index
+                index = new.index
 
             else:
-                added   = new
+                added = new
                 removed = old
-                index   = slice(0, max(len(old), len(new)))
+                index = slice(0, max(len(old), len(new)))
 
             # Let the extension registry know about the change.
-            self._fire_extension_point_changed(
-                trait.contributes_to, added, removed, index
-            )
+            self._fire_extension_point_changed(trait.contributes_to, added,
+                                               removed, index)
 
         return
 
@@ -321,9 +318,7 @@ class Plugin(ExtensionProvider):
 
         exception = ValueError(
             'multiple traits for extension point <%s> in plugin <%s>' % (
-                extension_point_id, self.id
-            )
-        )
+                extension_point_id, self.id))
 
         return exception
 
@@ -334,9 +329,8 @@ class Plugin(ExtensionProvider):
             extensions = getattr(self, trait_name)
 
         except:
-            logger.exception(
-                'getting extensions from %s, trait <%s>' % (self, trait_name)
-            )
+            logger.exception('getting extensions from %s, trait <%s>' %
+                             (self, trait_name))
             raise
 
         return extensions
@@ -413,5 +407,6 @@ class Plugin(ExtensionProvider):
             return getattr(self, trait_name)
 
         return self.application.register_service(protocol, factory)
+
 
 #### EOF ######################################################################

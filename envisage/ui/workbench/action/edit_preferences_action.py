@@ -1,6 +1,5 @@
 """ An action that displays the preferences dialog. """
 
-
 # Enthought library imports.
 from pyface.api import ImageResource
 from pyface.action.api import Action
@@ -42,5 +41,6 @@ class EditPreferencesAction(Action):
             self.window.application.preferences.save()
 
         return
+
 
 #### EOF ######################################################################

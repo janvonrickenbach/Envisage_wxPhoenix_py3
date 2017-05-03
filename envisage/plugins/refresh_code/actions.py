@@ -1,6 +1,5 @@
 """ Actions for the refresh code plugin. """
 
-
 # Enthought library imports.
 from pyface.action.api import Action
 
@@ -10,7 +9,7 @@ class RefreshCode(Action):
 
     #### 'Action' interface ###################################################
 
-    name        = 'Refresh Code'
+    name = 'Refresh Code'
     description = 'Refresh application to reflect python code changes'
     accelerator = 'Ctrl+Shift+R'
 
@@ -22,5 +21,6 @@ class RefreshCode(Action):
         refresh()
 
         return
+
 
 #### EOF ######################################################################

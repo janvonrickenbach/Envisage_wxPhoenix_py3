@@ -1,6 +1,5 @@
 """ Tests for extension point bindings. """
 
-
 # Enthought library imports.
 from envisage.api import ExtensionPoint
 from envisage.api import bind_extension_point
@@ -12,8 +11,7 @@ from traits.testing.unittest_tools import unittest
 # We do these as absolute imports to allow nose to run from a different
 # working directory.
 from envisage.tests.mutable_extension_registry import (
-    MutableExtensionRegistry
-)
+    MutableExtensionRegistry)
 
 
 def listener(obj, trait_name, old, new):
@@ -213,7 +211,8 @@ class ExtensionPointBindingTestCase(unittest.TestCase):
 
         # Add 2 extension points.
         registry.add_extension_point(self._create_extension_point('my.ep'))
-        registry.add_extension_point(self._create_extension_point('another.ep'))
+        registry.add_extension_point(
+            self._create_extension_point('another.ep'))
 
         # Declare a class that consumes both of the extension points.
         class Foo(HasTraits):

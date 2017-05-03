@@ -4,12 +4,10 @@
 #  All rights reserved.
 #
 #-----------------------------------------------------------------------------
-
 """
 A base class for actions that use the data plugin's services.
 
 """
-
 
 # Standard library imports.
 import logging
@@ -23,7 +21,6 @@ from data.data import Data
 
 # Application imports.
 from data.plugin.services import IDATA_MODEL, IDATA_UI
-
 
 # Create a logger for this module.
 logger = logging.getLogger(__name__)
@@ -46,7 +43,6 @@ class DataPluginAction(ProjectAction):
 
     # A reference to the data plugin's UI service.
     data_ui_service = UOL
-
 
     ##########################################################################
     # 'object' interface
@@ -71,7 +67,6 @@ class DataPluginAction(ProjectAction):
             self.data_ui_service = 'service://%s' % IDATA_UI
 
         return
-
 
     ##########################################################################
     # 'DataPluginAction' interface.
@@ -102,14 +97,14 @@ class DataPluginAction(ProjectAction):
         # If we have not identified a data, and we're supposed to show an error,
         # then do so now.
         if data is None and show_error:
-            self._display_error('Unable to identify a Data to perform this '
+            self._display_error(
+                'Unable to identify a Data to perform this '
                 'action with.   Please select a target Data within the project '
                 'tree and try again.')
 
         logger.debug('Target data: %s', data)
 
         return data
-
 
     def _get_target_data_from_node(self, node):
         """
@@ -138,7 +133,6 @@ class DataPluginAction(ProjectAction):
                 context = None
 
         return data
-
 
     def _get_target_data_from_project_selection(self):
         """
@@ -171,5 +165,6 @@ class DataPluginAction(ProjectAction):
             logger.error('Could not retrieve the name of the selected data')
 
         return None
-#### EOF #####################################################################
 
+
+#### EOF #####################################################################

@@ -1,6 +1,5 @@
 """ A simple interface for the Python shell. """
 
-
 # Enthought library imports.
 from traits.api import Interface
 
@@ -27,5 +26,6 @@ class IPythonShell(Interface):
         """ Returns the value bound to a name in the interpreter's namespace.
 
         """
+
 
 #### EOF ######################################################################

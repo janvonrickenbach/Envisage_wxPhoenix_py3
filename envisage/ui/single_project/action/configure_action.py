@@ -7,6 +7,7 @@ from envisage.ui.single_project.project_action import ProjectAction
 # class 'ConfigureAction'
 ##############################################################################
 
+
 class ConfigureAction(ProjectAction):
     """ An action that configures an item in the project tree.
 
@@ -26,9 +27,9 @@ class ConfigureAction(ProjectAction):
         # viscosity model assigned to the trait is NOT the same as the
         # viscosity model in the material's '_dirty_objects' collection!
         ui = event.node.obj.edit_traits(
-            parent=event.window.control, kind='livemodal'
-        )
+            parent=event.window.control, kind='livemodal')
 
         return
+
 
 #### EOF ######################################################################

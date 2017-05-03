@@ -1,6 +1,5 @@
 """ Tests for the plugin manager. """
 
-
 # Enthought library imports.
 from envisage.api import Plugin, PluginManager
 from traits.api import Bool
@@ -46,12 +45,12 @@ class BadPlugin(Plugin):
     def start(self):
         """ Start the plugin. """
 
-        raise 1/0
+        raise 1 / 0
 
     def stop(self):
         """ Stop the plugin. """
 
-        raise 1/0
+        raise 1 / 0
 
 
 class PluginManagerTestCase(unittest.TestCase):
@@ -78,7 +77,7 @@ class PluginManagerTestCase(unittest.TestCase):
     def test_get_plugin(self):
         """ get plugin """
 
-        simple_plugin  = SimplePlugin()
+        simple_plugin = SimplePlugin()
         plugin_manager = PluginManager(plugins=[simple_plugin])
 
         # Get the plugin.
@@ -94,7 +93,7 @@ class PluginManagerTestCase(unittest.TestCase):
         """ iteration over plugins """
 
         simple_plugin = SimplePlugin()
-        bad_plugin    = BadPlugin()
+        bad_plugin = BadPlugin()
 
         plugin_manager = PluginManager(plugins=[simple_plugin, bad_plugin])
 
@@ -110,7 +109,7 @@ class PluginManagerTestCase(unittest.TestCase):
     def test_start_and_stop(self):
         """ start and stop """
 
-        simple_plugin  = SimplePlugin()
+        simple_plugin = SimplePlugin()
         plugin_manager = PluginManager(plugins=[simple_plugin])
 
         # Start the plugin manager. This starts all of the plugin manager's
@@ -132,8 +131,8 @@ class PluginManagerTestCase(unittest.TestCase):
     def test_start_and_stop_errors(self):
         """ start and stop errors """
 
-        simple_plugin  = SimplePlugin()
-        bad_plugin     = BadPlugin()
+        simple_plugin = SimplePlugin()
+        bad_plugin = BadPlugin()
         plugin_manager = PluginManager(plugins=[simple_plugin, bad_plugin])
 
         # Start the plugin manager. This starts all of the plugin manager's
@@ -146,13 +145,11 @@ class PluginManagerTestCase(unittest.TestCase):
 
         # Try to start a non-existent plugin.
         self.failUnlessRaises(
-            SystemError, plugin_manager.start_plugin, plugin_id='bogus'
-        )
+            SystemError, plugin_manager.start_plugin, plugin_id='bogus')
 
         # Try to stop a non-existent plugin.
         self.failUnlessRaises(
-            SystemError, plugin_manager.stop_plugin, plugin_id='bogus'
-        )
+            SystemError, plugin_manager.stop_plugin, plugin_id='bogus')
 
         return
 
@@ -163,13 +160,11 @@ class PluginManagerTestCase(unittest.TestCase):
         include = ['foo', 'bar']
 
         plugin_manager = PluginManager(
-            include = include,
-            plugins = [
-                SimplePlugin(id='foo'),
-                SimplePlugin(id='bar'),
+            include=include,
+            plugins=[
+                SimplePlugin(id='foo'), SimplePlugin(id='bar'),
                 SimplePlugin(id='baz')
-            ]
-        )
+            ])
 
         # The Ids of the plugins that we expect the plugin manager to find.
         expected = ['foo', 'bar']
@@ -180,20 +175,19 @@ class PluginManagerTestCase(unittest.TestCase):
 
         return
 
-    def test_only_include_plugins_matching_a_wildcard_in_the_include_list(self):
+    def test_only_include_plugins_matching_a_wildcard_in_the_include_list(
+            self):
 
         # Note that the items in the list use the 'fnmatch' syntax for matching
         # plugins Ids.
         include = ['b*']
 
         plugin_manager = PluginManager(
-            include = include,
-            plugins = [
-                SimplePlugin(id='foo'),
-                SimplePlugin(id='bar'),
+            include=include,
+            plugins=[
+                SimplePlugin(id='foo'), SimplePlugin(id='bar'),
                 SimplePlugin(id='baz')
-            ]
-        )
+            ])
 
         # The Ids of the plugins that we expect the plugin manager to find.
         expected = ['bar', 'baz']
@@ -211,13 +205,11 @@ class PluginManagerTestCase(unittest.TestCase):
         exclude = ['foo', 'baz']
 
         plugin_manager = PluginManager(
-            exclude = exclude,
-            plugins = [
-                SimplePlugin(id='foo'),
-                SimplePlugin(id='bar'),
+            exclude=exclude,
+            plugins=[
+                SimplePlugin(id='foo'), SimplePlugin(id='bar'),
                 SimplePlugin(id='baz')
-            ]
-        )
+            ])
 
         # The Ids of the plugins that we expect the plugin manager to find.
         expected = ['bar']
@@ -235,13 +227,11 @@ class PluginManagerTestCase(unittest.TestCase):
         exclude = ['b*']
 
         plugin_manager = PluginManager(
-            exclude = exclude,
-            plugins = [
-                SimplePlugin(id='foo'),
-                SimplePlugin(id='bar'),
+            exclude=exclude,
+            plugins=[
+                SimplePlugin(id='foo'), SimplePlugin(id='bar'),
                 SimplePlugin(id='baz')
-            ]
-        )
+            ])
 
         # The Ids of the plugins that we expect the plugin manager to find.
         expected = ['foo']

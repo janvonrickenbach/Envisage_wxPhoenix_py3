@@ -40,8 +40,9 @@ def git_version():
         env['LANG'] = 'C'
         env['LC_ALL'] = 'C'
         out = subprocess.Popen(
-            cmd, stdout=subprocess.PIPE, env=env,
-        ).communicate()[0]
+            cmd,
+            stdout=subprocess.PIPE,
+            env=env, ).communicate()[0]
         return out
 
     try:
@@ -109,10 +110,12 @@ if not is_released:
         fullversion += '.dev{0}'.format(dev_num)
 
     with open(filename, "wt") as fp:
-        fp.write(template.format(version=VERSION,
-                                 full_version=fullversion,
-                                 git_revision=git_rev,
-                                 is_released=IS_RELEASED))
+        fp.write(
+            template.format(
+                version=VERSION,
+                full_version=fullversion,
+                git_revision=git_rev,
+                is_released=IS_RELEASED))
 
 
 if __name__ == "__main__":
@@ -120,15 +123,17 @@ if __name__ == "__main__":
     from envisage import __requires__, __version__
 
     setup(
-        name = 'envisage',
-        version = __version__,
-        author = "Martin Chilvers, et. al.",
-        author_email = "info@enthought.com",
-        maintainer = 'ETS Developers',
-        maintainer_email = 'enthought-dev@enthought.com',
-        url = 'http://docs.enthought.com/envisage',
-        download_url = 'https://github.com/enthought/envisage',
-        classifiers = [c.strip() for c in """\
+        name='envisage',
+        version=__version__,
+        author="Martin Chilvers, et. al.",
+        author_email="info@enthought.com",
+        maintainer='ETS Developers',
+        maintainer_email='enthought-dev@enthought.com',
+        url='http://docs.enthought.com/envisage',
+        download_url='https://github.com/enthought/envisage',
+        classifiers=[
+            c.strip()
+            for c in """\
             Development Status :: 5 - Production/Stable
             Intended Audience :: Developers
             Intended Audience :: Science/Research
@@ -142,23 +147,27 @@ if __name__ == "__main__":
             Topic :: Scientific/Engineering
             Topic :: Software Development
             Topic :: Software Development :: Libraries
-            """.splitlines() if len(c.strip()) > 0],
-        description = 'extensible application framework',
-        long_description = open('README.rst').read(),
-        entry_points = """
+            """.splitlines() if len(c.strip()) > 0
+        ],
+        description='extensible application framework',
+        long_description=open('README.rst').read(),
+        entry_points="""
             [envisage.plugins]
             envisage.core = envisage.core_plugin:CorePlugin
             """,
-        ext_modules = [],
-        install_requires = __requires__,
-        license = "BSD",
-        packages = find_packages(),
-        package_data = {'': ['images/*', '*.ini',],
-                        'envisage.tests': ['bad_eggs/*.egg',
-                                           'eggs/*.egg',
-                                           'plugins/pear/*.py',
-                                           'plugins/banana/*.py',
-                                           'plugins/orange/*.py']},
-        platforms = ["Windows", "Linux", "Mac OS-X", "Unix", "Solaris"],
-        zip_safe = False,
-    )
+        ext_modules=[],
+        install_requires=__requires__,
+        license="BSD",
+        packages=find_packages(),
+        package_data={
+            '': [
+                'images/*',
+                '*.ini',
+            ],
+            'envisage.tests': [
+                'bad_eggs/*.egg', 'eggs/*.egg', 'plugins/pear/*.py',
+                'plugins/banana/*.py', 'plugins/orange/*.py'
+            ]
+        },
+        platforms=["Windows", "Linux", "Mac OS-X", "Unix", "Solaris"],
+        zip_safe=False, )

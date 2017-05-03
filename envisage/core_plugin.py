@@ -1,6 +1,5 @@
 """ The Envisage core plugin. """
 
-
 # Enthought library imports.
 from envisage.api import ExtensionPoint, Plugin, ServiceOffer
 from traits.api import List, Instance, on_trait_change, Str
@@ -19,10 +18,10 @@ class CorePlugin(Plugin):
     """
 
     # Extension point Ids.
-    CATEGORIES       = 'envisage.categories'
+    CATEGORIES = 'envisage.categories'
     CLASS_LOAD_HOOKS = 'envisage.class_load_hooks'
-    PREFERENCES      = 'envisage.preferences'
-    SERVICE_OFFERS   = 'envisage.service_offers'
+    PREFERENCES = 'envisage.preferences'
+    SERVICE_OFFERS = 'envisage.service_offers'
 
     #### 'IPlugin' interface ##################################################
 
@@ -39,8 +38,8 @@ class CorePlugin(Plugin):
     # point.
     categories = ExtensionPoint(
         List(Instance('envisage.category.Category')),
-        id   = CATEGORIES,
-        desc = """
+        id=CATEGORIES,
+        desc="""
 
         Traits categories allow you to dynamically extend a Python class with
         extra attributes, methods and events.
@@ -58,8 +57,8 @@ class CorePlugin(Plugin):
                 target_class_name = 'foo.Foo'
             )
 
-        """
-    )
+        """)
+
     @on_trait_change('categories_items')
     def _categories_items_changed(self, event):
         """ React to new categories being *added*.
@@ -74,16 +73,16 @@ class CorePlugin(Plugin):
 
     class_load_hooks = ExtensionPoint(
         List(Instance('envisage.class_load_hook.ClassLoadHook')),
-        id   = CLASS_LOAD_HOOKS,
-        desc = """
+        id=CLASS_LOAD_HOOKS,
+        desc="""
 
         Class load hooks allow you to be notified when any 'HasTraits' class
         is imported or created.
 
         See the documentation for 'ClassLoadHook' for more details.
 
-        """
-    )
+        """)
+
     @on_trait_change('class_load_hooks_items')
     def _class_load_hooks_changed(self, event):
         """ React to new class load hooks being *added*.
@@ -99,8 +98,8 @@ class CorePlugin(Plugin):
 
     preferences = ExtensionPoint(
         List(Str),
-        id   = PREFERENCES,
-        desc = """
+        id=PREFERENCES,
+        desc="""
 
         Preferences files allow plugins to contribute default values for
         user preferences. Each contributed string must be the URL of a
@@ -127,8 +126,8 @@ class CorePlugin(Plugin):
 
         http://www.voidspace.org.uk/python/configobj.html
 
-        """
-    )
+        """)
+
     @on_trait_change('preferences_items')
     def _preferences_changed(self, event):
         """ React to new preferencess being *added*.
@@ -143,8 +142,8 @@ class CorePlugin(Plugin):
 
     service_offers = ExtensionPoint(
         List(ServiceOffer),
-        id   = SERVICE_OFFERS,
-        desc = """
+        id=SERVICE_OFFERS,
+        desc="""
 
         Services are simply objects that a plugin wants to make available to
         other plugins. This extension point allows you to offer services
@@ -160,8 +159,8 @@ class CorePlugin(Plugin):
 
         See the documentation for 'ServiceOffer' for more details.
 
-        """
-    )
+        """)
+
     @on_trait_change('service_offers_items')
     def _service_offers_changed(self, event):
         """ React to new service offers being *added*.
@@ -248,9 +247,8 @@ class CorePlugin(Plugin):
             return
 
         category_class_load_hook = ClassLoadHook(
-            class_name = category.target_class_name,
-            on_load    = import_and_add_category
-        )
+            class_name=category.target_class_name,
+            on_load=import_and_add_category)
 
         return category_class_load_hook
 
@@ -288,11 +286,11 @@ class CorePlugin(Plugin):
         """ Register a service offer. """
 
         service_id = self.application.register_service(
-            protocol   = service_offer.protocol,
-            obj        = service_offer.factory,
-            properties = service_offer.properties
-        )
+            protocol=service_offer.protocol,
+            obj=service_offer.factory,
+            properties=service_offer.properties)
 
         return service_id
+
 
 ### EOF ######################################################################

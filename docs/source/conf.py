@@ -71,7 +71,6 @@ today_fmt = '%B %d, %Y'
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
 
-
 # Options for HTML output
 # -----------------------
 
@@ -139,7 +138,6 @@ html_use_modindex = False
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'Envisagedoc'
 
-
 # Options for LaTeX output
 # ------------------------
 
@@ -151,9 +149,8 @@ htmlhelp_basename = 'Envisagedoc'
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, document class [howto/manual]).
-latex_documents = [
-  ('index', 'Envisage.tex', 'Envisage Documentation', 'Enthought, Inc.', 'manual'),
-]
+latex_documents = [('index', 'Envisage.tex', 'Envisage Documentation',
+                    'Enthought, Inc.', 'manual'), ]
 
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.

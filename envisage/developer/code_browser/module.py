@@ -1,6 +1,5 @@
 """ Classes used to represent modules. """
 
-
 # Standard library imports.
 import ast, os
 
@@ -98,11 +97,11 @@ class ModuleFactory(HasTraits):
 
         # Create a new module.
         module = Module(
-            namespace = namespace,
-            filename  = filename,
-            name      = self._get_module_name(filename),
-            doc       = ast.get_docstring(node, clean=False),
-        )
+            namespace=namespace,
+            filename=filename,
+            name=self._get_module_name(filename),
+            doc=ast.get_docstring(
+                node, clean=False), )
 
         # Walk the AST picking out the things we care about!
         ModuleVisitor(module).visit(node)
@@ -155,9 +154,9 @@ class ModuleVisitor(ast.NodeVisitor):
 
         # Factories used to create klasses, functions and assignments from
         # AST nodes.
-        self._klass_factory    = KlassFactory()
+        self._klass_factory = KlassFactory()
         self._function_factory = FunctionFactory()
-        self._assign_factory   = AssignFactory()
+        self._assign_factory = AssignFactory()
 
         return
 
@@ -222,5 +221,6 @@ class ModuleVisitor(ast.NodeVisitor):
             self.module.imports[alias.name] = ''
 
         return
+
 
 #### EOF ######################################################################

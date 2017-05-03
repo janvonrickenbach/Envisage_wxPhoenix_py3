@@ -1,6 +1,5 @@
 """ The traits UI handler for the text editor. """
 
-
 # Enthought library imports.
 from traitsui.api import Handler
 
@@ -28,5 +27,6 @@ class TextEditorHandler(Handler):
         info.object.save()
 
         return
+
 
 #### EOF ######################################################################

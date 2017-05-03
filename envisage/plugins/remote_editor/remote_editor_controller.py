@@ -24,5 +24,3 @@ class RemoteEditorController(Client):
 
     def open_file(self, filename):
         self.send_command('open', filename)
-
-

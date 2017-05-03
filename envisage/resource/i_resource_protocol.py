@@ -1,6 +1,5 @@
 """ The interface for protocols that handle resource URLs. """
 
-
 # Enthought library imports.
 from traits.api import Interface
 
@@ -18,5 +17,6 @@ class IResourceProtocol(Interface):
           protocol.file('acme.ui.workbench/preferences.ini')
 
         """
+
 
 #### EOF ######################################################################

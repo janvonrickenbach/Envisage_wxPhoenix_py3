@@ -1,9 +1,7 @@
 """ Example code used to test the code browser. """
 
-
 # Enthought library imports.
 from traits.api import HasTraits, Int
-
 
 
 class Base(HasTraits):
@@ -18,5 +16,6 @@ class Base(HasTraits):
 
     def bar(self):
         """ A method. """
+
 
 #### EOF ######################################################################

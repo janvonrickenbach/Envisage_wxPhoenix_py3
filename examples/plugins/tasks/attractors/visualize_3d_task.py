@@ -19,10 +19,13 @@ class Visualize3dTask(Task):
     id = 'example.attractors.task_3d'
     name = '3D Visualization'
 
-    menu_bar = SMenuBar(SMenu(id='File', name='&File'),
-                        SMenu(id='Edit', name='&Edit'),
-                        SMenu(TaskToggleGroup(),
-                              id='View', name='&View'))
+    menu_bar = SMenuBar(
+        SMenu(
+            id='File', name='&File'),
+        SMenu(
+            id='Edit', name='&Edit'),
+        SMenu(
+            TaskToggleGroup(), id='View', name='&View'))
 
     #### 'Visualize3dTask' interface ##########################################
 
@@ -48,8 +51,10 @@ class Visualize3dTask(Task):
         return pane
 
     def create_dock_panes(self):
-        return [ ModelConfigPane(model=self.active_model),
-                 ModelHelpPane(model=self.active_model) ]
+        return [
+            ModelConfigPane(model=self.active_model),
+            ModelHelpPane(model=self.active_model)
+        ]
 
     ###########################################################################
     # Protected interface.
@@ -58,14 +63,14 @@ class Visualize3dTask(Task):
     #### Trait initializers ###################################################
 
     def _default_layout_default(self):
-        return TaskLayout(
-            left=Tabbed(PaneItem('example.attractors.model_config_pane'),
-                        PaneItem('example.attractors.model_help_pane')))
+        return TaskLayout(left=Tabbed(
+            PaneItem('example.attractors.model_config_pane'),
+            PaneItem('example.attractors.model_help_pane')))
 
     def _models_default(self):
         from model.lorenz import Lorenz
         from model.rossler import Rossler
-        return [ Lorenz(), Rossler() ]
+        return [Lorenz(), Rossler()]
 
     #### Trait change handlers ################################################
 

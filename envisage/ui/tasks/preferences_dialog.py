@@ -16,11 +16,13 @@ class PreferencesTab(HasTraits):
     name = Unicode
     panes = List(PreferencesPane)
 
-    view = View(Item('panes',
-                     editor = ListEditor(style = 'custom'),
-                     show_label = False,
-                     style = 'readonly'),
-                resizable = True)
+    view = View(
+        Item(
+            'panes',
+            editor=ListEditor(style='custom'),
+            show_label=False,
+            style='readonly'),
+        resizable=True)
 
 
 class PreferencesDialog(Handler):
@@ -63,11 +65,11 @@ class PreferencesDialog(Handler):
     # 'HasTraits' interface.
     ###########################################################################
 
-    def trait_context ( self ):
+    def trait_context(self):
         """ Returns the default context to use for editing or configuring
             traits.
         """
-        return { 'object': self, 'handler': self }
+        return {'object': self, 'handler': self}
 
     def traits_view(self):
         """ Build the dynamic dialog view.
@@ -79,17 +81,20 @@ class PreferencesDialog(Handler):
         # Only show the tab bar if there is more than one category.
         tabs_style = 'custom' if len(self._tabs) > 1 else 'readonly'
 
-        return View(Item('_tabs',
-                         editor = ListEditor(page_name = '.name',
-                                             style ='custom',
-                                             use_notebook = True,
-                                             selected = '_selected'),
-                         show_label = False,
-                         style = tabs_style),
-                    buttons = buttons,
-                    kind = 'livemodal',
-                    resizable = True,
-                    title = 'Preferences')
+        return View(
+            Item(
+                '_tabs',
+                editor=ListEditor(
+                    page_name='.name',
+                    style='custom',
+                    use_notebook=True,
+                    selected='_selected'),
+                show_label=False,
+                style=tabs_style),
+            buttons=buttons,
+            kind='livemodal',
+            resizable=True,
+            title='Preferences')
 
     ###########################################################################
     # 'Handler' interface.
@@ -123,11 +128,11 @@ class PreferencesDialog(Handler):
                 category_map[pane.category].append(pane)
             else:
                 categories.append(PreferencesCategory(id=pane.category))
-                category_map[pane.category] = [ pane ]
+                category_map[pane.category] = [pane]
 
         # Construct the appropriately sorted list of preference tabs.
         tabs = []
         for category in before_after_sort(categories):
             panes = before_after_sort(category_map[category.id])
-            tabs.append(PreferencesTab(name = category.name, panes=panes))
+            tabs.append(PreferencesTab(name=category.name, panes=panes))
         self._tabs = tabs

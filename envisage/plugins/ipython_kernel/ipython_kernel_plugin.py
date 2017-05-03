@@ -4,13 +4,11 @@ import logging
 
 # Enthought library imports.
 from envisage.api import (bind_extension_point, ExtensionPoint, Plugin,
-    ServiceOffer)
+                          ServiceOffer)
 from traits.api import Instance, List
-
 
 IPYTHON_KERNEL_PROTOCOL = 'envisage.plugins.ipython_kernel.internal_ipkernel.InternalIPKernel'  # noqa
 IPYTHON_NAMESPACE = 'ipython_plugin.namespace'
-
 
 logger = logging.getLogger(__name__)
 
@@ -36,13 +34,14 @@ class IPythonKernelPlugin(Plugin):
     #### Extension points offered by this plugin ##############################
 
     kernel_namespace = ExtensionPoint(
-        List, id=IPYTHON_NAMESPACE, desc="""
+        List,
+        id=IPYTHON_NAMESPACE,
+        desc="""
 
         Variables to add to the IPython kernel namespace.
         This is a list of tuples (name, value).
 
-        """
-    )
+        """)
 
     #### Contributions to extension points made by this plugin ################
 
@@ -54,8 +53,7 @@ class IPythonKernelPlugin(Plugin):
 
         ipython_kernel_service_offer = ServiceOffer(
             protocol=IPYTHON_KERNEL_PROTOCOL,
-            factory=self._create_kernel,
-        )
+            factory=self._create_kernel, )
         return [ipython_kernel_service_offer]
 
     def _create_kernel(self):
@@ -66,6 +64,6 @@ class IPythonKernelPlugin(Plugin):
     def _kernel_default(self):
         from .internal_ipkernel import InternalIPKernel
         kernel = InternalIPKernel()
-        bind_extension_point(kernel, 'initial_namespace',
-                             IPYTHON_NAMESPACE, self.application)
+        bind_extension_point(kernel, 'initial_namespace', IPYTHON_NAMESPACE,
+                             self.application)
         return kernel

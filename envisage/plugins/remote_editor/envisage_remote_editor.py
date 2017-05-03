@@ -61,4 +61,3 @@ class EnvisageRemoteEditorController(RemoteEditorController):
             self.run_text(arguments)
             return True
         return False
-

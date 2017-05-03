@@ -1,6 +1,5 @@
 """ A plugin manager composed of other plugin managers! """
 
-
 # Standard library imports.
 import logging
 
@@ -14,7 +13,6 @@ from .i_plugin import IPlugin
 from .i_plugin_manager import IPluginManager
 from .plugin_event import PluginEvent
 from .plugin_manager import PluginManager
-
 
 # Logging.
 logger = logging.getLogger(__name__)
@@ -49,6 +47,7 @@ class CompositePluginManager(HasTraits):
 
     # The application that the plugin manager is part of.
     application = Instance(IApplication)
+
     def _application_changed(self, trait_name, old, new):
         for plugin_manager in self.plugin_managers:
             plugin_manager.application = new
@@ -62,6 +61,7 @@ class CompositePluginManager(HasTraits):
     # have an 'application' trait. Should we move 'application' up to
     # 'IPluginManager'?
     plugin_managers = List(PluginManager)
+
     @on_trait_change('plugin_managers[]')
     def _update_application(self, obj, trait_named, removed, added):
         for plugin_manager in removed:
@@ -82,6 +82,7 @@ class CompositePluginManager(HasTraits):
 
     # The plugins that the manager manages!
     _plugins = List(IPlugin)
+
     def __plugins_default(self):
         plugins = []
         for plugin_manager in self.plugin_managers:
@@ -173,5 +174,6 @@ class CompositePluginManager(HasTraits):
             raise SystemError('no such plugin %s' % plugin_id)
 
         return
+
 
 #### EOF ######################################################################

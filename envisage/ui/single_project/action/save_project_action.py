@@ -8,6 +8,7 @@ from pyface.api import ImageResource
 # class 'SaveProjectAction'
 ##############################################################################
 
+
 class SaveProjectAction(ProjectAction):
     """ An action that saves the current project. """
 
@@ -45,7 +46,6 @@ class SaveProjectAction(ProjectAction):
 
         return
 
-
     #### trait handlers ######################################################
 
     def _on_project_changed(self, obj, trait_name, old, new):
@@ -64,7 +64,6 @@ class SaveProjectAction(ProjectAction):
 
         super(SaveAction, self)._on_project_changed(obj, trait_name, old, new)
 
-
     ##########################################################################
     # 'SaveAction' interface
     ##########################################################################
@@ -82,7 +81,6 @@ class SaveProjectAction(ProjectAction):
 
         return self.model_service.project.is_save_allowed
 
-
     def _update_project_listeners(self, project, remove):
         """
         Update listeners on the specified project.
@@ -92,11 +90,10 @@ class SaveProjectAction(ProjectAction):
         logger.debug( (remove and 'Removing ' or 'Adding ') + \
             'listeners on project [%s] for SaveAction [%s]', project, self)
 
-        project.on_trait_change(self._on_is_save_allowed, 'is_save_allowed',
-            remove=remove)
+        project.on_trait_change(
+            self._on_is_save_allowed, 'is_save_allowed', remove=remove)
 
         return
-
 
     #### trait handlers ######################################################
 

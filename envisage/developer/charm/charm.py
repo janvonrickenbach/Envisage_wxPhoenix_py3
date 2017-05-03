@@ -1,6 +1,5 @@
 """ Charm - the model for a simple Python IDE. """
 
-
 # Enthought library imports.
 from envisage.developer.api import CodeBrowser, Module
 from traits.api import Event, HasTraits, Instance, Str
@@ -74,12 +73,10 @@ class Charm(HasTraits):
         """ Removes trait change listeners from a code browser. """
 
         code_browser.on_trait_change(
-            self._on_parsing_module, 'parsing_module', remove=True
-        )
+            self._on_parsing_module, 'parsing_module', remove=True)
 
         code_browser.on_trait_change(
-            self._on_parsed_module, 'parsed_module', remove=True
-        )
+            self._on_parsed_module, 'parsed_module', remove=True)
 
         return
 
@@ -116,5 +113,6 @@ class Charm(HasTraits):
         self.parsed_module = event
 
         return
+
 
 #### EOF ######################################################################

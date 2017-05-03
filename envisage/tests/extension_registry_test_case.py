@@ -1,6 +1,5 @@
 """ Tests for the base extension registry. """
 
-
 # Enthought library imports.
 from envisage.api import Application, ExtensionPoint
 from envisage.api import ExtensionRegistry, UnknownExtensionPoint
@@ -127,9 +126,8 @@ class ExtensionRegistryTestCase(unittest.TestCase):
 
         registry = self.registry
 
-        self.failUnlessRaises(
-            UnknownExtensionPoint, registry.remove_extension_point, 'my.ep'
-        )
+        self.failUnlessRaises(UnknownExtensionPoint,
+                              registry.remove_extension_point, 'my.ep')
 
         return
 
@@ -146,8 +144,7 @@ class ExtensionRegistryTestCase(unittest.TestCase):
             return
 
         self.failUnlessRaises(
-            ValueError, registry.remove_extension_point_listener, listener
-        )
+            ValueError, registry.remove_extension_point_listener, listener)
 
         return
 

@@ -1,6 +1,5 @@
 """ The Lorenz plugin. """
 
-
 # Enthought library imports.
 from envisage.api import Plugin, ServiceOffer
 from traits.api import List
@@ -33,10 +32,10 @@ class LorenzPlugin(Plugin):
         """ Trait initializer. """
 
         lorenz_service_offer = ServiceOffer(
-            protocol = 'acme.lorenz.lorenz.Lorenz',
-            factory  = 'acme.lorenz.lorenz.Lorenz'
-        )
+            protocol='acme.lorenz.lorenz.Lorenz',
+            factory='acme.lorenz.lorenz.Lorenz')
 
         return [lorenz_service_offer]
+
 
 #### EOF ######################################################################

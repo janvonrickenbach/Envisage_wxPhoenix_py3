@@ -1,6 +1,5 @@
 """ An action that shows the 'About' dialog. """
 
-
 # Enthought library imports.
 from pyface.action.api import Action
 
@@ -29,5 +28,6 @@ class AboutAction(Action):
         self.window.application.about()
 
         return
+
 
 #### EOF ######################################################################

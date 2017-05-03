@@ -15,13 +15,14 @@ from traitsui.value_tree import DictNode, StringNode, \
 from pyface.timer.api import Timer
 from pyface.api import GUI
 
+
 def search_namespace(namespace, string, depth=3):
     """ Iterator on a dictionnary-like object.
 
         Given a namespace, search recursively for a name containing the
         string in the enclosed modules and classes.
     """
-    if depth==0:
+    if depth == 0:
         raise StopIteration
     for child_name in namespace:
         child = namespace[child_name]
@@ -32,7 +33,7 @@ def search_namespace(namespace, string, depth=3):
                     search_namespace(child.__dict__,
                                                 string, depth=depth-1):
                 yield ('%s.%s' % (child_name, suitable_child_name),
-                                    suitable_child)
+                       suitable_child)
 
 
 def filter_namespace(namespace, string, depth=3):
@@ -52,23 +53,26 @@ def explore(node):
     # better. The logics should probably be put in the nodes themselves,
     # subclassing them.
     name = node.name
-    obj  = node.value
+    obj = node.value
+
     class MyClass(HasTraits):
         the_object = obj
 
-        view = TraitsView(Item('the_object', style='custom', show_label=False),
-                        resizable=True,
-                        title=name,
-                        width=600,
-                        )
+        view = TraitsView(
+            Item(
+                'the_object', style='custom', show_label=False),
+            resizable=True,
+            title=name,
+            width=600, )
 
     return MyClass().edit_traits()
+
 
 class NamespaceNode(DictNode):
     """ Subclass of the DictNode for the namespace purposes.
     """
 
-    def tno_get_icon ( self, node, is_expanded ):
+    def tno_get_icon(self, node, is_expanded):
         """ Returns the icon for a specified object.
 
             We overwrite this method because we don't have a default icon for
@@ -76,21 +80,21 @@ class NamespaceNode(DictNode):
         """
         return ('@icons:dict_node')
 
-    def tno_get_children ( self, node ):
+    def tno_get_children(self, node):
         """ Gets the object's children.
 
             We overwrite this method for a nicer label on the objects.
         """
         node_for = self.node_for
-        items    = list(self.value.items())
-        items.sort( lambda l, r: cmp( l[0], r[0] ) )
-        if len( items ) > 500:
-            return ([ self.node_for( k, v ) for k, v in items[: 250 ] ] +
-                    [ StringNode( value = '...', readonly = True ) ]        +
-                    [ self.node_for( k, v ) for k, v in items[ -250: ] ])
+        items = list(self.value.items())
+        items.sort(lambda l, r: cmp(l[0], r[0]))
+        if len(items) > 500:
+            return ([self.node_for(k, v) for k, v in items[:250]] +
+                    [StringNode(
+                        value='...', readonly=True)] +
+                    [self.node_for(k, v) for k, v in items[-250:]])
 
-        return [ self.node_for( k, v ) for k, v in items ]
-
+        return [self.node_for(k, v) for k, v in items]
 
 
 ################################################################################
@@ -131,24 +135,21 @@ class NamespaceView(View):
     ###########################################################################
 
     traits_view = TraitsView(
-            Group(Item('search_text', label='Search')),
-            Item(
-                'tree_nodes',
-                id     = 'table',
-                editor = TreeEditor(
-                                auto_open=1,
-                                hide_root=True,
-                                editable=False,
-                                nodes=value_tree_nodes,
-                                on_dclick='object._explore',
-                                ),
-                springy = True,
-                resizable = True,
-                show_label = False
-            ),
-            resizable = True,
-        )
-
+        Group(Item(
+            'search_text', label='Search')),
+        Item(
+            'tree_nodes',
+            id='table',
+            editor=TreeEditor(
+                auto_open=1,
+                hide_root=True,
+                editable=False,
+                nodes=value_tree_nodes,
+                on_dclick='object._explore', ),
+            springy=True,
+            resizable=True,
+            show_label=False),
+        resizable=True, )
 
     def create_control(self, parent):
         """ Creates the toolkit-specific control that represents the view.
@@ -168,7 +169,6 @@ class NamespaceView(View):
 
         return self.ui.control
 
-
     def destroy_control(self):
         """ Destroys the toolkit-specific control that represents the view.
 
@@ -177,12 +177,9 @@ class NamespaceView(View):
         super(NamespaceView, self).destroy_control()
 
         # Remove the namespace change handler
-        shell= self.window.application.get_service(IPythonShell)
+        shell = self.window.application.get_service(IPythonShell)
         if shell is not None:
-            shell.on_trait_change(
-                self._on_names_changed, 'names', remove=True
-            )
-
+            shell.on_trait_change(self._on_names_changed, 'names', remove=True)
 
     ###########################################################################
     # 'NamespaceView' interface.
@@ -205,10 +202,9 @@ class NamespaceView(View):
 
         if not self.search_text == '':
             filtered_namespace = filter_namespace(filtered_namespace,
-                                                        self.search_text)
+                                                  self.search_text)
 
         return NamespaceNode(value=filtered_namespace, readonly=True)
-
 
     def _get_tree_editor(self):
         """ Walk the editor list to retrieve the instance of the
@@ -217,7 +213,6 @@ class NamespaceView(View):
         for editor in self.ui._editors:
             print(editor)
         return self.ui._editors[-1]
-
 
     def _refresh_tree_nodes(self):
         """ Callback called by a timer to refresh the UI.
@@ -244,5 +239,6 @@ class NamespaceView(View):
         """ Displays a view of the object.
         """
         explore(object)
+
 
 #### EOF ######################################################################

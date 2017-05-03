@@ -34,7 +34,6 @@ class TestClient(Client):
 
 
 class TestThread(Thread):
-
     def run(self):
         self.server = Server()
         self.server.init()
@@ -42,7 +41,6 @@ class TestThread(Thread):
 
 
 class CommunicationTestCase(unittest.TestCase):
-
     def setUp(self):
         """ Make sure no old lock files exist prior to run.
         """
@@ -80,7 +78,7 @@ class CommunicationTestCase(unittest.TestCase):
         client2 = TestClient(self_type='client2', other_type='client1')
         client2.register()
         sleep(.5)
-        self.assert_(not(client1.orphaned or client2.orphaned))
+        self.assert_(not (client1.orphaned or client2.orphaned))
 
         client1.send_command("foo", "bar")
         sleep(.1)
@@ -92,14 +90,13 @@ class CommunicationTestCase(unittest.TestCase):
         self.assertEqual(client2.command, unicode_str("Très"))
         self.assertEqual(client2.arguments, "bien")
 
-
         client1.unregister()
         sleep(.1)
         self.assert_(client1.orphaned and client2.orphaned)
 
         client1.register()
         sleep(.1)
-        self.assert_(not(client1.orphaned or client2.orphaned))
+        self.assert_(not (client1.orphaned or client2.orphaned))
 
         # Simulated breakage -- does the Server handle unexpected communication
         # failure?

@@ -1,6 +1,5 @@
 """ The action set interface. """
 
-
 # Enthought library imports.
 from traits.api import Dict, Interface, List, Str
 
@@ -70,5 +69,6 @@ class IActionSet(Interface):
     #     ``Location(path='MenuBar/ASubMenu/AGroup')``
     #
     aliases = Dict(Str, Str)
+
 
 #### EOF ######################################################################

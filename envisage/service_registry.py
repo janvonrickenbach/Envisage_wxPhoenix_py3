@@ -1,6 +1,5 @@
 """ The service registry. """
 
-
 # Standard library imports.
 import logging
 
@@ -11,7 +10,6 @@ from traits.api import Dict, Event, HasTraits, Int, provides
 from .i_service_registry import IServiceRegistry
 from .import_manager import ImportManager
 from ._compat import STRING_BASE_CLASS
-
 
 # Logging.
 logger = logging.getLogger(__name__)
@@ -58,7 +56,11 @@ class ServiceRegistry(HasTraits):
     # 'IServiceRegistry' interface.
     ###########################################################################
 
-    def get_required_service(self, protocol, query='', minimize='',maximize=''):
+    def get_required_service(self,
+                             protocol,
+                             query='',
+                             minimize='',
+                             maximize=''):
         """ Return the service that matches the specified query.
 
         Raise a 'NoSuchServiceError' exception if no such service exists.
@@ -110,9 +112,8 @@ class ServiceRegistry(HasTraits):
 
                 # If the registered service is actually a factory then use it
                 # to create the actual object.
-                obj = self._resolve_factory(
-                    actual_protocol, name, obj, properties, service_id
-                )
+                obj = self._resolve_factory(actual_protocol, name, obj,
+                                            properties, service_id)
 
                 # If a query was specified then only add the service if it
                 # matches it!
@@ -220,9 +221,8 @@ class ServiceRegistry(HasTraits):
             name = protocol_or_name
 
         else:
-            name = '%s.%s' % (
-                protocol_or_name.__module__, protocol_or_name.__name__
-            )
+            name = '%s.%s' % (protocol_or_name.__module__,
+                              protocol_or_name.__name__)
 
         return name
 
@@ -263,5 +263,6 @@ class ServiceRegistry(HasTraits):
             self._services[service_id] = (name, obj, properties)
 
         return obj
+
 
 #### EOF ######################################################################

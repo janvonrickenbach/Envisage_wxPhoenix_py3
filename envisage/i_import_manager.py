@@ -1,6 +1,5 @@
 """ The interface for import managers. """
 
-
 # Enthought library imports.
 from traits.api import Interface
 
@@ -43,5 +42,6 @@ class IImportManager(Interface):
         The first form is retained for backwards compatability.
 
         """
+
 
 #### EOF ######################################################################

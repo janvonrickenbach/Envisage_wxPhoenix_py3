@@ -27,12 +27,14 @@ class ModelHelpPane(TraitsDockPane):
 
     html = Property(Unicode, depends_on='model')
 
-    view = View(Item('pane.html',
-                     editor = HTMLEditor(base_url=HELP_PATH,
-                                         open_externally=True),
-                     show_label = False),
-                width = 300,
-                resizable = True)
+    view = View(
+        Item(
+            'pane.html',
+            editor=HTMLEditor(
+                base_url=HELP_PATH, open_externally=True),
+            show_label=False),
+        width=300,
+        resizable=True)
 
     ###########################################################################
     # Protected interface.
@@ -58,4 +60,3 @@ class ModelHelpPane(TraitsDockPane):
                 return f.read()
         else:
             return 'No information available for model.'
-

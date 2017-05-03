@@ -1,6 +1,5 @@
 """ Utility functions for working with Python Eggs. """
 
-
 # Standard library imports.
 import pkg_resources
 
@@ -35,9 +34,8 @@ def get_entry_points_in_egg_order(working_set, entry_point_name):
 
     # Find all distributions that actually contain contributions to the
     # entry point.
-    distributions = get_distributions_with_entry_point(
-        working_set, entry_point_name
-    )
+    distributions = get_distributions_with_entry_point(working_set,
+                                                       entry_point_name)
 
     # Order them in dependency order (i.e. ordered by their requirements).
     distributions = get_distributions_in_egg_order(working_set, distributions)
@@ -95,5 +93,6 @@ def get_requires(working_set, distribution):
             requires.append(working_set.find(requirement))
 
     return requires
+
 
 #### EOF ######################################################################

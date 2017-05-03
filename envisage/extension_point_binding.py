@@ -1,6 +1,5 @@
 """ A binding between a trait on an object and an extension point. """
 
-
 # Standard library imports.
 import weakref
 
@@ -120,18 +119,14 @@ class ExtensionPointBinding(HasTraits):
         """ Wire-up trait change handlers etc. """
 
         # Listen for the object's trait being changed.
-        self.obj.on_trait_change(
-            self._on_trait_changed, self.trait_name
-        )
+        self.obj.on_trait_change(self._on_trait_changed, self.trait_name)
 
-        self.obj.on_trait_change(
-            self._on_trait_items_changed, self.trait_name + '_items'
-        )
+        self.obj.on_trait_change(self._on_trait_items_changed,
+                                 self.trait_name + '_items')
 
         # Listen for the extension point being changed.
         self.extension_registry.add_extension_point_listener(
-            self._extension_point_listener, self.extension_point_id
-        )
+            self._extension_point_listener, self.extension_point_id)
 
         return
 
@@ -139,7 +134,7 @@ class ExtensionPointBinding(HasTraits):
         """ Set the object's trait to the value of the extension point. """
 
         value = self.extension_registry.get_extensions(self.extension_point_id)
-        traits = {self.trait_name : value}
+        traits = {self.trait_name: value}
 
         self.obj.set(trait_change_notify=notify, **traits)
 
@@ -150,26 +145,25 @@ class ExtensionPointBinding(HasTraits):
 
         self._set_trait(notify=False)
 
-        self.obj.trait_property_changed(
-            self.trait_name + '_items', Undefined, event
-        )
+        self.obj.trait_property_changed(self.trait_name + '_items', Undefined,
+                                        event)
 
         return
 
     def _set_extensions(self, extensions):
         """ Set the extensions to an extension point. """
 
-        self.extension_registry.set_extensions(
-            self.extension_point_id, extensions
-        )
+        self.extension_registry.set_extensions(self.extension_point_id,
+                                               extensions)
 
         return
 
 
 # Factory function for creating bindings.
-def bind_extension_point(
-    obj, trait_name, extension_point_id, extension_registry=None
-):
+def bind_extension_point(obj,
+                         trait_name,
+                         extension_point_id,
+                         extension_registry=None):
     """ Create a binding to an extension point. """
 
     # This may seem a bit wierd, but we manually build up a dictionary of
@@ -185,14 +179,15 @@ def bind_extension_point(
     # done in the constructor (we could of course split that out, which may be
     # the 'right' way to do it ;^).
     traits = {
-        'obj'                : obj,
-        'trait_name'         : trait_name,
-        'extension_point_id' : extension_point_id
+        'obj': obj,
+        'trait_name': trait_name,
+        'extension_point_id': extension_point_id
     }
 
     if extension_registry is not None:
         traits['extension_registry'] = extension_registry
 
     return ExtensionPointBinding(**traits)
+
 
 #### EOF ######################################################################

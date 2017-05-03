@@ -1,6 +1,5 @@
 """ An extension registry implementation with multiple providers. """
 
-
 # Standard library imports.
 import logging
 
@@ -11,7 +10,6 @@ from traits.api import List, provides, on_trait_change
 from .extension_registry import ExtensionRegistry
 from .i_extension_provider import IExtensionProvider
 from .i_provider_extension_registry import IProviderExtensionRegistry
-
 
 # Logging.
 logger = logging.getLogger(__name__)
@@ -145,7 +143,7 @@ class ProviderExtensionRegistry(ExtensionRegistry):
             # provider contributes any extensions.
             if len(new) > 0:
                 index = sum(map(len, extensions))
-                refs  = self._get_listener_refs(extension_point_id)
+                refs = self._get_listener_refs(extension_point_id)
                 events[extension_point_id] = (refs, new[:], index)
 
             extensions.append(new)
@@ -195,7 +193,7 @@ class ProviderExtensionRegistry(ExtensionRegistry):
             # provider contributed any extensions.
             if len(old) > 0:
                 offset = sum(map(len, extensions[:index]))
-                refs  = self._get_listener_refs(extension_point_id)
+                refs = self._get_listener_refs(extension_point_id)
                 events[extension_point_id] = (refs, old[:], offset)
 
             del extensions[index]
@@ -262,9 +260,8 @@ class ProviderExtensionRegistry(ExtensionRegistry):
         refs = self._get_listener_refs(extension_point_id)
 
         # Let any listeners know that the extensions have been added.
-        self._call_listeners(
-            refs, extension_point_id, event.added, event.removed, index
-        )
+        self._call_listeners(refs, extension_point_id, event.added,
+                             event.removed, index)
 
         return
 
@@ -287,11 +284,13 @@ class ProviderExtensionRegistry(ExtensionRegistry):
         """ Translate an event index by the given offset. """
 
         if isinstance(index, slice):
-            index = slice(index.start+offset, index.stop+offset, index.step)
+            index = slice(index.start + offset, index.stop + offset,
+                          index.step)
 
         else:
             index = index + offset
 
         return index
+
 
 #### EOF ######################################################################

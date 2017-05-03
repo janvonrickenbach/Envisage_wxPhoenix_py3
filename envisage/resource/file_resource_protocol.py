@@ -1,6 +1,5 @@
 """ A resource protocol for a local file system. """
 
-
 # Standard library imports.
 import errno
 
@@ -36,5 +35,6 @@ class FileResourceProtocol(HasTraits):
                 raise
 
         return f
+
 
 #### EOF ######################################################################

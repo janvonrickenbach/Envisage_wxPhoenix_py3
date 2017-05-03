@@ -1,6 +1,5 @@
 """ The Developer perspective. """
 
-
 # Enthought library imports.
 from pyface.workbench.api import Perspective, PerspectiveItem
 
@@ -30,25 +29,18 @@ class DeveloperPerspective(Perspective):
     # The contents of the perspective.
     contents = [
         PerspectiveItem(
-            id       = APPLICATION_BROWSER_VIEW,
-            position = 'left'
-        ),
-
+            id=APPLICATION_BROWSER_VIEW, position='left'),
         PerspectiveItem(
-            id          = EXTENSION_REGISTRY_BROWSER_VIEW,
-            position    = 'bottom',
-            relative_to = APPLICATION_BROWSER_VIEW
-        ),
-
+            id=EXTENSION_REGISTRY_BROWSER_VIEW,
+            position='bottom',
+            relative_to=APPLICATION_BROWSER_VIEW),
         PerspectiveItem(
-            id          = 'Python',
-            position    = 'bottom',
-        ),
-
+            id='Python',
+            position='bottom', ),
         PerspectiveItem(
-            id          = SERVICE_REGISTRY_BROWSER_VIEW,
-            position    = 'right',
-        ),
+            id=SERVICE_REGISTRY_BROWSER_VIEW,
+            position='right', ),
     ]
+
 
 #### EOF ######################################################################

@@ -1,6 +1,5 @@
 """ The 'Banana' plugin """
 
-
 from envisage.api import Plugin
 from traits.api import Bool
 
@@ -33,5 +32,6 @@ class BananaPlugin(Plugin):
 
     started = Bool(False)
     stopped = Bool(False)
+
 
 #### EOF ######################################################################

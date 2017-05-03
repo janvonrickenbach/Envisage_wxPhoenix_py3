@@ -9,6 +9,7 @@ from .editor.text_editor import TextEditor
 
 logger = logging.getLogger(__name__)
 
+
 class NewFileAction(Action):
     """ Open a new file in the text editor.
     """
@@ -20,8 +21,8 @@ class NewFileAction(Action):
 
     def perform(self, event=None):
         logger.info('NewFileAction.perform()')
-        self.window.workbench.edit(File(''), kind=TextEditor,
-            use_existing=False)
+        self.window.workbench.edit(
+            File(''), kind=TextEditor, use_existing=False)
 
 
 class OpenFileAction(Action):
@@ -32,8 +33,6 @@ class OpenFileAction(Action):
 
     def perform(self, event=None):
         logger.info('OpenFileAction.perform()')
-        dialog = FileDialog(parent=self.window.control,
-            title='Open File')
+        dialog = FileDialog(parent=self.window.control, title='Open File')
         if dialog.open() == OK:
             self.window.workbench.edit(File(dialog.path), kind=TextEditor)
-

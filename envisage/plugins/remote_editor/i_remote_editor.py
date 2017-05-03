@@ -3,6 +3,7 @@
 # Enthought library imports.
 from traits.api import Interface
 
+
 class IRemoteEditor(Interface):
     """ Interface definition for the Namespace view """
 
@@ -16,5 +17,5 @@ class IRemoteEditor(Interface):
 
         """
 
-#### EOF ######################################################################
 
+#### EOF ######################################################################

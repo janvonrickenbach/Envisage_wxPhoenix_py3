@@ -1,10 +1,10 @@
 """ The 'Bar' plugin """
 
-
 # Enthought library imports.
 from envisage.api import Plugin
 from traits.api import Bool
 import busted_module
+
 
 class BadPlugin(Plugin):
     """ The 'Bad' plugin """
@@ -38,5 +38,6 @@ class BadPlugin(Plugin):
         self.stopped = True
 
         return
+
 
 #### EOF ######################################################################

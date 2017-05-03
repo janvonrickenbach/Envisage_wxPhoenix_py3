@@ -26,24 +26,23 @@ from etsdevtools.debug.fbi import enable_fbi, fbi
 #  'FBIPlugin' class:
 #-------------------------------------------------------------------------------
 
-class FBIPlugin ( Plugin ):
+
+class FBIPlugin(Plugin):
     """ FBIPython plugin. """
 
     #---------------------------------------------------------------------------
     #  'Plugin' interface:
     #---------------------------------------------------------------------------
 
-    def start ( self, application ):
+    def start(self, application):
         """ Starts the plugin.
         """
         # Tell the FBI to wiretap all unauthorized exceptions:
         enable_fbi()
-        push_exception_handler( handler = lambda obj, name, old, new: fbi(),
-                                locked  = False,
-                                main    = True )
+        push_exception_handler(
+            handler=lambda obj, name, old, new: fbi(), locked=False, main=True)
 
-    def stop ( self, application ):
+    def stop(self, application):
         """ Stops the plugin.
         """
         pass
-

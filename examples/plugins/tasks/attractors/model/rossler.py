@@ -37,14 +37,15 @@ class Rossler(HasTraits):
     times = Property(Array, depends_on='time_start, time_stop, time_step')
 
     # Configuration view.
-    view = View(Item('a'),
-                Item('b'),
-                Item('c'),
-                Item('initial_point'),
-                Item('time_start'),
-                Item('time_stop'),
-                Item('time_step'),
-                resizable=True)
+    view = View(
+        Item('a'),
+        Item('b'),
+        Item('c'),
+        Item('initial_point'),
+        Item('time_start'),
+        Item('time_stop'),
+        Item('time_step'),
+        resizable=True)
 
     ###########################################################################
     # 'Rossler' interface.
@@ -52,7 +53,7 @@ class Rossler(HasTraits):
 
     def compute_step(self, point, time):
         x, y, z = point
-        return array([ -y - z, x + self.a * y, self.b + z * (x - self.c) ])
+        return array([-y - z, x + self.a * y, self.b + z * (x - self.c)])
 
     ###########################################################################
     # Protected interface.
@@ -73,5 +74,6 @@ class RosslerIPlottable2dAdapter(Adapter, IModel3dIPlottable2dMixin):
     adaptee = Instance(Rossler)
 
     plot_type = Str('line')
+
 
 adapts(RosslerIPlottable2dAdapter, Rossler, IPlottable2d)

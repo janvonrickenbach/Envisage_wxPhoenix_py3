@@ -1,6 +1,5 @@
 """ The AcmeLab Workbench plugin. """
 
-
 # Enthought library imports.
 from envisage.api import Plugin
 from traits.api import List
@@ -14,10 +13,10 @@ class AcmeWorkbenchPlugin(Plugin):
     """
 
     # Extension points Ids.
-    ACTION_SETS       = 'envisage.ui.workbench.action_sets'
-    PERSPECTIVES      = 'envisage.ui.workbench.perspectives'
+    ACTION_SETS = 'envisage.ui.workbench.action_sets'
+    PERSPECTIVES = 'envisage.ui.workbench.perspectives'
     PREFERENCES_PAGES = 'envisage.ui.workbench.preferences_pages'
-    VIEWS             = 'envisage.ui.workbench.views'
+    VIEWS = 'envisage.ui.workbench.views'
 
     #### 'IPlugin' interface ##################################################
 
@@ -70,5 +69,6 @@ class AcmeWorkbenchPlugin(Plugin):
         from acme.workbench.view.api import RedView, YellowView
 
         return [BlackView, BlueView, GreenView, RedView, YellowView]
+
 
 #### EOF ######################################################################

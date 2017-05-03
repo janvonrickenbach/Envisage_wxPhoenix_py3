@@ -1,6 +1,5 @@
 """ Tests for the events fired when extension points are changed. """
 
-
 # Enthought library imports.
 from traits.testing.unittest_tools import unittest
 
@@ -8,9 +7,8 @@ from traits.testing.unittest_tools import unittest
 #
 # We do these as absolute imports to allow nose to run from a different
 # working directory.
-from envisage.tests.application_test_case import (
-    PluginA, PluginB, PluginC, TestApplication, listener
-)
+from envisage.tests.application_test_case import (PluginA, PluginB, PluginC,
+                                                  TestApplication, listener)
 
 
 class ExtensionPointChangedTestCase(unittest.TestCase):
@@ -56,7 +54,8 @@ class ExtensionPointChangedTestCase(unittest.TestCase):
     def test_append(self):
         """ append """
 
-        a = PluginA(); a.on_trait_change(listener, 'x_items')
+        a = PluginA()
+        a.on_trait_change(listener, 'x_items')
         b = PluginB()
         c = PluginC()
 
@@ -98,7 +97,8 @@ class ExtensionPointChangedTestCase(unittest.TestCase):
     def test_remove(self):
         """ remove """
 
-        a = PluginA(); a.on_trait_change(listener, 'x_items')
+        a = PluginA()
+        a.on_trait_change(listener, 'x_items')
         b = PluginB()
         c = PluginC()
 
@@ -140,7 +140,8 @@ class ExtensionPointChangedTestCase(unittest.TestCase):
     def test_assign_empty_list(self):
         """ assign empty list """
 
-        a = PluginA(); a.on_trait_change(listener, 'x_items')
+        a = PluginA()
+        a.on_trait_change(listener, 'x_items')
         b = PluginB()
         c = PluginC()
 
@@ -183,7 +184,8 @@ class ExtensionPointChangedTestCase(unittest.TestCase):
     def test_assign_empty_list_no_event(self):
         """ assign empty list no event """
 
-        a = PluginA(); a.on_trait_change(listener, 'x_items')
+        a = PluginA()
+        a.on_trait_change(listener, 'x_items')
         b = PluginB()
         c = PluginC()
 
@@ -216,7 +218,8 @@ class ExtensionPointChangedTestCase(unittest.TestCase):
     def test_assign_non_empty_list(self):
         """ assign non-empty list """
 
-        a = PluginA(); a.on_trait_change(listener, 'x_items')
+        a = PluginA()
+        a.on_trait_change(listener, 'x_items')
         b = PluginB()
         c = PluginC()
 
@@ -259,7 +262,8 @@ class ExtensionPointChangedTestCase(unittest.TestCase):
     def test_add_plugin(self):
         """ add plugin """
 
-        a = PluginA(); a.on_trait_change(listener, 'x_items')
+        a = PluginA()
+        a.on_trait_change(listener, 'x_items')
         b = PluginB()
         c = PluginC()
 
@@ -311,7 +315,8 @@ class ExtensionPointChangedTestCase(unittest.TestCase):
     def test_remove_plugin(self):
         """ remove plugin """
 
-        a = PluginA(); a.on_trait_change(listener, 'x_items')
+        a = PluginA()
+        a.on_trait_change(listener, 'x_items')
         b = PluginB()
         c = PluginC()
 

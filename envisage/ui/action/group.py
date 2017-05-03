@@ -1,6 +1,5 @@
 """ The *definition* of a group in a tool bar or menu. """
 
-
 # Enthought library imports.
 from traits.api import Bool, Str
 
@@ -32,5 +31,6 @@ class Group(Location):
         return 'Group(%s)' % self.id
 
     __repr__ = __str__
+
 
 #### EOF ######################################################################

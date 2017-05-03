@@ -1,6 +1,5 @@
 """ An action set is a collection of menus, groups, and actions. """
 
-
 # Standard library imports.
 import logging
 
@@ -14,7 +13,6 @@ from .group import Group
 from .menu import Menu
 from .tool_bar import ToolBar
 from .i_action_set import IActionSet
-
 
 # Logging.
 logger = logging.getLogger(__name__)
@@ -102,5 +100,6 @@ class ActionSet(HasTraits):
         logger.warn('action set %s has no name - using <%s>' % (self, name))
 
         return name
+
 
 #### EOF ######################################################################

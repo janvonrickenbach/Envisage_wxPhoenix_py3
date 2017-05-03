@@ -4,7 +4,6 @@
 #  All rights reserved.
 #
 #-----------------------------------------------------------------------------
-
 """
 The single project plugin's project view
 
@@ -26,15 +25,15 @@ from envisage.ui.single_project.project import Project
 from envisage.ui.single_project.services import IPROJECT_MODEL, \
     IPROJECT_UI
 
-
 # Setup a logger for this module.
-logger=logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 
 # Dummy EmptyProject class for when the ProjectView doesn't have a reference
 # to a Project.
 class EmptyProject(Project):
     pass
+
 
 class EmptyProjectAdapter(ITreeNodeAdapter):
     """ Adapter for our EmptyProject. """
@@ -92,6 +91,7 @@ class ProjectAdapter(ITreeNodeAdapter):
         """
         return True
 
+
 class ProjectView(HasTraits):
     """
     The single project plugin's project view
@@ -118,11 +118,12 @@ class ProjectView(HasTraits):
 
     # The traits view to display:
     view = View(
-        Item('root', editor = TreeEditor(editable=False, auto_open=1),
-            show_label = False,
-        ),
-        resizable = True
-    )
+        Item(
+            'root',
+            editor=TreeEditor(
+                editable=False, auto_open=1),
+            show_label=False, ),
+        resizable=True)
 
     ##########################################################################
     # 'View' interface.
@@ -134,7 +135,7 @@ class ProjectView(HasTraits):
         model_service = self._get_model_service()
         model_service.on_trait_change(self._on_project_changed, 'project')
         model_service.on_trait_change(self._on_project_selection_changed,
-            'selection')
+                                      'selection')
 
         # Make sure our control is initialized to the current project.
         self._switch_projects(EmptyProject(), model_service.project)
@@ -156,7 +157,6 @@ class ProjectView(HasTraits):
         set2 = set(list2)
         return set1 != set2
 
-
     def _clear_state(self):
         """
         Clears out all indications of any project state from this view.
@@ -169,7 +169,6 @@ class ProjectView(HasTraits):
 
         return
 
-
     def _get_model_service(self):
         """
         Return a reference to the single project plugin's model service.
@@ -178,7 +177,6 @@ class ProjectView(HasTraits):
 
         return self.application.get_service(IPROJECT_MODEL)
 
-
     def _get_ui_service(self):
         """
         Return a reference to the single project plugin's UI service.
@@ -186,7 +184,6 @@ class ProjectView(HasTraits):
         """
 
         return self.window.application.get_service(IPROJECT_UI)
-
 
     def _switch_projects(self, old, new):
         """
@@ -212,7 +209,6 @@ class ProjectView(HasTraits):
 
         return
 
-
     def _sync_state_to_project(self, project):
         """
         Sync the state of this view to the specified project's state.
@@ -220,7 +216,7 @@ class ProjectView(HasTraits):
         """
 
         logger.debug('Syncing ProjectView [%s] to project state [%s]', self,
-            project)
+                     project)
 
         # Update our Project reference.
         self.root = project
@@ -229,7 +225,6 @@ class ProjectView(HasTraits):
         #self.name_suffix = (project.dirty and self.title_suffix) or ''
 
         return
-
 
     def _update_project_listeners(self, project, remove=False):
         """
@@ -242,10 +237,9 @@ class ProjectView(HasTraits):
 
         project.on_trait_change(self._on_project_name_changed, 'name', remove)
         project.on_trait_change(self._on_project_dirty_changed, 'dirty',
-            remove)
+                                remove)
 
         return
-
 
     #### trait handlers ######################################################
 
@@ -262,7 +256,7 @@ class ProjectView(HasTraits):
         # on the new suffix, if any.
         name = self.name
         if old is not None and len(old) > 0:
-            index = name.rfind(" " + old)#rfind(name, " " + old)
+            index = name.rfind(" " + old)  #rfind(name, " " + old)
             if index > -1:
                 name = name[0:index]
         if new is not None and len(new) > 0:
@@ -274,18 +268,17 @@ class ProjectView(HasTraits):
 
         return
 
-
-    def _on_control_right_clicked (self, event):
+    def _on_control_right_clicked(self, event):
         """
         Handle events when the tree control itself is right-clicked.
 
         """
 
         logger.debug('ProjectView control right-clicked')
-        self._get_ui_service().display_default_context_menu(self.control, event)
+        self._get_ui_service().display_default_context_menu(self.control,
+                                                            event)
 
         return
-
 
     def _on_key_pressed_changed(self, event):
         """
@@ -302,7 +295,6 @@ class ProjectView(HasTraits):
 
         return
 
-
     def _on_node_activated_changed(self, node):
         """
         Handle nodes being activated (i.e. double-clicked.)
@@ -313,7 +305,6 @@ class ProjectView(HasTraits):
 
         return
 
-
     def _on_project_changed(self, obj, trait_name, old, new):
         """
         Handle when the current project changes.
@@ -322,12 +313,11 @@ class ProjectView(HasTraits):
 
         logger.debug('\n\n ***************** \n\n')
         logger.debug('Detected project changed from [%s] to [%s] in '
-            'ProjectView [%s]', old, new, self)
+                     'ProjectView [%s]', old, new, self)
 
         self._switch_projects(old, new)
 
         return
-
 
     def _on_project_dirty_changed(self, obj, trait_name, old, new):
         """
@@ -343,7 +333,6 @@ class ProjectView(HasTraits):
 
         return
 
-
     def _on_project_name_changed(self, obj, trait_name, old, new):
         """
         Handle the open project's name changing.
@@ -353,7 +342,6 @@ class ProjectView(HasTraits):
         self._project_control.root.name = new
 
         return
-
 
     def _on_project_selection_changed(self, obj, trait_name, old, new):
         """
@@ -380,7 +368,6 @@ class ProjectView(HasTraits):
 
         return
 
-
     def _on_selection_changed(self, obj, trait_name, old, new):
         """
         Handle selection changes in our tree control.
@@ -401,7 +388,6 @@ class ProjectView(HasTraits):
         # we do that through our listener on the project selection.
 
         return
-
 
     def _on_closing_changed(self, old, new):
         """

@@ -4,14 +4,12 @@ import os.path
 
 # Enthought library imports.
 from envisage.api import Application, ExtensionPoint
-from traits.api import (
-    Bool, Callable, Directory, Event, HasStrictTraits,
-    Instance, Int, List, Unicode, Vetoable)
+from traits.api import (Bool, Callable, Directory, Event, HasStrictTraits,
+                        Instance, Int, List, Unicode, Vetoable)
 from traits.etsconfig.api import ETSConfig
 
 # Local imports
 from envisage._compat import pickle, STRING_BASE_CLASS
-
 
 # Logging.
 logger = logging.getLogger(__name__)
@@ -162,8 +160,10 @@ class TasksApplication(Application):
             return None
 
         # Create the task using suitable task extensions.
-        extensions = [ext for ext in self.task_extensions
-                      if ext.task_id == id or not ext.task_id]
+        extensions = [
+            ext for ext in self.task_extensions
+            if ext.task_id == id or not ext.task_id
+        ]
         task = factory.create_with_extensions(extensions)
         task.id = factory.id
         return task
@@ -215,8 +215,8 @@ class TasksApplication(Application):
                 if task:
                     window.add_task(task)
                 else:
-                    logger.error(
-                        'Missing factory for task with ID %r', task_id)
+                    logger.error('Missing factory for task with ID %r',
+                                 task_id)
 
             # Apply a suitable layout.
             if restore:
@@ -301,8 +301,8 @@ class TasksApplication(Application):
 
         # Create a TaskWindow for each TaskWindowLayout.
         for window_layout in window_layouts:
-            window = self.create_window(window_layout,
-                                        restore=self.always_use_default_layout)
+            window = self.create_window(
+                window_layout, restore=self.always_use_default_layout)
             window.open()
 
     def _get_task_factory(self, id):
@@ -397,8 +397,8 @@ class TasksApplication(Application):
         return GUI(splash_screen=self.splash_screen)
 
     def _state_location_default(self):
-        state_location = os.path.join(ETSConfig.application_home,
-                                      'tasks', ETSConfig.toolkit)
+        state_location = os.path.join(ETSConfig.application_home, 'tasks',
+                                      ETSConfig.toolkit)
         if not os.path.exists(state_location):
             os.makedirs(state_location)
 
@@ -497,6 +497,8 @@ class TasksApplicationState(HasStrictTraits):
     def push_window_layout(self, window_layout):
         """ Merge a TaskWindowLayout into the accumulated list.
         """
-        self.window_layouts = [layout for layout in self.window_layouts
-                               if not layout.is_equivalent_to(window_layout)]
+        self.window_layouts = [
+            layout for layout in self.window_layouts
+            if not layout.is_equivalent_to(window_layout)
+        ]
         self.window_layouts.insert(0, window_layout)

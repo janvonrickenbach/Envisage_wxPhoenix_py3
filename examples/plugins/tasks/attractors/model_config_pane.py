@@ -18,7 +18,6 @@ class ModelConfigPane(TraitsDockPane):
 
     model = Instance(HasTraits)
 
-    view = View(Item('pane.model',
-                     style = 'custom',
-                     show_label = False),
-                resizable = True)
+    view = View(
+        Item(
+            'pane.model', style='custom', show_label=False), resizable=True)

@@ -1,6 +1,5 @@
 """ The interface for extension points. """
 
-
 # Enthought library imports.
 from traits.api import Instance, Interface, Str, TraitType
 
@@ -28,5 +27,6 @@ class IExtensionPoint(Interface):
     #
     # e.g. List(Str)
     trait_type = Instance(TraitType)
+
 
 #### EOF ######################################################################

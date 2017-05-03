@@ -6,7 +6,6 @@
 #  Author: Dave Peterson <dpeterson@enthought.com>
 #
 #-----------------------------------------------------------------------------
-
 """
 A base class for project factories.
 
@@ -21,7 +20,6 @@ from traits.api import HasTraits, Instance
 
 # Local imports.
 from .project import Project
-
 
 # Setup a logger for this module.
 logger = logging.getLogger(__name__)
@@ -50,7 +48,6 @@ class ProjectFactory(HasTraits):
     # Current envisage application.
     application = Instance(IApplication)
 
-
     ##########################################################################
     # 'ProjectFactory' interface.
     ##########################################################################
@@ -70,7 +67,6 @@ class ProjectFactory(HasTraits):
 
         return self.PROJECT_CLASS(application=self.application)
 
-
     def open(self, location):
         """
         Open a project from the specified location.
@@ -85,11 +81,10 @@ class ProjectFactory(HasTraits):
             project = self.PROJECT_CLASS.load(location, self.application)
         except:
             logger.exception('Unable to load Project from location %s',
-                location)
+                             location)
             project = None
 
         return project
 
 
 #### EOF #####################################################################
-

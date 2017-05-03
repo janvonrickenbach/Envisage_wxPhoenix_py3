@@ -1,6 +1,5 @@
 """ The interface for 'Message of the Day' messages. """
 
-
 # Enthought library imports.
 from traits.api import Interface, Str
 
@@ -13,5 +12,6 @@ class IMessage(Interface):
 
     # The text of the message.
     text = Str
+
 
 #### EOF ######################################################################

@@ -1,6 +1,5 @@
 """ A widget for editing Python code. """
 
-
 # Enthought library imports.
 from traits.api import Bool, Event, Instance, File, Unicode
 from pyface.tasks.i_editor import IEditor

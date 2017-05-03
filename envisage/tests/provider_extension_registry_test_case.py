@@ -1,6 +1,5 @@
 """ Tests for the provider extension registry. """
 
-
 # Standard imports
 import unittest
 
@@ -82,7 +81,6 @@ class ProviderExtensionRegistryTestCase(ExtensionRegistryTestCase):
         class ProviderC(ExtensionProvider):
             """ An empty provider! """
 
-
         # Add the providers to the registry.
         registry.add_provider(ProviderA())
         registry.add_provider(ProviderB())
@@ -132,21 +130,18 @@ class ProviderExtensionRegistryTestCase(ExtensionRegistryTestCase):
             def _x_changed(self, old, new):
                 """ Static trait change handler. """
 
-                self._fire_extension_point_changed(
-                    'my.ep', new, old, slice(0, len(old))
-                )
+                self._fire_extension_point_changed('my.ep', new, old,
+                                                   slice(0, len(old)))
 
                 return
 
             def _x_items_changed(self, event):
                 """ Static trait change handler. """
 
-                self._fire_extension_point_changed(
-                    'my.ep', event.added, event.removed, event.index
-                )
+                self._fire_extension_point_changed('my.ep', event.added,
+                                                   event.removed, event.index)
 
                 return
-
 
         class ProviderB(ExtensionProvider):
             """ An extension provider. """
@@ -169,18 +164,16 @@ class ProviderExtensionRegistryTestCase(ExtensionRegistryTestCase):
             def _x_changed(self, old, new):
                 """ Static trait change handler. """
 
-                self._fire_extension_point_changed(
-                    'my.ep', new, old, slice(0, len(old))
-                )
+                self._fire_extension_point_changed('my.ep', new, old,
+                                                   slice(0, len(old)))
 
                 return
 
             def _x_items_changed(self, event):
                 """ Static trait change handler. """
 
-                self._fire_extension_point_changed(
-                    'my.ep', event.added, event.removed, event.index
-                )
+                self._fire_extension_point_changed('my.ep', event.added,
+                                                   event.removed, event.index)
 
                 return
 
@@ -284,9 +277,8 @@ class ProviderExtensionRegistryTestCase(ExtensionRegistryTestCase):
             def _x_items_changed(self, event):
                 """ Static trait change handler. """
 
-                self._fire_extension_point_changed(
-                    'x', event.added, event.removed, event.index
-                )
+                self._fire_extension_point_changed('x', event.added,
+                                                   event.removed, event.index)
 
                 return
 
@@ -399,9 +391,8 @@ class ProviderExtensionRegistryTestCase(ExtensionRegistryTestCase):
             def _x_items_changed(self, event):
                 """ Static trait change handler. """
 
-                self._fire_extension_point_changed(
-                    'x', event.added, event.removed, event.index
-                )
+                self._fire_extension_point_changed('x', event.added,
+                                                   event.removed, event.index)
 
                 return
 
@@ -564,9 +555,8 @@ class ProviderExtensionRegistryTestCase(ExtensionRegistryTestCase):
         registry.add_extension_point(self._create_extension_point('my.ep'))
 
         # Set some extensions.
-        self.failUnlessRaises(
-            SystemError, registry.set_extensions, 'my.ep', [1, 2, 3]
-        )
+        self.failUnlessRaises(SystemError, registry.set_extensions, 'my.ep',
+                              [1, 2, 3])
 
         return
 

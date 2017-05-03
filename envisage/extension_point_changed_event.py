@@ -1,6 +1,5 @@
 """ An event fired when an extension point's extensions have changed. """
 
-
 # Enthought library imports.
 from traits.api import TraitListEvent
 
@@ -8,7 +7,7 @@ from traits.api import TraitListEvent
 class ExtensionPointChangedEvent(TraitListEvent):
     """ An event fired when an extension point's extensions have changed. """
 
-    def __init__ (self, extension_point_id=None, **kw):
+    def __init__(self, extension_point_id=None, **kw):
         """ Constructor. """
 
         # The base class has the 'index', 'removed' and 'added' attributes.
@@ -18,5 +17,6 @@ class ExtensionPointChangedEvent(TraitListEvent):
         self.extension_point_id = extension_point_id
 
         return
+
 
 #### EOF ######################################################################

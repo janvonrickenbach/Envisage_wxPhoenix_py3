@@ -6,7 +6,6 @@
 #  Author: Dave Peterson <dpeterson@enthought.com>
 #
 #-----------------------------------------------------------------------------
-
 """
 A base class for projects that can be displayed by the single_project
 plugin.
@@ -31,7 +30,6 @@ from traits.util.clean_strings import clean_filename
 #from envisage.ui.single_project.editor.project_editor import \
 #    ProjectEditor
 from envisage.api import Application
-
 
 # Setup a logger for this module.
 logger = logging.getLogger(__name__)
@@ -60,12 +58,10 @@ class Project(HasTraits):
     # Current envisage application.
     application = Instance(Application, transient=True)
 
-
     #### protected 'Project' class interface #################################
 
     # Format used to create a unique name from a location and a counter.
     _unique_name_format = '%s_%s'
-
 
     ##########################################################################
     # Attributes
@@ -95,19 +91,17 @@ class Project(HasTraits):
     # The UI view to use when creating a new project
     traits_view = View(
         Group('location'),
-        title = 'New Project',
-        id = 'envisage.single_project.project.Project',
-        buttons = [ 'OK', 'Cancel' ],
-        width = 0.33,
+        title='New Project',
+        id='envisage.single_project.project.Project',
+        buttons=['OK', 'Cancel'],
+        width=0.33,
 
         # Ensure closing via the dialog close button is the same
         # as clicking cancel.
-        close_result = False,
+        close_result=False,
 
         # Ensure the user can resize the dialog.
-        resizable = True,
-        )
-
+        resizable=True, )
 
     #### protected 'Project' interface #######################################
 
@@ -118,7 +112,6 @@ class Project(HasTraits):
     # The cache of this project's name.  We can't just initialize it to a
     # default value since the location may be cleared at any time.
     _name = Str(transient=True)
-
 
     ##########################################################################
     # 'Object' interface.
@@ -158,7 +151,6 @@ class Project(HasTraits):
 
         return state
 
-
     def __setstate__(self, state):
         """
         Restore the state of this object during unpickling.
@@ -189,16 +181,14 @@ class Project(HasTraits):
         # Restore our state.
         return super(Project, self).__setstate__(state)
 
-
     def __str__(self):
         """
         Return the unofficial string representation of this object.
 
         """
 
-        result ='%s(name=%s)' % (super(Project, self).__str__(), self.name)
+        result = '%s(name=%s)' % (super(Project, self).__str__(), self.name)
         return result
-
 
     ##########################################################################
     # 'Project' interface.
@@ -341,7 +331,6 @@ class Project(HasTraits):
         else:
             del self._editors[resource]
 
-
     def save(self, location=None, overwrite=False):
         """
         Save this project.
@@ -425,7 +414,6 @@ class Project(HasTraits):
 
         return
 
-
     def start(self):
         """
         Notify this project that it is now the 'current' project.
@@ -446,7 +434,6 @@ class Project(HasTraits):
         # Ensure we start with an empty set of editors
         self._editors = {}
 
-
     def stop(self):
         """
         Called only by the project plugin framework to notify this
@@ -466,7 +453,6 @@ class Project(HasTraits):
 
         logger.debug('Project [%s] stopped', self)
 
-
     #### protected interface #################################################
 
     def _close_all_editors(self):
@@ -480,9 +466,8 @@ class Project(HasTraits):
         # editor is derived from ProjectEditor.)
         for editor in self._editors.values():
             logger.debug('Project requesting close of ProjectEditor [%s]',
-                editor)
+                         editor)
             editor.close()
-
 
     def _close_resource_editors(self, resource):
         """
@@ -508,7 +493,6 @@ class Project(HasTraits):
 
         return
 
-
     def _contains_resource(self, resource):
         """
         Called to determine if this project contains the specified
@@ -522,7 +506,6 @@ class Project(HasTraits):
         """
 
         return False
-
 
     def _get_name(self):
         """
@@ -550,7 +533,6 @@ class Project(HasTraits):
 
         return result
 
-
     def _load(cls, location):
         """
         Load a project from the specified location.
@@ -566,8 +548,7 @@ class Project(HasTraits):
         # Allow derived classes to determine the actual pickle file given the
         # requested source location.
         filename = cls.get_pickle_filename(location)
-        logger.debug('Loading Project of class [%s] from [%s]', cls,
-            filename)
+        logger.debug('Loading Project of class [%s] from [%s]', cls, filename)
 
         # Try to unpickle the project while making sure to close any file we
         # opened.
@@ -582,7 +563,7 @@ class Project(HasTraits):
             project._load_hook(location)
 
             logger.debug('Loaded Project [%s] from location [%s]', project,
-                filename)
+                         filename)
 
         # Ensure any opened file is closed
         finally:
@@ -591,11 +572,11 @@ class Project(HasTraits):
                     fh.close()
                 except:
                     logger.exception('Unable to close project file [%s]',
-                        filename)
+                                     filename)
 
         return project
-    _load = classmethod(_load)
 
+    _load = classmethod(_load)
 
     def _load_hook(self, location):
         """
@@ -613,7 +594,6 @@ class Project(HasTraits):
 
         pass
 
-
     def _location_default(self):
         """
         Generates the default value for our location trait.
@@ -621,7 +601,6 @@ class Project(HasTraits):
         """
 
         return self.get_default_project_location(self.application)
-
 
     def _make_location_unique(cls, location):
         """
@@ -634,11 +613,11 @@ class Project(HasTraits):
         counter = 1
         while os.path.exists(result):
             result = cls._unique_name_format % (location, counter)
-            counter+=1
+            counter += 1
 
         return result
-    _make_location_unique = classmethod(_make_location_unique)
 
+    _make_location_unique = classmethod(_make_location_unique)
 
     def _save(self, location):
         """
@@ -678,10 +657,9 @@ class Project(HasTraits):
                     fh.close()
             except:
                 logger.exception('Unable to close project pickle file [%s]',
-                    filename)
+                                 filename)
 
         return
-
 
     def _save_hook(self, location):
         """
@@ -697,7 +675,6 @@ class Project(HasTraits):
 
         pass
 
-
     #### trait handlers ######################################################
 
     def _location_changed(self, old, new):
@@ -707,7 +684,7 @@ class Project(HasTraits):
         """
 
         logger.debug('Location changed from [%s] to [%s] for Project [%s]',
-            old, new, self)
+                     old, new, self)
 
         # Invalidate any cached project name
         old_name = self._name

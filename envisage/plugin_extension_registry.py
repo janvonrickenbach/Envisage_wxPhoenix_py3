@@ -1,6 +1,5 @@
 """ An extension registry that uses plugins as extension providers. """
 
-
 # Enthought library imports.
 from traits.api import Instance, on_trait_change
 
@@ -59,5 +58,6 @@ class PluginExtensionRegistry(ProviderExtensionRegistry):
         self.remove_provider(event.plugin)
 
         return
+
 
 #### EOF ######################################################################

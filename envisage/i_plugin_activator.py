@@ -1,6 +1,5 @@
 """ The plugin activator interface. """
 
-
 # Enthought library imports.
 from traits.api import Interface
 
@@ -30,5 +29,6 @@ class IPluginActivator(Interface):
         """ Stop the specified plugin.
 
         """
+
 
 #### EOF ######################################################################

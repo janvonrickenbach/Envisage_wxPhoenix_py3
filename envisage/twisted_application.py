@@ -5,13 +5,11 @@ module can safely live in the Envisage core without twisted being installed.
 
 """
 
-
 # Standard library imports.
 import logging
 
 # Enthought library imports.
 from envisage.api import Application
-
 
 # Logging.
 logger = logging.getLogger(__name__)
@@ -47,5 +45,6 @@ class TwistedApplication(Application):
             reactor.stop()
 
         return stopped
+
 
 #### EOF ######################################################################

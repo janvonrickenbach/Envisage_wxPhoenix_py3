@@ -1,4 +1,3 @@
-
 # Enthought library imports.
 from pyface.action.api import ActionItem, Group
 from pyface.tasks.api import TaskWindowLayout
