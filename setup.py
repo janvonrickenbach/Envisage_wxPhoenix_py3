@@ -43,7 +43,7 @@ def git_version():
             cmd,
             stdout=subprocess.PIPE,
             env=env, ).communicate()[0]
-        return out
+        return str(out)
 
     try:
         # We ask git to find the latest tag matching a glob expression. The
