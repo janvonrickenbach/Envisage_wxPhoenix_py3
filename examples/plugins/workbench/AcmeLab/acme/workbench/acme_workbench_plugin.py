@@ -34,7 +34,7 @@ class AcmeWorkbenchPlugin(Plugin):
     def _action_sets_default(self):
         """ Trait initializer. """
 
-        from test_action_set import TestActionSet
+        from .test_action_set import TestActionSet
 
         return [TestActionSet]
 

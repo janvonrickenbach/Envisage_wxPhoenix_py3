@@ -1,7 +1,7 @@
 """ A view containing a red panel! """
 
 # Local imports.
-from color_view import ColorView
+from .color_view import ColorView
 
 
 class RedView(ColorView):

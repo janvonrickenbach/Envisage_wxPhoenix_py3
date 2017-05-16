@@ -1,7 +1,7 @@
 """ A view containing a black panel! """
 
 # Local imports.
-from color_view import ColorView
+from .color_view import ColorView
 
 
 class BlackView(ColorView):
