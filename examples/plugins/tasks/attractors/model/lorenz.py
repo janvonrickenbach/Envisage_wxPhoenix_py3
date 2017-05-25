@@ -8,8 +8,8 @@ from traits.api import Adapter, Array, Float, HasTraits, Instance, \
 from traitsui.api import View, Item
 
 # Local imports
-from i_model_3d import IModel3d, IModel3dIPlottable2dMixin
-from i_plottable_2d import IPlottable2d
+from .i_model_3d import IModel3d, IModel3dIPlottable2dMixin
+from .i_plottable_2d import IPlottable2d
 
 
 @provides(IModel3d)

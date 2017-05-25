@@ -7,7 +7,7 @@ from traits.api import Array, Float, HasTraits, Int, Property, Str, \
 from traitsui.api import Item, View
 
 # Local imports.
-from i_plottable_2d import IPlottable2d
+from .i_plottable_2d import IPlottable2d
 
 
 @provides(IPlottable2d)

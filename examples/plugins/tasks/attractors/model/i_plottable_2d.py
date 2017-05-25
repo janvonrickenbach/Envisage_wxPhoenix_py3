@@ -2,7 +2,7 @@
 from traits.api import Enum, Unicode
 
 # Local imports.
-from i_model_2d import IModel2d
+from .i_model_2d import IModel2d
 
 
 class IPlottable2d(IModel2d):
