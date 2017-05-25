@@ -7,7 +7,7 @@ from envisage.ui.tasks.tasks_plugin import TasksPlugin
 from attractors_plugin import AttractorsPlugin
 
 # Local imports.
-from .attractors_application import AttractorsApplication
+from attractors_application import AttractorsApplication
 
 
 def main(argv):

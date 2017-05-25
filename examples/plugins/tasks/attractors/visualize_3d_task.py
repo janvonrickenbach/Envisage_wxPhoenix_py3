@@ -5,9 +5,9 @@ from pyface.tasks.api import Task, TaskLayout, Tabbed, PaneItem
 from traits.api import Any, List
 
 # Local imports.
-from .model_config_pane import ModelConfigPane
-from .model_help_pane import ModelHelpPane
-from .plot_3d_pane import Plot3dPane
+from model_config_pane import ModelConfigPane
+from model_help_pane import ModelHelpPane
+from plot_3d_pane import Plot3dPane
 
 
 class Visualize3dTask(Task):
