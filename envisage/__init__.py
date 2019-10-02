@@ -5,7 +5,7 @@ from ._version import full_version as __version__  # noqa
 
 __requires__ = [
     'apptools',
-    'traits==4.7.0.dev51',
+    'traits==4.7.0+ansys.ch',
 ]
 
 # Per logging best practices, add a NullHandler to the root 'envisage'
