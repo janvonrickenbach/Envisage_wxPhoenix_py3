@@ -11,6 +11,8 @@ envisage: extensible application framework
 
 http://docs.enthought.com/envisage
 
+This is a fork of the Envisage Package that adds support wxPythonPhoenix and Python3   
+
 Envisage is a Python-based framework for building extensible applications,
 that is, applications whose functionality can be extended by adding "plug-ins".
 Envisage provides a standard mechanism for features to be added to an
